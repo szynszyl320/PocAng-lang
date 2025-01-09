@@ -3,5 +3,16 @@
     "SIGNUP": "Signup",
     "NAME": "Name",
     "PASSWORD": "Password",
-    "PASSWORDCONFIRM": "Confirm your password"
+    "PASSWORDCONFIRM": "Confirm your password",
+    
+    "SETTINGS": "Settings",
+    "THEMECHANGE": "Change your theme",
+    "LIGHTTHEME": "Light theme",
+    "DARKTHEME": "Dark theme",
+    "LANGUAGECHANGE": "Change your language",
+    "ENGLISH": "English",
+    "POLISH": "Polish",
+    "SPANISH": "Spanish",
+    "GERMAN": "German",
+    "SAVE": "Save settings"
 }

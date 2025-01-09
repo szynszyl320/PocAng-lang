@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service'
+import { AuthService } from '../services/auth.service'
 import { FormsModule } from '@angular/forms';
-import { TranslationService } from '../translation.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { SettingsComponent } from '../settings/settings.component';
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, TranslateModule],
+  imports: [FormsModule, TranslateModule, SettingsComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -21,17 +22,13 @@ export class LoginComponent {
   loginForm: boolean = false;
   signupForm: boolean = false;
   
-  constructor(private authService: AuthService, private translationSerivce: TranslationService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
     // Subscribe to the auth state
     this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user;
     });
-  }
-
-  switchLanguage(lang: string) {
-    this.translationSerivce.setLanguage(lang);
   }
 
   login(event: Event) {

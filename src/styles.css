@@ -1,5 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+/* Imports */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/* Global styles */
 body {
     margin: 0;
     padding: 0;
+}
+
+/* Light theme - global variables */
+:root {
+    /* settings */
+    --settings-background-color: #bed8d4;
+    --settings-header-background-color: #2081c3;
+    --settings-nav-button-color: #78d5d7;
+    --settings-nav-button-border-color: #65bbbd;
+    --settings-nav-button-hover-shadow: -3px 11px 37px 8px rgba(0,0,0,0.3);
+
 }
