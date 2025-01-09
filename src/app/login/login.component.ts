@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service'
 import { FormsModule } from '@angular/forms';
+import { TranslationService } from '../translation.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -19,7 +21,7 @@ export class LoginComponent {
   loginForm: boolean = false;
   signupForm: boolean = false;
   
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private translationSerivce: TranslationService) {}
 
   ngOnInit() {
     // Subscribe to the auth state
@@ -28,12 +30,16 @@ export class LoginComponent {
     });
   }
 
+  switchLanguage(lang: string) {
+    this.translationSerivce.setLanguage(lang);
+  }
+
   login(event: Event) {
     event.preventDefault();
     this.authService.login(this.email, this.password).catch((error) => {
       console.error('Login failed', error);
     });
-    
+                
     this.email = '';
     this.password = '';
     this.confirmPassword = '';
@@ -44,7 +50,6 @@ export class LoginComponent {
 
   signup(event: Event) {
     event.preventDefault();
-    console.log(this.email, this.password, this.confirmPassword, this.name);
     this.authService.signUp(this.email, this.password, this.confirmPassword, this.name).catch((error) => {
       console.error('Signup fialed', error);
     })

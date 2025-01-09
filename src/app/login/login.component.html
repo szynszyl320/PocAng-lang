@@ -6,9 +6,9 @@
         <main>
             <header><h1>Installed</h1></header>
             <form (submit)="login($event)">
-                <input type="email" name="email" placeholder="email" [(ngModel)]="email" required/>
-                <input type="password" name="password" placeholder="Password" [(ngModel)]="password" required />
-                <button type="submit">Login</button>
+                <input type="email" name="email" placeholder="Email" [(ngModel)]="email" required/>
+                <input type="password" name="password" placeholder="{{ 'PASSWORD' | translate }}" [(ngModel)]="password" required />
+                <button type="submit">{{ 'LOGIN' | translate }}</button>
             </form>    
         </main>
         <button (click)="loginInit()" class="back"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 800"><g stroke-width="59" stroke="hsl(227, 71%, 57%)" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="rotate(44, 400, 400)"><line x1="280.5" y1="280.5" x2="519.5" y2="519.5" marker-end="url(#SvgjsMarker1160)"></line></g><defs><marker markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" viewBox="0 0 5 5" orient="auto" id="SvgjsMarker1160"><polygon points="0,5 1.6666666666666667,2.5 0,0 5,2.5" fill="hsl(227, 71%, 57%)"></polygon></marker></defs></svg></button>
@@ -17,22 +17,21 @@
             <header><h1>Installed</h1></header>
             <form (submit)="signup($event)">
                 <input type="email" name="email" placeholder="Email" [(ngModel)]="email" required />
-                <input type="text" name="name" placeholder="Name" [(ngModel)]="name" required />
-                <input type="password" name="password" placeholder="Password" [(ngModel)]="password" required />
-                <input type="password" name="password" placeholder="Confirm Password" [(ngModel)]="confirmPassword" required />
-                <button type="submit">Signup</button>
+                <input type="text" name="name" placeholder="{{ 'NAME' | translate }}" [(ngModel)]="name" required />
+                <input type="password" name="password" placeholder="{{ 'PASSWORD' | translate }}" [(ngModel)]="password" required />
+                <input type="password" name="password" placeholder="{{ 'PASSWORDCONFIRM' | translate }}" [(ngModel)]="confirmPassword" required />
+                <button type="submit">{{ 'SIGNUP' | translate }}</button>
             </form>
             <button class="back" (click)="signupInit()"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 800"><g stroke-width="59" stroke="hsl(227, 71%, 57%)" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="rotate(44, 400, 400)"><line x1="280.5" y1="280.5" x2="519.5" y2="519.5" marker-end="url(#SvgjsMarker1160)"></line></g><defs><marker markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" viewBox="0 0 5 5" orient="auto" id="SvgjsMarker1160"><polygon points="0,5 1.6666666666666667,2.5 0,0 5,2.5" fill="hsl(227, 71%, 57%)"></polygon></marker></defs></svg></button>
         </main>
     }  @else {
         <main>
-            <header><h1>Installed</h1></header>
+            <header><h1>Installed</h1><h3>To jest wersja demonstracyjna</h3></header>
             <article>
-                <button (click)="loginInit()">Logowanie</button>
-                <button (click)="signupInit()">Rejstrowanie</button>
+                <button (click)="loginInit()">{{ 'LOGIN' | translate }}</button>
+                <button (click)="signupInit()">{{ 'SIGNUP' | translate }}</button>
             </article>
-        </main>
-        
+        </main> 
     }
     
 }
