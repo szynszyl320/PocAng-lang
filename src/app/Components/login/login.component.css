@@ -2,7 +2,7 @@ main {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-image: url(../images/background_login.svg);
+    background-image: url(../../images/background_login.svg);
     margin: 0;
 }
 

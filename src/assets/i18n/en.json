@@ -14,5 +14,12 @@
     "POLISH": "Polish",
     "SPANISH": "Spanish",
     "GERMAN": "German",
-    "SAVE": "Save settings"
+    "SAVE": "Save settings",
+    "CHANGEPASSWORD": "Password change",
+    "CHANGEVISIBILITY": "Change email visiblity",
+    "CHANGEEMAIL": "Email change",
+    "CHANGENAME": "Name change",
+    "SAVECHANGES": "Save changes",
+    "OLDPASSWORD": "Old password",
+    "CHANGEPASSWORDCONFIRM": "Confirm password change"
 }

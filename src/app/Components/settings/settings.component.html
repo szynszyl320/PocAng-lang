@@ -11,7 +11,7 @@
                 <section>
                     <article>
                         <label for="themeChange">{{ 'THEMECHANGE' | translate }}</label>
-                        <select id="themeChange" [(ngModel)]="themeValue">
+                        <select id="themeChange" [(ngModel)]="themeValue" (change)="switchTheme(themeValue)">
                             <option value="light">{{ 'LIGHTTHEME' | translate }}</option>
                             <option value="dark">{{ 'DARKTHEME' | translate }}</option>
                         </select>    
@@ -34,26 +34,29 @@
             @case ("Account") {
                 <section>
                     <article>
-                        <label for="passwordChange">{{ 'CHANGEPASSWORD' | translate }}</label>
-                        <input type="password" id="passwordChange" />
+                        <label for="nameChange">{{ 'CHANGENAME' | translate }}</label>
+                        <input type="text" id="nameChange" [(ngModel)]="name">
                     </article>
                     <article>
                         <label for="emailVisibility">{{ 'CHANGEVISIBILITY' | translate }}</label>
-                        <input type="checkbox" id="emailVisibility">
+                        <input type="checkbox" id="emailVisibility" [(ngModel)]="emailVisibility">
+                    </article>
+                    <button (click)="updateUser($event)">{{ 'SAVECHANGES' | translate }}</button>
+                    <hr>
+                    <article>
+                        <label for="passwordChange">{{ 'CHANGEPASSWORD' | translate }}</label>
+                        <input type="password" id="passwordChange" [(ngModel)]="password"/>
                     </article>
                     <article>
-                        <label for="emailChange">{{ 'CHANGEEMAIL' | translate }}</label>
-                        <input type="email" id="emailChange">
+                        <label for="oldPassword">{{ 'OLDPASSWORD' | translate }}</label>
+                        <input type="password" id="oldPassword" [(ngModel)]="oldPassword" />
                     </article>
-                    <article>
-                        <label for="nameChange">{{ 'CHANGENAME' | translate }}</label>
-                        <input type="text" id="nameChange">
-                    </article>
-                    <button>{{ 'SAVECHANGES' | translate }}</button>
+                    <button (click)="updatePassword($event)">{{ 'CHANGEPASSWORDCONFIRM' | translate }}</button>
                 </section>
             }
         }         
-        <button class="saveButton">{{ 'SAVE' | translate }}</button>
+        <button class="saveButton" (click)="saveSettings()">{{ 'SAVE' | translate }}</button>
+        
     </main>
 }
 
