@@ -21,5 +21,24 @@
     "CHANGENAME": "Name change",
     "SAVECHANGES": "Save changes",
     "OLDPASSWORD": "Old password",
-    "CHANGEPASSWORDCONFIRM": "Confirm password change"
+    "CHANGEPASSWORDCONFIRM": "Confirm password change",
+    
+    "YOURGROUPS": "Your groups",
+    "CREATENEWGROUP": "Create a new group",
+    "CONFIRMCREATE": "Confirm group creation",
+    "GROUPNAME": "Group name",
+    "GROUPICON": "Group icon",
+    "EMAIL": "Email",
+    "ADDUSER": "Add user",
+    "EMAILHASTOBEVISIBLE": "Email of the user has to be visible",
+    "ADDEDUSERS": "Added users",
+    "REMOVEUSERFROMGROUP": "Remove user from group",
+    "SELECTGROUP": "Select group",
+    "CONFIRMCREATION": "Confirm creation",
+    "ADDUSERTOEXISTINGGROUP": "Add user to existing group",
+    "ADDUSERTOGROUP": "Add",
+    "EDITGROUP": "Edit group",
+    "EDITGROUPNAME": "Edit group name",
+    "EDITGROUPICON": "Edit group icon",
+    "EDITGROUPCONFIRM": "Confirm"
 }

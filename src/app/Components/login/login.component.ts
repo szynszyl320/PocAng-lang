@@ -3,12 +3,13 @@ import { AuthService } from '../../services/auth.service'
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { SettingsComponent } from '../settings/settings.component';
+import { GroupsComponent } from '../groups/groups.component';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, TranslateModule, SettingsComponent],
+  imports: [FormsModule, TranslateModule, SettingsComponent, GroupsComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -21,7 +22,8 @@ export class LoginComponent {
   name: string = '';
   loginForm: boolean = false;
   signupForm: boolean = false;
-  
+  list : any;
+
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
@@ -57,6 +59,11 @@ export class LoginComponent {
     this.name = '';
     this.loginForm = false;
     this.signupForm = false;
+  }
+
+  async getGroupTemp() {
+    this.list = (await this.authService.getOwnedGroups(this.currentUser)).items;  
+    console.log(this.list[0].expand.users);
   }
 
   logout() {

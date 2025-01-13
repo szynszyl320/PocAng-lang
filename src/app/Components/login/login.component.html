@@ -1,6 +1,7 @@
 @if (currentUser) {
-    <p>Welcome, {{ currentUser?.email }}</p>
+    <p>Welcome, {{ currentUser?.name }}</p>
     <button (click)="logout()">Logout</button>
+    <app-groups />
 } @else {
     @if (loginForm) {
         <main>
@@ -31,7 +32,7 @@
                 <button (click)="loginInit()">{{ 'LOGIN' | translate }}</button>
                 <button (click)="signupInit()">{{ 'SIGNUP' | translate }}</button>
             </article>
-        </main> 
+        </main>
     }
     
 }

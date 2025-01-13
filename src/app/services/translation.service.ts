@@ -13,7 +13,7 @@ export class TranslationService {
   private initializeLanguage() {
     const browserLang = this.translate.getBrowserLang() || 'en';
     this.translate.setDefaultLang('en');
-    this.translate.use(browserLang.match(/en|pl/) ? browserLang : 'en');
+    // this.translate.use(browserLang.match(/en|pl/) ? browserLang : 'en');
   }
 
   // Change the language

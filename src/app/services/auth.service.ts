@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { EmailValidator } from '@angular/forms';
-import PocketBase from 'pocketbase';
-import { BehaviorSubject, Observable } from 'rxjs';
+import PocketBase, { ListResult, RecordModel } from 'pocketbase';
+import { BehaviorSubject, groupBy, Observable, toArray } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -78,4 +77,53 @@ export class AuthService {
     })
   }
 
+  async getOwnedGroups(user: any) {
+    try {
+      const groups = await (this.pb.collection('groups').getList(1, 50, { 
+        filter: `ownerId = "${user.id}"`,
+        expand: 'users' 
+      }))
+      return groups;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findUserByEmailName(email: string, name: string) {
+    try {
+      const user = await this.pb.collection('users').getFirstListItem(`email = "${email}" && name="${name}"`)
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async createNewGroup(name: string, icon: File, owner: any, users: Array<string>) {
+    try {
+      const groupData = {
+        "name": name,
+        "icon": icon,
+        "ownerId": owner.id,
+        "users": users
+      }
+      const record = await this.pb.collection('groups').create(groupData);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateGroup(group: any, name: string, icon: File, users: Array<any>) {
+    console.log(group);
+    
+    try {
+      const groupData = {
+        "name": ((name != null)? name : group.name),
+        "icon": ((icon != null)? icon : group.icon),
+        "users": ((users != null)? users : group.users)
+      }      
+      const record = await this.pb.collection('groups').update(group.id, groupData);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
