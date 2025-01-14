@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service'
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { WordsetcreatorComponent } from '../wordsetcreator/wordsetcreator.component';
 
 @Component({
   selector: 'app-wordlists',
   standalone: true,
-  imports: [FormsModule, TranslateModule],
+  imports: [FormsModule, TranslateModule, WordsetcreatorComponent],
   templateUrl: './wordlists.component.html',
   styleUrl: './wordlists.component.css'
 })
@@ -23,6 +24,8 @@ export class WordlistsComponent {
   wordsetEditIcon: any;
   wordsetEditLanguage: string = '';
   placeholderArray: Array<any> = [];
+  wordlistEdit: number = 0;
+  wordlistEditForm = false;
 
   constructor(private authService: AuthService) {}
 
@@ -33,20 +36,26 @@ export class WordlistsComponent {
     this.getUserWordsets();
   }
 
+  setEditWordlist(input: number) {
+    this.wordlistEditForm = !this.wordlistEditForm;
+    this.wordlistEdit = input;
+  }
+
   async getUserWordsets() {
     const wordsets = (await this.authService.getUserWordsets(this.currentUser)).items
     this.userWordsets = wordsets;
   }
 
-  createNewWordset(event: Event) {
+  async createNewWordset(event: Event) {
     event.preventDefault();
     try {
-      this.authService.createWordset(this.currentUser.id, this.wordsetName, this.wordsetIcon, this.wordsetLanguage);
-      console.log('wordset created sucessfully');
+      await this.authService.createWordset(this.currentUser.id, this.wordsetName, this.wordsetIcon, this.wordsetLanguage);
+      console.log('wordset created successfully');
     } catch (error) {
-      console.log('failed to create wordset', error);
+      console.error('Failed to create wordset', error);
     }
   }
+  
 
   updateWordset(event: Event) {
     event.preventDefault();

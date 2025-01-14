@@ -3,7 +3,7 @@
     <section>
         <h2>Your wordsets</h2>
         @for (wordset of userWordsets; track $index) {
-            <div>{{ wordset.icon }} - {{ wordset.name }} - {{ wordset.language}}</div>
+            <div>{{ wordset.icon }} - {{ wordset.name }} - {{ wordset.language}} - <button (click)="setEditWordlist($index)">Edytuj listę słów</button></div>
         }
     </section>
     
@@ -45,5 +45,10 @@
         </article>
         <button (click)="updateWordset($event)">{{'CONFIRMWORDSETEDIT' | translate}}</button>
     </section>
-    
+
 </main>
+
+@if (wordlistEditForm) {
+    <app-wordsetcreator [wordset]="userWordsets[wordlistEdit]" />
+    <button class="closeButton" (click)="setEditWordlist(0)">Close</button>
+}

@@ -8,3 +8,10 @@ section {
     margin-left: auto;
     margin-right: auto;
 }
+
+.closeButton {
+    z-index: 4;
+    position: absolute;
+    left: 2%;
+    bottom: 2%;
+}
