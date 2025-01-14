@@ -1,7 +1,18 @@
 @if (currentUser) {
-    <p>Welcome, {{ currentUser?.name }}</p>
-    <button (click)="logout()">Logout</button>
-    <app-groups />
+    <nav>
+        <h3>Welcome, {{ currentUser?.name }}</h3>
+        <button (click)="changeTab('groups')">{{'GROUPS' | translate}}</button>
+        <button (click)="changeTab('wordlists')">{{'WORDLISTS' | translate}}</button>
+        <button (click)="logout()">{{'LOGOUT' | translate}}</button>
+    </nav>
+    @switch (menuSelector) {
+        @case ('groups') {
+            <app-groups />
+        }
+        @case ('wordlists') {
+            <app-wordlists />
+        }
+    } 
 } @else {
     @if (loginForm) {
         <main>

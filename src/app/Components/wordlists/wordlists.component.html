@@ -1,0 +1,49 @@
+<main>
+
+    <section>
+        <h2>Your wordsets</h2>
+        @for (wordset of userWordsets; track $index) {
+            <div>{{ wordset.icon }} - {{ wordset.name }} - {{ wordset.language}}</div>
+        }
+    </section>
+    
+    <section>
+        <h2>Create wordsets</h2>
+        <article>
+            <label for="wordsetName">{{ 'NEWWORDSETNAME' | translate }}</label>
+            <input type="text" name="create name" id="wordsetName" [(ngModel)]="wordsetName">
+        </article>
+        <article>
+            <label for="wordsetIcon">{{ 'NEWWORDSETICON' | translate }}</label>
+            <input type="file" name="create icon" id="wordsetIcon" [(ngModel)]="wordsetIcon">
+        </article>
+        <article>
+            <label for="wordsetLanguage">{{ 'NEWORDSETLANGUAGE' | translate }}</label>
+            <input type="text" name="create language" id="wordsetLanguage" [(ngModel)]="wordsetLanguage">
+        </article>
+        <button (click)="createNewWordset($event)">{{'CONFIMRWORDSETCREATION'| translate}}</button>
+    </section>
+
+    <section>
+        <h2>Edit wordsets</h2>
+        <select name="chose wordset" id="selectWORDSET" [(ngModel)]="chosenWordset">
+            @for (wordset of userWordsets; track $index) {
+                <option [value]="$index">{{wordset.name}}</option>
+            }
+        </select>
+        <article>
+            <label for="editWordsetName">{{'EDITWORDSETNAME' | translate}}</label>
+            <input type="text" name="edit name" id="editWordsetName" [(ngModel)]="wordsetEditName">
+        </article>
+        <article>
+            <label for="editWordsetIcon">{{'EDITWORDSETICON' | translate}}</label>
+            <input type="file" name="edit icon" id="editWordsetIcon" [(ngModel)]="wordsetEditIcon">
+        </article>
+        <article>
+            <label for="editWordsetLanguage">{{'EDITWORDSETLANGUAGE' | translate }}</label>
+            <input type="text" name="edit language" id="editWordsetLanguage" [(ngModel)]="wordsetEditLanguage">
+        </article>
+        <button (click)="updateWordset($event)">{{'CONFIRMWORDSETEDIT' | translate}}</button>
+    </section>
+    
+</main>

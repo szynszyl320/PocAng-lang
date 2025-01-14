@@ -70,3 +70,8 @@ svg {
     object-fit: contain;
     height: 90%;
 }
+
+nav {
+    display: inline-flex;
+    gap: 1vh;
+}

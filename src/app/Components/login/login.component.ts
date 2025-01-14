@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { SettingsComponent } from '../settings/settings.component';
 import { GroupsComponent } from '../groups/groups.component';
-
+import { WordlistsComponent } from '../wordlists/wordlists.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, TranslateModule, SettingsComponent, GroupsComponent],
+  imports: [FormsModule, TranslateModule, SettingsComponent, GroupsComponent, WordlistsComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -23,6 +23,7 @@ export class LoginComponent {
   loginForm: boolean = false;
   signupForm: boolean = false;
   list : any;
+  menuSelector: string = 'wordlists';
 
   constructor(private authService: AuthService) {}
 
@@ -76,5 +77,9 @@ export class LoginComponent {
 
   signupInit() {
     this.signupForm = !this.signupForm
+  }
+
+  changeTab(tab: string) {
+    this.menuSelector = tab;
   }
 }

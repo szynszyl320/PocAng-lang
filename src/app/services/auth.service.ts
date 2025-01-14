@@ -113,8 +113,6 @@ export class AuthService {
   }
 
   async updateGroup(group: any, name: string, icon: File, users: Array<any>) {
-    console.log(group);
-    
     try {
       const groupData = {
         "name": ((name != null)? name : group.name),
@@ -126,4 +124,45 @@ export class AuthService {
       throw error;
     }
   }
+
+  async getUserWordsets(user: any) {
+    try {
+      const record = await this.pb.collection('wordset').getList(1, 50, {
+        filter: `creatorId = "${user.id}"`
+      })
+      return record;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async createWordset(userId: string, name: string, icon: File, language: string) {
+    try {
+      const wordsetData = {
+        "name": name,
+        "icon": icon,
+        "language": language,
+        "creatorId": userId
+      }
+      this.pb.collection('wordset').create(wordsetData);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateWordset(wordset: any, name: string, icon: any, language: string, wordlist: Array<any>) {
+    try {
+      const newWordsetData = {
+        "name": ((name != null)? name : wordset.name),
+        "icon": icon, //((icon != null)? icon : wordset.icon),
+        "language": ((language != null)? language : wordset.language),
+        "wordlist": ((wordlist != null)? wordlist : wordset.wordlist)
+      }
+      const record = this.pb.collection('wordset').update(wordset.id, newWordsetData);
+    } catch (error) {
+      throw error;
+    }
+  }
+
 }
+
