@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, reflectComponentType } from '@angular/core';
 import PocketBase, { ListResult, RecordModel } from 'pocketbase';
 import { BehaviorSubject, groupBy, Observable, toArray } from 'rxjs';
 
@@ -62,7 +62,6 @@ export class AuthService {
 
   async updateAccount(emailVisibilty: boolean, name: string, user: any) {
     const userData = {   
-      // email: ((email != null)? email: user.email),
       emailVisibility: ((emailVisibilty != null)? emailVisibilty : user.emailVisibilty),
       name: ((name != null)? name : user.name),
     }
@@ -150,15 +149,92 @@ export class AuthService {
     }
   }
 
-  async updateWordset(wordset: any, name: string, icon: any, language: string, wordlist: Array<any>) {
+  async updateWordset(wordset: any, name: string, icon: File, language: string, wordlist: Array<any>) {
     try {
       const newWordsetData = {
         "name": ((name != null)? name : wordset.name),
-        "icon": icon, //((icon != null)? icon : wordset.icon),
+        "icon": ((icon != null)? icon : wordset.icon),
         "language": ((language != null)? language : wordset.language),
         "wordlist": ((wordlist != null)? wordlist : wordset.wordlist)
       }
       const record = this.pb.collection('wordset').update(wordset.id, newWordsetData);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getUserAccesses(wordsetId: any) {
+    try {
+      const record = await this.pb.collection('wordset_access_user').getList(1, 50, {
+        filter: `wordsetId = "${wordsetId}"`,
+        expand: 'userId,wordsetId'
+      });
+      return record;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async grantAccessToUser(wordsetId: string, userId: string) {
+    try {
+      const accessData = {
+        wordsetId: wordsetId,
+        userId: userId
+      }
+      const record = await this.pb.collection('wordset_access_user').create(accessData);
+      return record;  
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async revokeAccessToUser(recordId: string) {
+    try {
+      const record = await this.pb.collection('wordset_access_user').delete(recordId);
+      return record;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findGroupByName(name: string) {
+    try {
+      const group = this.pb.collection('group').getFirstListItem(`name = "${name}"`);
+      return group;
+    } catch (error) {
+      throw error;
+    }
+  }
+  
+  async getGroupsAccess(wordsetId: string) {
+    try {
+      const record = await this.pb.collection('wordset_access_group').getList(1, 50, {
+        filter: `wordsetId = "${wordsetId}"`,
+        expand: "groupId,wordsetId"
+      })
+      return record;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async grantAccessToGroup(wordsetId: string, groupId: string) {
+    try {
+      const accessData = {
+        wordsetId: wordsetId,
+        groupId: groupId
+      }
+      const record = await this.pb.collection('wordset_access_group').create(accessData);
+      return record;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async revokeAccessToGroup(recordId: string) {
+    try {
+      const record = await this.pb.collection('wordset_access_group').delete(recordId);
+      return record;
     } catch (error) {
       throw error;
     }

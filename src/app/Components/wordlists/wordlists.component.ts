@@ -3,11 +3,12 @@ import { AuthService } from '../../services/auth.service'
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { WordsetcreatorComponent } from '../wordsetcreator/wordsetcreator.component';
+import { UseraccessComponent } from '../useraccess/access.component';
 
 @Component({
   selector: 'app-wordlists',
   standalone: true,
-  imports: [FormsModule, TranslateModule, WordsetcreatorComponent],
+  imports: [FormsModule, TranslateModule, WordsetcreatorComponent, UseraccessComponent],
   templateUrl: './wordlists.component.html',
   styleUrl: './wordlists.component.css'
 })
@@ -26,6 +27,8 @@ export class WordlistsComponent {
   placeholderArray: Array<any> = [];
   wordlistEdit: number = 0;
   wordlistEditForm = false;
+  userAccessForm = false;
+  userAccess: number = 0;
 
   constructor(private authService: AuthService) {}
 
@@ -39,6 +42,11 @@ export class WordlistsComponent {
   setEditWordlist(input: number) {
     this.wordlistEditForm = !this.wordlistEditForm;
     this.wordlistEdit = input;
+  }
+
+  userAccessEdit(input: number) {
+    this.userAccessForm = !this.userAccessForm;
+    this.userAccess = input;
   }
 
   async getUserWordsets() {

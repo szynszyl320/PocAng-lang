@@ -40,7 +40,7 @@ export class WordsetcreatorComponent {
       this.wordsetObject = value
       this.manualEditorText = JSON.stringify(this.wordsetObject.wordlist, null, 0);
       this.assistedCreatorContent = JSON.parse(this.manualEditorText);
-      
+
     })  
   }
 

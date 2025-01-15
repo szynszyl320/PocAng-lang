@@ -1,0 +1,13 @@
+main {
+    position: absolute;
+    width: 90%;
+    height: 90vh;
+    background-color: rgb(220, 229, 229);
+    top: 2%;
+    left: 2%;
+}
+
+article {
+    display: flex;
+    gap: 1vh;
+}
