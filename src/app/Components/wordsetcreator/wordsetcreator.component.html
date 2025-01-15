@@ -1,30 +1,47 @@
 <main>
     <nav>
-        <button></button>
-        <button></button>
-        <button></button>
+        <button (click)="tabSelector('assisted')">Creation assist</button>
+        <button (click)="tabSelector('manual')">Manual</button>
     </nav>
 
     <div>
-        
-        <section>
+       
+        @switch (tab) {
+            @case ('assisted') {
+                <section>
 
-            <h2>Assisted creating</h2>
+                    <h2>Assisted creating</h2>
 
-            <section>
-                
-            </section>
+                    <section>
+                        <article><div>{{'QUESTIONTYPE' | translate}}</div><div>{{'QUESTIONVALUEONE' | translate}}</div><div>{{'QUESTIONVALUETWO' | translate}}</div></article>
+                        @for (question of assistedCreatorContent; track $index) {
+                            <article><div>{{question.type}}</div><div>{{question.valueOne}}</div><div>{{question.valueTwo}}</div></article>
+                        }
+                    </section>
 
-        </section>
+                    <article>
+                        <select name="type" id="questionType" [(ngModel)]="newQuestionType">
+                            <option value="translate">{{'TRANSALTION' | translate}}</option>
+                            <option value="fillIn">{{'FILLIN' | translate}}</option>
+                        </select>
+                        <input type="text" name="field 1" id="fieldOne" placeholder="{{'PLACEFORSENTENCEORWORD' | translate}}" [(ngModel)]="newQuestionValueOne">
+                        <input type="text" name="filed 2" id="fieldTwo" placeholder="{{'PLACEFORSENTENCE' | translate}}" [(ngModel)]="newQuestionValueTwo">
+                        <button (click)="addNewQuestionAssist()">{{'ADDNEWWORD' | translate}}</button>
+                    </article>
 
-        <section>
+                </section>
+            }
+            @case ('manual') {            
+                <section>
 
-            <h2>Manual writing</h2>
+                    <h2>Manual writing</h2>
 
-            <textarea name="manual writing" id="manualWriter"></textarea>
+                    <textarea name="manual writing" id="manualWriter" [(ngModel)]="manualEditorText"></textarea>
 
-        </section>
-    
+                    <button (click)="addnewQuestionManual()">{{'SAVE' | translate}}</button>
+                </section>
+            }
+        }
     </div>
 
 </main>
