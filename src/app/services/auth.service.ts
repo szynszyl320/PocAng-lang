@@ -1,6 +1,6 @@
-import { Injectable, reflectComponentType } from '@angular/core';
-import PocketBase, { ListResult, RecordModel } from 'pocketbase';
-import { BehaviorSubject, filter, groupBy, Observable, toArray } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import PocketBase from 'pocketbase';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,6 @@ import { BehaviorSubject, filter, groupBy, Observable, toArray } from 'rxjs';
 export class AuthService {
   private pb = new PocketBase('http://127.0.0.1:8090');
 
-  // BehaviorSubject to track the current user (like Svelte's `writable`)
   private currentUserSubject = new BehaviorSubject<any>(this.pb.authStore.record);
   public currentUser$ :Observable<any> = this.currentUserSubject.asObservable();
 
@@ -28,54 +27,71 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  // checked
   async login(email: string, password: string) {
     try {
       const user = await this.pb.collection('users').authWithPassword(email, password);
       this.currentUserSubject.next(this.currentUserSubject);
       return user;
     } catch (error) {
-      console.error('Login failed', error);
       throw error;
     }
   }
 
-  async signUp(email: string, password: string, confirmPassword: string, name :string) {
+  //checked
+  async signUp(email: string, password: string, confirmPassword: string, name: string) {
     try {
       const newUser = {
         email: email,
         password: password,
         passwordConfirm: confirmPassword,
         name: name,
-        verified: true
+        verified: true,
+        emailVisibilty: true
       }
       const record = await this.pb.collection('users').create(newUser);
       await this.login(email, password)
+      return record;
     } catch (error) {
-      console.error('Signup failed', error)
+      throw error
     }
   }
 
+  //checked
   logout() {
     this.pb.authStore.clear();
     this.currentUserSubject.next(null);
   }
 
+  //checked
   async updateAccount(emailVisibilty: boolean, name: string, user: any) {
-    const userData = {   
-      emailVisibility: ((emailVisibilty != null)? emailVisibilty : user.emailVisibilty),
-      name: ((name != null)? name : user.name),
+    try {
+      const userData = {   
+        emailVisibility: ((emailVisibilty != null)? emailVisibilty : user.emailVisibilty),
+        name: ((name != null)? name : user.name),
+      }
+      const record = await this.pb.collection('users').update(user.id, userData);
+      return record;
+    } catch (error) {
+      throw error;
     }
-    const record = await this.pb.collection('users').update(user.id, userData);
   }
 
-  async updatePassword(password: string, oldPassword: string, user: any) {
-    const record = await this.pb.collection('users').update(user.id, {
-      password: password,
-      passwordConfirm: password,
-      oldPassword: oldPassword
-    })
+  //checked
+  async updatePassword(password: string, oldPassword: string, userId: any) {
+    try {
+      const record = await this.pb.collection('users').update(userId, {
+        password: password,
+        passwordConfirm: password,
+        oldPassword: oldPassword
+      });
+      return record;
+    } catch (error) {
+      throw error;
+    }
   }
 
+  //checked
   async getOwnedGroups(user: any) {
     try {
       const groups = await (this.pb.collection('groups').getList(1, 50, { 
@@ -88,6 +104,7 @@ export class AuthService {
     }
   }
 
+  //checked
   async findUserByEmailName(email: string, name: string) {
     try {
       const user = await this.pb.collection('users').getFirstListItem(`email = "${email}" && name="${name}"`)
@@ -97,12 +114,13 @@ export class AuthService {
     }
   }
 
-  async createNewGroup(name: string, icon: File, owner: any, users: Array<string>) {
+  //checked
+  async createNewGroup(name: string, icon: File, ownerId: string, users: Array<string>) {
     try {
       const groupData = {
         "name": name,
         "icon": icon,
-        "ownerId": owner.id,
+        "ownerId": ownerId,
         "users": users
       }
       const record = await this.pb.collection('groups').create(groupData);
@@ -111,6 +129,7 @@ export class AuthService {
     }
   }
 
+  //checked
   async updateGroup(group: any, name: string, icon: File, users: Array<any>) {
     try {
       const groupData = {
@@ -124,10 +143,11 @@ export class AuthService {
     }
   }
 
-  async getUserWordsets(user: any) {
+  //checked
+  async getUserWordsets(userId: string) {
     try {
       const record = await this.pb.collection('wordset').getList(1, 50, {
-        filter: `creatorId = "${user.id}"`
+        filter: `creatorId = "${userId}"`
       })
       return record;
     } catch (error) {
@@ -135,6 +155,7 @@ export class AuthService {
     }
   }
 
+  //checked
   async createWordset(userId: string, name: string, icon: File, language: string) {
     try {
       const wordsetData = {
@@ -149,6 +170,7 @@ export class AuthService {
     }
   }
 
+  //checked
   async updateWordset(wordset: any, name: string, icon: File, language: string, wordlist: Array<any>) {
     try {
       const newWordsetData = {
@@ -163,6 +185,7 @@ export class AuthService {
     }
   }
 
+  //checked
   async getUserAccesses(wordsetId: any) {
     try {
       const record = await this.pb.collection('wordset_access_user').getList(1, 50, {
@@ -175,6 +198,7 @@ export class AuthService {
     }
   }
 
+  //checked
   async grantAccessToUser(wordsetId: string, userId: string) {
     try {
       const accessData = {
@@ -188,6 +212,7 @@ export class AuthService {
     }
   }
 
+  //checked
   async revokeAccessToUser(recordId: string) {
     try {
       const record = await this.pb.collection('wordset_access_user').delete(recordId);
@@ -197,6 +222,7 @@ export class AuthService {
     }
   }
 
+  //checked
   async findGroupByName(name: string) {
     try {
       const group = await this.pb.collection('groups').getFirstListItem(`name = "${name}"`);
@@ -206,6 +232,7 @@ export class AuthService {
     }
   }
   
+  //checked
   async getGroupsAccess(wordsetId: string) {
     try {
       const record = await this.pb.collection('wordset_access_group').getList(1, 50, {
@@ -218,6 +245,7 @@ export class AuthService {
     }
   }
 
+  //checked
   async grantAccessToGroup(wordsetId: string, groupId: string) {
     try {
       const accessData = {
@@ -231,6 +259,7 @@ export class AuthService {
     }
   }
 
+  //checked
   async revokeAccessToGroup(recordId: string) {
     try {
       const record = await this.pb.collection('wordset_access_group').delete(recordId);
@@ -240,6 +269,7 @@ export class AuthService {
     }
   }
 
+  //checked
   async getUserAccessedWordsets(userId: string) {
     try {
       const record = await this.pb.collection('wordset_access_user').getList(1, 50, {
@@ -252,6 +282,7 @@ export class AuthService {
     }
   }
 
+  //checked
   async getGroupAccessedWordsets(userId: string) {
     try {
       const records = await this.pb.collection('wordset_access_group').getList(1, 50, {
@@ -266,6 +297,7 @@ export class AuthService {
     }
   }
 
+  //checked
   async createActivity(userId: string) {
     try {
       const data = {

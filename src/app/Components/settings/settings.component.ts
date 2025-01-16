@@ -72,7 +72,7 @@ export class SettingsComponent {
     event.preventDefault();
     console.log(this.oldPassword);
     try {
-      this.authService.updatePassword(this.password, this.oldPassword, this.currentUser);
+      this.authService.updatePassword(this.password, this.oldPassword, this.currentUser.id);
     } catch (error) {
       console.error(error);
     }

@@ -1,9 +1,8 @@
-import { Component, EventEmitter, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { AuthService } from '../../services/auth.service'
-import { CheckboxControlValueAccessor, FormsModule } from '@angular/forms';
+import {  FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { flatMap } from 'rxjs';
 
 @Component({
   selector: 'app-testing',
@@ -16,25 +15,21 @@ import { flatMap } from 'rxjs';
 export class TestingComponent {
 
   currentUser: any;
-  usedWordset: any;
 
+  usedWordset: any;
   wordset = input<any>()
   wordset$ = toObservable(this.wordset);
 
   questionSet: Array<any>  = [];
   questionSubSet: Array<any> = []
-
   question: any;
-
+  
   answer: string = '';
-
   isCorrect?: boolean;
+  questionId: number = 0;
+  length: number = 20;
 
   componentClose = output<boolean>();
-
-  questionId: number = 0;
-
-  length: number = 20;
 
   constructor(private authService: AuthService) {}
 
@@ -55,15 +50,22 @@ export class TestingComponent {
   
   generateSubset() {
     this.questionSubSet = [];
+    const usedValues = new Array<number>
     for(let i = 0; i < 20; i++) {
       let random = Math.floor(Math.random() * (this.questionSet.length))
-      this.questionSubSet.push(this.questionSet[random])
+      if (usedValues.includes(random)) {
+        random = Math.floor(Math.random() * (this.questionSet.length))
+      } else {
+        this.questionSubSet.push(this.questionSet[random]);
+        usedValues.push(random);
+      }
     }
     this.chooseQuestion();
   }
   
   lenghtCheck() {
     if (this.questionSubSet.length == 0) {
+      this.createActivity();
       this.componentClose.emit(false);
     }
   }
@@ -82,4 +84,15 @@ export class TestingComponent {
     this.lenghtCheck();
     this.chooseQuestion();
   }
+
+  async createActivity() {
+    try {
+      console.log(this.currentUser.id);
+      const record = await this.authService.createActivity(this.currentUser.id);
+      console.log(record);
+    } catch (error) {
+      console.error('failed to create activity', error);
+    }
+  }
+
 }

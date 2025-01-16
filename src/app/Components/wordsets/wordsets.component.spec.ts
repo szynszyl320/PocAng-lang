@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WordlistsComponent } from './wordlists.component';
+import { WordlistsComponent } from './wordsets.component';
 
 describe('WordlistsComponent', () => {
   let component: WordlistsComponent;

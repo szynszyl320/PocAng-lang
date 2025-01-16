@@ -3,14 +3,14 @@ import { AuthService } from '../../services/auth.service'
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { WordsetcreatorComponent } from '../wordsetcreator/wordsetcreator.component';
-import { UseraccessComponent } from '../useraccess/access.component';
+import { UseraccessComponent } from '../access/access.component';
 
 @Component({
   selector: 'app-wordlists',
   standalone: true,
   imports: [FormsModule, TranslateModule, WordsetcreatorComponent, UseraccessComponent],
-  templateUrl: './wordlists.component.html',
-  styleUrl: './wordlists.component.css'
+  templateUrl: './wordsets.component.html',
+  styleUrl: './wordsets.component.css'
 })
 
 export class WordlistsComponent {
@@ -50,7 +50,7 @@ export class WordlistsComponent {
   }
 
   async getUserWordsets() {
-    const wordsets = (await this.authService.getUserWordsets(this.currentUser)).items
+    const wordsets = (await this.authService.getUserWordsets(this.currentUser.id)).items
     this.userWordsets = wordsets;
   }
 
@@ -63,7 +63,6 @@ export class WordlistsComponent {
       console.error('Failed to create wordset', error);
     }
   }
-  
 
   updateWordset(event: Event) {
     event.preventDefault();

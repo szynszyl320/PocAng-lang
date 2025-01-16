@@ -68,7 +68,7 @@ export class GroupsComponent {
   async createNewGroup(event: Event) {
     event.preventDefault();
     try {
-      this.authService.createNewGroup(this.groupName, this.groupIcon, this.currentUser, this.userIdList);
+      this.authService.createNewGroup(this.groupName, this.groupIcon, this.currentUser.id, this.userIdList);
       this.groupName = '';
       this.groupIcon = null;
       this.userIdList = [];

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { SettingsComponent } from '../settings/settings.component';
 import { GroupsComponent } from '../groups/groups.component';
-import { WordlistsComponent } from '../wordlists/wordlists.component';
+import { WordlistsComponent } from '../wordsets/wordsets.component';
 import { LearningComponent } from '../learning/learning.component';
 
 @Component({
