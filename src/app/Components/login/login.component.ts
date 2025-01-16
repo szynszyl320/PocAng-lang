@@ -5,11 +5,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SettingsComponent } from '../settings/settings.component';
 import { GroupsComponent } from '../groups/groups.component';
 import { WordlistsComponent } from '../wordlists/wordlists.component';
+import { LearningComponent } from '../learning/learning.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, TranslateModule, SettingsComponent, GroupsComponent, WordlistsComponent],
+  imports: [FormsModule, TranslateModule, SettingsComponent, GroupsComponent, WordlistsComponent, LearningComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -23,7 +24,7 @@ export class LoginComponent {
   loginForm: boolean = false;
   signupForm: boolean = false;
   list : any;
-  menuSelector: string = 'wordlists';
+  menuSelector: string = 'learning';
 
   constructor(private authService: AuthService) {}
 

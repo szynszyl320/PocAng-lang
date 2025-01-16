@@ -1,6 +1,6 @@
 import { Injectable, reflectComponentType } from '@angular/core';
 import PocketBase, { ListResult, RecordModel } from 'pocketbase';
-import { BehaviorSubject, groupBy, Observable, toArray } from 'rxjs';
+import { BehaviorSubject, filter, groupBy, Observable, toArray } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -199,7 +199,7 @@ export class AuthService {
 
   async findGroupByName(name: string) {
     try {
-      const group = this.pb.collection('group').getFirstListItem(`name = "${name}"`);
+      const group = await this.pb.collection('groups').getFirstListItem(`name = "${name}"`);
       return group;
     } catch (error) {
       throw error;
@@ -234,6 +234,44 @@ export class AuthService {
   async revokeAccessToGroup(recordId: string) {
     try {
       const record = await this.pb.collection('wordset_access_group').delete(recordId);
+      return record;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getUserAccessedWordsets(userId: string) {
+    try {
+      const record = await this.pb.collection('wordset_access_user').getList(1, 50, {
+        filter: `userId = "${userId}"`,
+        expand: `userId,wordsetId`
+      })
+      return record;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getGroupAccessedWordsets(userId: string) {
+    try {
+      const records = await this.pb.collection('wordset_access_group').getList(1, 50, {
+        expand: 'groupId,wordsetId',
+      })
+      const filteredRecords = records.items.filter((record: any) =>
+        record.expand.groupId.users.includes(userId)
+      );
+      return filteredRecords;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async createActivity(userId: string) {
+    try {
+      const data = {
+        userId: userId
+      }
+      const record = await this.pb.collection('user_activity').create(data);
       return record;
     } catch (error) {
       throw error;

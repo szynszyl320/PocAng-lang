@@ -38,16 +38,16 @@
             @for (access of groupAccessList; track $index) {
                 <article>
                     <div>{{access.expand.groupId.name}}</div>
-                    <button>{{'REVOKEGROUPACCESS' |  translate}}</button>
+                    <button (click)="revokeGroupAccess($event, access.i)">{{'REVOKEGROUPACCESS' |  translate}}</button>
                 </article>
             }
         </div>
         <div>
             <article>
                 <label for="groupName">{{'GROUPNAME' | translate}}</label>
-                <input type="text" name="name" id="groupName">
+                <input type="text" name="name" id="groupName" [(ngModel)]="groupName">
             </article>
-            <button>{{'GRANTACCESS' | translate}}</button>
+            <button (click)="grantGroupAccess($event)">{{'GRANTACCESS' | translate}}</button>
         </div>
     </section>
 

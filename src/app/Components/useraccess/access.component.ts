@@ -76,7 +76,6 @@ export class UseraccessComponent {
     try {
       const groups = (await this.authService.getGroupsAccess(this.wordsetObject.id)).items
       this.groupAccessList = groups;
-      console.log(groups);
     } catch (error) {
       console.error('failed to get groups', error);
     }
@@ -86,10 +85,10 @@ export class UseraccessComponent {
     event.preventDefault();
     try {
       const group = await this.authService.findGroupByName(this.groupName);
-      const record = this.authService.grantAccessToGroup(this.wordsetId, group.id)
+      const record = this.authService.grantAccessToGroup(this.wordsetId, group.id);
       this.getGroupsWithAccess();
     } catch (error) {
-      console.error('failer to grant access', error);
+      console.error('failed to grant access', error);
     }
   }
 

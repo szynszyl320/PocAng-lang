@@ -3,6 +3,7 @@
         <h3>Welcome, {{ currentUser?.name }}</h3>
         <button (click)="changeTab('groups')">{{'GROUPS' | translate}}</button>
         <button (click)="changeTab('wordlists')">{{'WORDLISTS' | translate}}</button>
+        <button (click)="changeTab('learning')">{{'LEARNING' | translate}}</button>
         <button (click)="logout()">{{'LOGOUT' | translate}}</button>
     </nav>
     @switch (menuSelector) {
@@ -11,6 +12,9 @@
         }
         @case ('wordlists') {
             <app-wordlists />
+        }
+        @case ('learning') {
+            <app-learning />
         }
     } 
 } @else {

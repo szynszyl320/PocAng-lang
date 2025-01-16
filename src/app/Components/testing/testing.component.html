@@ -1,0 +1,11 @@
+<main> 
+
+    <article>
+        <div>{{ question.type }}</div>
+        <div>{{ question.valueOne }}</div>
+        <input type="text" name="user input" id="valueTwo" [(ngModel)]="answer">
+        <button (click)="answerCheck(questionId)">{{'CHECKANSWER' | translate}}</button>
+        <div>{{length}}/20</div>
+    </article>
+
+</main>

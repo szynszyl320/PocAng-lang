@@ -1,0 +1,31 @@
+<main>
+    <section>
+        <h2>{{'USERWORDSETS' | translate}}</h2>
+        <div>
+            @for (access of userAccessedWordsets; track $index) {
+                <article>
+                    <div>{{ access.expand.wordsetId.name }}</div>
+                    <div>{{ access.expand.wordsetId.language }}</div>
+                    <button (click)="displayForm($index, 'user')">{{'USE' | translate}}</button>
+                </article>
+            }
+        </div>
+    </section>
+
+    <section>
+        <h2>{{'GROUPWORDSETS' | translate}}</h2>
+        <div>
+            @for (access of groupAccessedWordsets; track $index) {
+                <article>
+                    <div>{{ access.expand.wordsetId.name }}</div>
+                    <div>{{ access.expand.wordsetId.language }}</div>
+                    <button (click)="displayForm($index, 'group')">{{'USE' | translate}}</button>
+                </article>
+            }
+        </div>
+    </section>
+</main>
+
+@if (testingForm) {
+    <app-testing [wordset]="usedWordset" (componentClose)="handleAppClose($event)"/>
+}
