@@ -27,7 +27,8 @@ export class TestingComponent {
   answer: string = '';
   isCorrect?: boolean;
   questionId: number = 0;
-  length: number = 20;
+  length: number = 0;
+  staticLenght: number = this.length;
 
   componentClose = output<boolean>();
 
@@ -44,22 +45,25 @@ export class TestingComponent {
     });
     this.wordset$.subscribe((value) =>  {
       this.questionSet = value.wordlist;
+      ((this.questionSet.length > 20)? this.length = 20 : this.length = this.questionSet.length)
+      this.staticLenght = this.length;
       this.generateSubset();
+      console.log(this.length, this.questionSet);
     });
+    
   }
   
   generateSubset() {
     this.questionSubSet = [];
-    const usedValues = new Array<number>
-    for(let i = 0; i < 20; i++) {
-      let random = Math.floor(Math.random() * (this.questionSet.length))
+    const usedValues = new Array<number>   
+    for(let i = 0; i < this.length; i++) {
+      let random = Math.floor(Math.random() * (this.questionSet.length))      
       while (usedValues.includes(random)) {
         random = Math.floor(Math.random() * (this.questionSet.length))
       }
       this.questionSubSet.push(this.questionSet[random]);
       usedValues.push(random);
-    }
-    console.log(this.questionSubSet);
+    };
     this.chooseQuestion();
   }
   
@@ -80,7 +84,9 @@ export class TestingComponent {
     if (this.question.valueTwo == this.answer) {
       this.questionSubSet.splice(id, 1);
       this.length--;
+      this.answer = '';
     }
+    this.answer = '';
     this.lenghtCheck();
     this.chooseQuestion();
   }

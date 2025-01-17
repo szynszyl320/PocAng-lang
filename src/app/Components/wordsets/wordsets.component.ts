@@ -16,17 +16,24 @@ import { UseraccessComponent } from '../access/access.component';
 export class WordlistsComponent {
 
   currentUser: any;
+  
   userWordsets: Array<any> = [];
+  
   wordsetName: string = '';
   wordsetIcon: any;
   wordsetLanguage: string = '';
+  
   chosenWordset: number = 0;
+  
   wordsetEditName: string = '';
   wordsetEditIcon: any;
   wordsetEditLanguage: string = '';
+  
   placeholderArray: Array<any> = [];
+  
   wordlistEdit: number = 0;
   wordlistEditForm = false;
+  
   userAccessForm = false;
   userAccess: number = 0;
 
@@ -58,20 +65,41 @@ export class WordlistsComponent {
     event.preventDefault();
     try {
       await this.authService.createWordset(this.currentUser.id, this.wordsetName, this.wordsetIcon, this.wordsetLanguage);
+      this.getUserWordsets();
+      
+      this.wordsetEditName = '';
+      this.wordsetIcon = null;
+      this.wordsetLanguage = '';
+
       console.log('wordset created successfully');
     } catch (error) {
       console.error('Failed to create wordset', error);
     }
   }
 
-  updateWordset(event: Event) {
+  async updateWordset(event: Event) {
     event.preventDefault();
     try {
-      console.log(this.userWordsets[this.chosenWordset].id);
       this.authService.updateWordset(this.userWordsets[this.chosenWordset], this.wordsetEditName, this.wordsetEditIcon, this.wordsetEditLanguage, this.placeholderArray)
+      this.getUserWordsets();
+      
+      this.wordsetEditName = '';
+      this.wordsetEditIcon = null;
+      this.wordsetEditLanguage = '';
+
       console.log('wordset updated successfully');
     } catch (error) {
       console.error('failed to update wordset', error);
+    }
+  }
+
+  async deleteWordset(event: Event, wordsetId: string) {
+    event.preventDefault()
+    try {
+      this.authService.deleteWordset(wordsetId);
+      this.getUserWordsets();
+    } catch (error) {
+      console.error('failed to delte wordset', error);
     }
   }
 

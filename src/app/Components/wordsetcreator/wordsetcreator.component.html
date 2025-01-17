@@ -14,7 +14,12 @@
                     <section class="list">
                         <article><div>{{'QUESTIONTYPE' | translate}}</div><div>{{'QUESTIONVALUEONE' | translate}}</div><div>{{'QUESTIONVALUETWO' | translate}}</div></article>
                         @for (question of assistedCreatorContent; track $index) {
-                            <article><div>{{question.type}}</div><div>{{question.valueOne}}</div><div>{{question.valueTwo}}</div></article>
+                            <article>
+                                <div>{{question.type}}</div>
+                                <div>{{question.valueOne}}</div>
+                                <div>{{question.valueTwo}}</div>
+                                <button (click)="deleteQuestion($index)">{{'DELETEFROMWORDLIST' | translate}}</button>
+                            </article>
                         }
                     </section>
 

@@ -164,7 +164,8 @@ export class AuthService {
         "name": name,
         "icon": icon,
         "language": language,
-        "creatorId": userId
+        "creatorId": userId,
+        "wordlist": []
       }
       this.pb.collection('wordset').create(wordsetData);
     } catch (error) {
@@ -182,6 +183,15 @@ export class AuthService {
         "wordlist": ((wordlist != null)? wordlist : wordset.wordlist)
       }
       const record = this.pb.collection('wordset').update(wordset.id, newWordsetData);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteWordset(wordsetId: string) {
+    try {
+      const record = this.pb.collection('wordset').delete(wordsetId);
+      return record;
     } catch (error) {
       throw error;
     }

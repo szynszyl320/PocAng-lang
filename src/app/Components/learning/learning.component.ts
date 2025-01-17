@@ -65,7 +65,6 @@ export class LearningComponent {
 
   displayForm(inputId: number, searchtype: string) {
     this.testingForm = !this.testingForm;
-    // ((searchtype == 'user')? this.usedWordset = this.userAccessedWordsets[inputId].expand.wordsetId : this.usedWordset = this.groupAccessedWordsets[inputId].expand.wordsetId)
     if (searchtype == 'user') {
       this.usedWordset = this.userAccessedWordsets[inputId].expand.wordsetId;
     } else if (searchtype == 'group') {

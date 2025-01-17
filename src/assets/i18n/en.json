@@ -65,6 +65,9 @@
     "PLACEFORSENTENCEORWORD": "Place for question",
     "PLACEFORSENTENCE": "Place for answer",
     "ADDNEWWORD": "Add new word",
+    "EDITWORDLIST": "Edit wordlist",
+    "EDITACCESS": "Edit access",
+    "DELETEWORDSET": "Delete wordset",
 
     "USERACCESS": "User access",
     "USEREMAIL": "Email",
@@ -75,7 +78,7 @@
     "GRANTACCESS": "Grant access",
 
     "USERWORDSETS": "Wordsets shared with you",
-    "GROUPWORDSETS": "Wordsets shared with your group",
+    "GROUPWORDSETS": "Wordsets shared with your groups",
     "YOURWORDSETS": "Your Wordsets",
     "WORDSETNAME": "Wordset name",
     "WORDSETLANGUAGE": "Wordset language",

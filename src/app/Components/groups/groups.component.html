@@ -3,7 +3,7 @@
         <h2>{{ 'YOURGROUPS' | translate }}</h2>
         @for (group of groupList; track $index) {
             <article>
-                <h2>{{groupIcon}} - {{ group.name }}</h2>
+                <h2>{{ group.name }}</h2>
                 @for (user of group.expand.users; track $index) {
                     <div class="user-item">{{user.name}}<button (click)="removeFromGroup(group, $index)">{{ 'REMOVEUSERFROMGROUP' | translate }}</button></div>
                 }
@@ -66,9 +66,7 @@
             </article>
             <button (click)="addToGroup($event)">{{'ADDUSERTOGROUP' | translate}}</button>
         </div>
-    </section>
-
-    <section>
+        <hr>
         <h2>{{ 'EDITGROUP' | translate }}</h2>
         <div>
             <article>
@@ -90,4 +88,5 @@
             <button type="submit" (click)="updateGroup(groupList[editGroupIndex], groupEditName, groupEditIcon, groupList[editGroupIndex].users)">{{'EDITGROUPCONFIRM' | translate}}</button>
         </div>
     </section>
+
 </main>

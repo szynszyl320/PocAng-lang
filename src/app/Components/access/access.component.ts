@@ -56,9 +56,14 @@ export class UseraccessComponent {
     try {
       const user = await this.authService.findUserByEmailName(this.userEmail, this.userName);
       this.authService.grantAccessToUser(this.wordsetId, user.id); 
+      
+      this.userName = '';
+      this.userEmail = '';
+      
       this.getUsersWithAccess();
     } catch (error) {
       console.error('Failed to grant access', error);
+      alert(`Fialed to grant access to ${this.userEmail}`)
     }
   }
 
@@ -69,6 +74,7 @@ export class UseraccessComponent {
       this.getUsersWithAccess();
     } catch (error) {
       console.error('Failed to revoke access', error);
+      alert(`Failed to revoke access from user`)
     }
   }
 
@@ -86,9 +92,13 @@ export class UseraccessComponent {
     try {
       const group = await this.authService.findGroupByName(this.groupName);
       const record = this.authService.grantAccessToGroup(this.wordsetId, group.id);
+      
+      this.groupName = '';
+      
       this.getGroupsWithAccess();
     } catch (error) {
       console.error('failed to grant access', error);
+      alert(`failed to grant access to ${this.groupName}`)
     }
   }
 
@@ -99,6 +109,7 @@ export class UseraccessComponent {
       this.getGroupsWithAccess();
     } catch (error) {
       console.error('failed to revoke access', error);
+      alert('failed to revoke access from group')
     }
   }
 

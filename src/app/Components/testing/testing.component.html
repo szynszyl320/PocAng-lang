@@ -5,7 +5,7 @@
         <div>{{ question.valueOne }}</div>
         <input type="text" name="user input" id="valueTwo" [(ngModel)]="answer">
         <button (click)="answerCheck(questionId)">{{'CHECKANSWER' | translate}}</button>
-        <div>{{length}}/20</div>
+        <div>{{length}}/{{staticLenght}}</div>
     </article>
 
     <button (click)="closeWindow()">{{'LEAVETEST' | translate}}</button>

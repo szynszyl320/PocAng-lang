@@ -2,6 +2,7 @@
 body {
     margin: 0;
     padding: 0;
+    color: var(--text-color);
 }
 
 /* Light theme - global variables */
@@ -14,8 +15,19 @@ body {
     --whit-main-background-color: white;
     --input-border-color: #ddd;
     --main-box-shadow-color: rgba(0, 0, 0, 0.1);
+    --text-color: black;
 }
 
-/* [data-theme="dark"] {
-    
-} */
+/* Dark theme - global variables */
+[data-theme="dark"] {
+    --body-background-color: #1a1a1a;
+    --navbar-background-color: #2d2d2d;
+    --button-background-color: #4361ee;
+    --button-color: white;
+    --button-background-color-hover: #3145b6;
+    --whit-main-background-color: #2d2d2d;
+    --input-border-color: #444;
+    --main-box-shadow-color: rgba(0, 0, 0, 0.3);
+    --text-color: rgb(255, 255, 255);
+}
+

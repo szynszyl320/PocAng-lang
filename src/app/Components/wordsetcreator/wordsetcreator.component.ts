@@ -50,16 +50,32 @@ export class WordsetcreatorComponent {
 
   addNewQuestionAssist() {
     try {
-      this.assistedCreatorContent.push({
+        this.assistedCreatorContent.push({
         type: this.newQuestionType,
         valueOne: this.newQuestionValueOne,
         valueTwo: this.newQuestionValueTwo
       })
       this.manualEditorText = JSON.stringify(this.assistedCreatorContent);
       this.authService.updateWordset(this.wordsetObject, this.wordsetObject.name, this.wordsetObject.icon, this.wordsetObject.language, this.assistedCreatorContent)
+      
+      this.newQuestionType = '';
+      this.newQuestionValueOne = '';
+      this.newQuestionValueTwo = '';
+
       console.log('wordset updated successfully');
     } catch (error) {
       console.error('failed to update wordset', error);
+    }
+  }
+
+  async deleteQuestion(questionId: number) {
+    try {
+      this.assistedCreatorContent.splice(questionId,1);
+      this.manualEditorText = JSON.stringify(this.assistedCreatorContent);
+      this.authService.updateWordset(this.wordsetObject, this.wordsetObject.name, this.wordsetObject.icon, this.wordsetObject.language, this.assistedCreatorContent)
+      console.log('wordset updated successfully');
+    } catch (error) {
+      console.log('failed to delte question', error);
     }
   }
 
