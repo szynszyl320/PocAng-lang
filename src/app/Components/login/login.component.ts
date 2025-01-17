@@ -17,19 +17,21 @@ import { LearningComponent } from '../learning/learning.component';
 
 export class LoginComponent {
   currentUser: any = null;
-  email : string = '';
-  password : string = '';
-  confirmPassword : string = '';
+  
+  email: string = '';
   name: string = '';
+  icon: any;
+  password: string = '';
+  confirmPassword: string = ''; 
+  
   loginForm: boolean = false;
   signupForm: boolean = false;
-  list : any;
+  
   menuSelector: string = 'learning';
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    // Subscribe to the auth state
     this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user;
     });
@@ -37,35 +39,36 @@ export class LoginComponent {
 
   login(event: Event) {
     event.preventDefault();
-    this.authService.login(this.email, this.password).catch((error) => {
-      console.error('Login failed', error);
-    });
-                
-    this.email = '';
-    this.password = '';
-    this.confirmPassword = '';
-    this.name = '';
-    this.loginForm = false;
-    this.signupForm = false;
+    try {
+      this.authService.login(this.email, this.password)
+      
+      this.email = '';
+      this.password = '';
+      this.loginForm = false;
+      
+    } catch (error) {
+      console.log('failed to login', error);
+      alert('failed to login, check password and email'); 
+    }
   }
 
   signup(event: Event) {
     event.preventDefault();
-    this.authService.signUp(this.email, this.password, this.confirmPassword, this.name).catch((error) => {
-      console.error('Signup fialed', error);
-    })
-
-    this.email = '';
-    this.password = '';
-    this.confirmPassword = '';
-    this.name = '';
-    this.loginForm = false;
-    this.signupForm = false;
-  }
-
-  async getGroupTemp() {
-    this.list = (await this.authService.getOwnedGroups(this.currentUser)).items;  
-    console.log(this.list[0].expand.users);
+    try {
+      this.authService.signUp(this.email, this.password, this.confirmPassword, this.name, this.icon)
+      
+      this.email = '';
+      this.password = '';
+      this.confirmPassword = '';
+      this.icon = null;
+      this.name = '';
+      
+      this.signupForm = false;
+    
+    } catch (error) {
+      console.log('failed to signup', error);
+      alert('failed to signup, check if the email has not been used already');
+    }
   }
 
   logout() {
@@ -83,4 +86,5 @@ export class LoginComponent {
   changeTab(tab: string) {
     this.menuSelector = tab;
   }
+
 }

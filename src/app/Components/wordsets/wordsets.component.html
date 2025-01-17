@@ -1,6 +1,6 @@
 <main>
 
-    <section>
+    <section class="modifier">
         <h2>Your wordsets</h2>
         @for (wordset of userWordsets; track $index) {
             <div>{{ wordset.icon }} - {{ wordset.name }} - {{ wordset.language}} - <button (click)="setEditWordlist($index)">Edytuj listę słów</button> - <button (click)="userAccessEdit($index)">Edytuj dostęp</button></div>

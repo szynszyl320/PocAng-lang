@@ -21,7 +21,7 @@ export class TestingComponent {
   wordset$ = toObservable(this.wordset);
 
   questionSet: Array<any>  = [];
-  questionSubSet: Array<any> = []
+  questionSubSet: Array<any> = [];
   question: any;
   
   answer: string = '';
@@ -53,13 +53,13 @@ export class TestingComponent {
     const usedValues = new Array<number>
     for(let i = 0; i < 20; i++) {
       let random = Math.floor(Math.random() * (this.questionSet.length))
-      if (usedValues.includes(random)) {
+      while (usedValues.includes(random)) {
         random = Math.floor(Math.random() * (this.questionSet.length))
-      } else {
-        this.questionSubSet.push(this.questionSet[random]);
-        usedValues.push(random);
       }
+      this.questionSubSet.push(this.questionSet[random]);
+      usedValues.push(random);
     }
+    console.log(this.questionSubSet);
     this.chooseQuestion();
   }
   
@@ -93,6 +93,10 @@ export class TestingComponent {
     } catch (error) {
       console.error('failed to create activity', error);
     }
+  }
+
+  closeWindow() {
+    this.componentClose.emit(false);
   }
 
 }

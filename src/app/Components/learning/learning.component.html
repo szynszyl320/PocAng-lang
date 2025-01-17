@@ -24,6 +24,23 @@
             }
         </div>
     </section>
+
+    <section>
+        <h2>{{'YOURWORDSETS' | translate}}</h2>
+        <div>
+            <article>
+                <div>{{'WORDSETNAME' | translate}}</div>
+                <div>{{'WORDSETLANGUAGE' | translate}}</div>
+            </article>
+            @for (access of userWordsets; track $index) {
+                <article>
+                    <div>{{access.name}}</div>
+                    <div>{{access.language}}</div>
+                    <button (click)="displayForm($index, 'owned')">{{'USE' | translate}}</button>
+                </article>
+            }
+        </div>
+    </section>
 </main>
 
 @if (testingForm) {

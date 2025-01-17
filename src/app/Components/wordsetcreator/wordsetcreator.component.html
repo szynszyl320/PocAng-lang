@@ -5,14 +5,13 @@
     </nav>
 
     <div>
-       
         @switch (tab) {
             @case ('assisted') {
                 <section>
 
                     <h2>Assisted creating</h2>
 
-                    <section>
+                    <section class="list">
                         <article><div>{{'QUESTIONTYPE' | translate}}</div><div>{{'QUESTIONVALUEONE' | translate}}</div><div>{{'QUESTIONVALUETWO' | translate}}</div></article>
                         @for (question of assistedCreatorContent; track $index) {
                             <article><div>{{question.type}}</div><div>{{question.valueOne}}</div><div>{{question.valueTwo}}</div></article>

@@ -28,6 +28,7 @@
                             <option value="es">{{ 'SPANISH' | translate }}</option>
                             <option value="ge">{{ 'GERMAN' | translate }}</option>
                             <option value="pt">{{ 'PORTUGESE' | translate }}</option>
+                            <option value="fr">{{ 'BAGUETTE' | translate}}</option>
                         </select>
                     </article>
                 </section>
@@ -41,6 +42,10 @@
                     <article>
                         <label for="emailVisibility">{{ 'CHANGEVISIBILITY' | translate }}</label>
                         <input type="checkbox" id="emailVisibility" [(ngModel)]="emailVisibility">
+                    </article>
+                    <article>
+                        <label for="avatar">{{'CHANGEAVATAR' | translate}}</label>
+                        <input type="file" name="user avatar" id="avatar" [(ngModel)]="avatar">
                     </article>
                     <button (click)="updateUser($event)">{{ 'SAVECHANGES' | translate }}</button>
                     <hr>

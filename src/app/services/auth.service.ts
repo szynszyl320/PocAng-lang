@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   //checked
-  async signUp(email: string, password: string, confirmPassword: string, name: string) {
+  async signUp(email: string, password: string, confirmPassword: string, name: string, icon: File) {
     try {
       const newUser = {
         email: email,
@@ -47,10 +47,11 @@ export class AuthService {
         passwordConfirm: confirmPassword,
         name: name,
         verified: true,
-        emailVisibilty: true
+        emailVisibilty: true,
+        avatar: icon
       }
       const record = await this.pb.collection('users').create(newUser);
-      await this.login(email, password)
+      await this.login(email, password);
       return record;
     } catch (error) {
       throw error
@@ -64,11 +65,12 @@ export class AuthService {
   }
 
   //checked
-  async updateAccount(emailVisibilty: boolean, name: string, user: any) {
+  async updateAccount(emailVisibilty: boolean, name: string, user: any, icon: File) {
     try {
       const userData = {   
         emailVisibility: ((emailVisibilty != null)? emailVisibilty : user.emailVisibilty),
         name: ((name != null)? name : user.name),
+        avatar: ((icon != null)? icon: user.avatar)
       }
       const record = await this.pb.collection('users').update(user.id, userData);
       return record;

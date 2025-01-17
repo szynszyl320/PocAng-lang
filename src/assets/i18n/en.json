@@ -4,7 +4,11 @@
     "NAME": "Name",
     "PASSWORD": "Password",
     "PASSWORDCONFIRM": "Confirm your password",
-    
+    "GROUPS": "Groups",
+    "WORDLISTS": "Wordsets",
+    "LEARNING": "Learning",
+    "LOGOUT": "Logout",
+
     "SETTINGS": "Settings",
     "THEMECHANGE": "Change your theme",
     "LIGHTTHEME": "Light theme",
@@ -14,6 +18,8 @@
     "POLISH": "Polish",
     "SPANISH": "Spanish",
     "GERMAN": "German",
+    "PORTUGESE": "Portugese",
+    "BAGUETTE": "French",
     "SAVE": "Save settings",
     "CHANGEPASSWORD": "Password change",
     "CHANGEVISIBILITY": "Change email visiblity",
@@ -22,7 +28,8 @@
     "SAVECHANGES": "Save changes",
     "OLDPASSWORD": "Old password",
     "CHANGEPASSWORDCONFIRM": "Confirm password change",
-    
+    "CHANGEAVATAR": "Change avatar",
+
     "YOURGROUPS": "Your groups",
     "CREATENEWGROUP": "Create a new group",
     "CONFIRMCREATE": "Confirm group creation",
@@ -40,5 +47,40 @@
     "EDITGROUP": "Edit group",
     "EDITGROUPNAME": "Edit group name",
     "EDITGROUPICON": "Edit group icon",
-    "EDITGROUPCONFIRM": "Confirm"
+    "EDITGROUPCONFIRM": "Confirm",
+    "ADDNEWUSER": "Add new user",
+    
+    "NEWWORDSETNAME": "New wordset name",
+    "NEWWORDSETICON": "New wordset icon",
+    "NEWORDSETLANGUAGE": "New wordset language",
+    "EDITWORDSETNAME": "Edit wordset name",
+    "EDITWORDSETICON": "Edit wordset icon",
+    "EDITWORDSETLANGUAGE": "Edit wordset language",
+    "CONFIMRWORDSETCREATION": "Confirm",
+    "CONFIRMWORDSETEDIT": "Confirm",
+    "CLOSE": "Close",
+    "QUESTIONTYPE": "Question type",
+    "QUESTIONVALUEONE": "Question",
+    "QUESTIONVALUETWO": "Answer",
+    "PLACEFORSENTENCEORWORD": "Place for question",
+    "PLACEFORSENTENCE": "Place for answer",
+    "ADDNEWWORD": "Add new word",
+
+    "USERACCESS": "User access",
+    "USEREMAIL": "Email",
+    "USERNAME": "Name",
+    "REVOKEFROMUSER": "Revoke access from user",
+    "REVOKEACCESS": "Revoke",
+    "GROUPACCESS": "Group access",
+    "GRANTACCESS": "Grant access",
+
+    "USERWORDSETS": "Wordsets shared with you",
+    "GROUPWORDSETS": "Wordsets shared with your group",
+    "YOURWORDSETS": "Your Wordsets",
+    "WORDSETNAME": "Wordset name",
+    "WORDSETLANGUAGE": "Wordset language",
+
+    "CHECKANSWER": "Check answer",
+    "LEAVETEST": "Leave test",
+    "USE": "Use"
 }

@@ -15,12 +15,22 @@ import { AuthService } from '../../services/auth.service';
 
 export class SettingsComponent {
   
-  password: string = '';
-  emailVisibility: boolean = false;
+  currentUser: any;
+  
+  emailVisibility: boolean = true;
   name: string = '';
+  avatar: any;
+  
+  password: string = '';
   oldPassword: string = '';
 
-  currentUser: any;
+  isOn : boolean = false;
+
+  languageValue : string = '';
+
+  themeValue : string = '';
+
+  settingsTab: string = "Language";
 
   constructor(private translationSerivce: TranslationService, private themeService: ThemeService, private authService: AuthService) {
 
@@ -41,14 +51,6 @@ export class SettingsComponent {
     this.themeService.setTheme(theme);
   }
 
-  isOn : boolean = false;
-
-  languageValue : string = '';
-
-  themeValue : string = '';
-
-  settingsTab: string = "Language";
-
   showSettings() {
     this.isOn = !this.isOn;
   }
@@ -60,7 +62,7 @@ export class SettingsComponent {
   updateUser(event: Event) {
     event.preventDefault();
     try {
-      this.authService.updateAccount(this.emailVisibility, this.name, this.currentUser);
+      this.authService.updateAccount(this.emailVisibility, this.name, this.currentUser, this.avatar);
     } catch (error) {
       console.error('Account update failed', error);
     }
@@ -80,23 +82,17 @@ export class SettingsComponent {
     this.oldPassword = '';
   }
 
-  // Function to get the value of a specific cookie
   getCookieValue(cookieName: string) {
-    // Get all the cookies
     const cookies = document.cookie.split(';');
   
-    // Loop through the cookies and find the one with the specified name
     for (let i = 0; i < cookies.length; i++) {
       const cookie = cookies[i].trim();
   
-      // Check if the cookie starts with the specified name
-      if (cookie.startsWith(`${cookieName}=`)) {
-        // Return the value of the cookie
+       if (cookie.startsWith(`${cookieName}=`)) {
         return cookie.substring(cookieName.length + 1);
       }
     }
     return "0";
-  // If the cookie is not found, return nul
 }
 
   saveSettings() {

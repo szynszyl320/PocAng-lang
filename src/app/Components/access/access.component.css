@@ -1,13 +1,61 @@
 main {
     position: absolute;
-    width: 90%;
-    height: 90vh;
-    background-color: rgb(220, 229, 229);
-    top: 2%;
-    left: 2%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    background-color: #f8f9fa;
+}
+
+section {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
 }
 
 article {
     display: flex;
-    gap: 1vh;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+input {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 300px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+label {
+    min-width: 120px;
+    color: #666;
+}
+
+div {
+    margin: 1rem 0;
 }

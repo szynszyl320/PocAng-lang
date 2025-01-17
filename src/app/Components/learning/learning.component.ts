@@ -20,6 +20,8 @@ export class LearningComponent {
 
   groupAccessedWordsets: Array<any> = [];
 
+  userWordsets: Array<any> = [];
+
   testingForm: boolean = false;
   usedWordset: any;
 
@@ -30,7 +32,8 @@ export class LearningComponent {
       this.currentUser = user;
     });
     this.searchUserAccessedWordsets();
-    this.searchGroupAccessedWorsets();
+    this.searchGroupAccessedWordsets();
+    this.searchUserOwnerWordsets();
   }
 
   async searchUserAccessedWordsets() {
@@ -42,7 +45,7 @@ export class LearningComponent {
     }
   }
 
-  async searchGroupAccessedWorsets() {
+  async searchGroupAccessedWordsets() {
     try {
       const wordsets = (await this.authService.getGroupAccessedWordsets(this.currentUser.id))
       this.groupAccessedWordsets = wordsets;
@@ -51,9 +54,25 @@ export class LearningComponent {
     }
   }
 
+  async searchUserOwnerWordsets() {
+    try {
+      const wordsets = (await this.authService.getUserWordsets(this.currentUser.id)).items;
+      this.userWordsets = wordsets;
+    } catch (error) {
+      console.error('failed to find wordsets', error);
+    }
+  }
+
   displayForm(inputId: number, searchtype: string) {
     this.testingForm = !this.testingForm;
-    ((searchtype == 'user')? this.usedWordset = this.userAccessedWordsets[inputId].expand.wordsetId : this.usedWordset = this.groupAccessedWordsets[inputId].expand.wordsetId)
+    // ((searchtype == 'user')? this.usedWordset = this.userAccessedWordsets[inputId].expand.wordsetId : this.usedWordset = this.groupAccessedWordsets[inputId].expand.wordsetId)
+    if (searchtype == 'user') {
+      this.usedWordset = this.userAccessedWordsets[inputId].expand.wordsetId;
+    } else if (searchtype == 'group') {
+      this.usedWordset = this.groupAccessedWordsets[inputId].expand.wordsetId;
+    } else {
+      this.usedWordset = this.userWordsets[inputId];
+    }
   }
 
   handleAppClose(event: boolean) {
