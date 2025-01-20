@@ -108,5 +108,17 @@ export class WordlistsComponent {
     }
   }
 
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.wordsetIcon = file;
+      this.wordsetEditIcon = file;
+    }
+  }
+
+  getWordsetIcon(wordset:any) {
+    return this.authService.getWordsetIcon(wordset);
+  }
+
 }
 

@@ -65,6 +65,7 @@ export class SettingsComponent {
   updateUser(event: Event) {
     event.preventDefault();
     try {
+      console.log(this.avatar);
       this.authService.updateAccount(this.emailVisibility, this.name, this.currentUser, this.avatar);
     } catch (error) {
       console.error('Account update failed', error);
@@ -143,6 +144,13 @@ export class SettingsComponent {
         this.daysArray[matchIndex].count = activity.count; 
       }
     });
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.avatar = file;
+    }
   }
 
 }

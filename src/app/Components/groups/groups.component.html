@@ -1,84 +1,84 @@
 <main>
     <section>
-        <h2>{{ 'YOURGROUPS' | translate }}</h2>
+        <h2>{{ 'groups.YOURGROUPS' | translate }}</h2>
         @for (group of groupList; track $index) {
             <article>
-                <h2>{{ group.name }}</h2>
+                <h2><img [src]="groupIconSet(group)" alt="Icon">{{ group.name }}</h2>
                 @for (user of group.expand.users; track $index) {
-                    <div class="user-item">{{user.name}}<button (click)="removeFromGroup(group, $index)">{{ 'REMOVEUSERFROMGROUP' | translate }}</button></div>
+                    <div class="user-item">{{user.name}}<button (click)="removeFromGroup(group, $index)">{{ 'groups.REMOVEUSERFROMGROUP' | translate }}</button></div>
                 }
             </article>
         }
     </section>
 
     <section>
-        <h2>{{ 'CREATENEWGROUP' | translate }}</h2>
+        <h2>{{ 'groups.CREATENEWGROUP' | translate }}</h2>
             <div>
-                <button (click)="createNewGroup($event)">{{'CONFIRMCREATION' | translate}}</button>
+                <button (click)="createNewGroup($event)">{{'groups.CONFIRMCREATION' | translate}}</button>
                 <article>
-                    <label for="groupName">{{'GROUPNAME' | translate}}</label>
+                    <label for="groupName">{{'groups.GROUPNAME' | translate}}</label>
                     <input type="text" id="groupName" [(ngModel)]="groupName" name="group name">
                 </article>
                 <article>   
-                    <label for="groupIcon">{{ 'GROUPICON' | translate }}</label>
-                    <input type="file" id="groupIcon" [(ngModel)]="groupIcon" name="group icon">
+                    <label for="groupIcon">{{ 'groups.GROUPICON' | translate }}</label>
+                    <input type="file" id="groupIcon" (change)="onFileSelected($event)" name="group icon">
                 </article>
             </div>
             <div>
-                <h4>{{'ADDNEWUSER' | translate}}</h4>
+                <h4>{{'groups.ADDNEWUSER' | translate}}</h4>
                 <article>
-                    <label for="userEmail">{{ 'EMAIL' | translate }}</label>
+                    <label for="userEmail">{{ 'groups.EMAIL' | translate }}</label>
                     <input type="email" id="userEmail" [(ngModel)]="userEmail" name="email">
                 </article>
                 <article>
-                    <label for="userName">{{ 'NAME' | translate }}</label>
+                    <label for="userName">{{ 'groups.NAME' | translate }}</label>
                     <input type="text" id="userName" [(ngModel)]="userName" name="username"> 
                 </article>
-                <button (click)="getSpecificUser($event)">{{'ADDUSER' | translate}}</button>
-                <h4>{{'EMAILHASTOBEVISIBLE' | translate}}</h4>
+                <button (click)="getSpecificUser($event)">{{'groups.ADDUSER' | translate}}</button>
+                <h4>{{'groups.EMAILHASTOBEVISIBLE' | translate}}</h4>
             </div>
             <article>
-                <h4>{{'ADDEDUSERS' | translate}}</h4>
+                <h4>{{'groups.ADDEDUSERS' | translate}}</h4>
                 @for (user of userList; track $index) {
-                    <p>{{ 'EMAIL' | translate }}: {{ user.name }} {{ 'NAME' | translate }}: {{ user.email }}</p> 
+                    <p>{{ 'groups.EMAIL' | translate }}: {{ user.name }} {{ 'groups.NAME' | translate }}: {{ user.email }}</p> 
                 }
             </article>
     </section>
 
     <section>
-        <h2>{{ 'ADDUSERTOEXISTINGGROUP' | translate }}</h2>
+        <h2>{{ 'groups.ADDUSERTOEXISTINGGROUP' | translate }}</h2>
         <div>
             <article>
-                <label for="addUserEmail">{{'EMAIL' | translate}}</label>
+                <label for="addUserEmail">{{'groups.EMAIL' | translate}}</label>
                 <input type="email" id="addUserEmail" [(ngModel)]="addUserEmail" name="user email">
             </article>
             <article>
-                <label for="addUserName">{{'NAME' | translate}}</label>
+                <label for="addUserName">{{'groups.NAME' | translate}}</label>
                 <input type="text" id="addUserName" [(ngModel)]="addUserName" name="addusername">
             </article>
             <article>
-                <label for="groupSelect">{{'SELECTGROUP'| translate}}</label>
+                <label for="groupSelect">{{'groups.SELECTGROUP'| translate}}</label>
                 <select id="groupSelect" [(ngModel)]="selectedGroup" name="select group">
                     @for (group of groupList; track $index) {
                         <option [value]="$index">{{group.name}}</option>
                     }
                 </select>
             </article>
-            <button (click)="addToGroup($event)">{{'ADDUSERTOGROUP' | translate}}</button>
+            <button (click)="addToGroup($event)">{{'groups.ADDUSERTOGROUP' | translate}}</button>
         </div>
         <hr>
-        <h2>{{ 'EDITGROUP' | translate }}</h2>
+        <h2>{{ 'groups.EDITGROUP' | translate }}</h2>
         <div>
             <article>
-                <label for="editGroupName">{{'EDITGROUPNAME' | translate}}</label>
+                <label for="editGroupName">{{'groups.EDITGROUPNAME' | translate}}</label>
                 <input type="text" id="editGroupName" [(ngModel)]="groupEditName" name="name edit">
             </article>
             <article>
-                <label for="editGroupIcon">{{'EDITGROUPICON' | translate}}</label>
-                <input type="file" id="editGroupIcon" [(ngModel)]="groupEditIcon" name="icon edit">
+                <label for="editGroupIcon">{{'groups.EDITGROUPICON' | translate}}</label>
+                <input type="file" id="editGroupIcon" (change)="onFileSelected($event)" name="icon edit">
             </article>
             <article>
-                <label for="groupEditSelect">{{'SELECTGROUP'| translate}}</label>
+                <label for="groupEditSelect">{{'groups.SELECTGROUP'| translate}}</label>
                 <select id="groupEditSelect" [(ngModel)]="editGroupIndex" name="group index">
                     @for (group of groupList; track $index) {
                         <option [value]="$index">{{group.name}}</option>

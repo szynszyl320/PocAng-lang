@@ -58,6 +58,11 @@ export class AuthService {
     }
   }
 
+  getAvatar(user: any) {
+    const record = this.pb.files.getURL(user, user.avatar);
+    return record;
+  }
+
   //checked
   logout() {
     this.pb.authStore.clear();
@@ -69,7 +74,7 @@ export class AuthService {
     try {
       const userData = {   
         emailVisibility: ((emailVisibilty != null)? emailVisibilty : user.emailVisibilty),
-        name: ((name != null)? name : user.name),
+        name: ((name != null && name !='')? name : user.name),
         avatar: ((icon != null)? icon: user.avatar)
       }
       const record = await this.pb.collection('users').update(user.id, userData);
@@ -135,7 +140,7 @@ export class AuthService {
   async updateGroup(group: any, name: string, icon: File, users: Array<any>) {
     try {
       const groupData = {
-        "name": ((name != null)? name : group.name),
+        "name": ((name != null && name != '')? name : group.name),
         "icon": ((icon != null)? icon : group.icon),
         "users": ((users != null)? users : group.users)
       }      
@@ -143,6 +148,11 @@ export class AuthService {
     } catch (error) {
       throw error;
     }
+  }
+
+  public getGroupIcon(group: any) {
+    const record = this.pb.files.getURL(group, group.icon);
+    return record;
   }
 
   //checked
@@ -177,9 +187,9 @@ export class AuthService {
   async updateWordset(wordset: any, name: string, icon: File, language: string, wordlist: Array<any>) {
     try {
       const newWordsetData = {
-        "name": ((name != null)? name : wordset.name),
+        "name": ((name != null && name != '')? name : wordset.name),
         "icon": ((icon != null)? icon : wordset.icon),
-        "language": ((language != null)? language : wordset.language),
+        "language": ((language != null && language != '')? language : wordset.language),
         "wordlist": ((wordlist != null)? wordlist : wordset.wordlist)
       }
       const record = this.pb.collection('wordset').update(wordset.id, newWordsetData);
@@ -195,6 +205,12 @@ export class AuthService {
     } catch (error) {
       throw error;
     }
+  }
+
+  
+  public getWordsetIcon(wordset: any) {
+    const record = this.pb.files.getURL(wordset, wordset.icon);
+    return record;
   }
 
   //checked

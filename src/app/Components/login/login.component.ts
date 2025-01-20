@@ -23,7 +23,9 @@ export class LoginComponent {
   icon: any;
   password: string = '';
   confirmPassword: string = ''; 
-  
+
+  avatar?: string;
+
   loginForm: boolean = false;
   signupForm: boolean = false;
   
@@ -35,7 +37,9 @@ export class LoginComponent {
     this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user;
     });
+    this.avatar = this.authService.getAvatar(this.currentUser);
   }
+
 
   login(event: Event) {
     event.preventDefault();
@@ -45,7 +49,7 @@ export class LoginComponent {
       this.email = '';
       this.password = '';
       this.loginForm = false;
-      
+
     } catch (error) {
       console.log('failed to login', error);
       alert('failed to login, check password and email'); 

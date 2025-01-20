@@ -1,49 +1,49 @@
 <main>
 
     <section class="modifier">
-        <h2>Your wordsets</h2>
+        <h2>{{'wordsets.YOURWORDSETS' | translate}}</h2>
         @for (wordset of userWordsets; track $index) {
-            <div>{{ wordset.icon }} - {{ wordset.name }} - {{ wordset.language}} - <button (click)="setEditWordlist($index)">{{'EDITWORDLIST' | translate}}</button> - <button (click)="userAccessEdit($index)">{{'EDITACCESS' | translate}}</button><button (click)="deleteWordset($event, wordset.id)">{{'DELETEWORDSET' | translate}}</button></div>
+            <div><img [src]="getWordsetIcon(wordset)" alt="Icon"> - {{ wordset.name }} - {{ wordset.language}} - <button (click)="setEditWordlist($index)">{{'wordsets.EDITWORDLIST' | translate}}</button> - <button (click)="userAccessEdit($index)">{{'wordsets.EDITACCESS' | translate}}</button><button (click)="deleteWordset($event, wordset.id)">{{'wordsets.DELETEWORDSET' | translate}}</button></div>
         }
     </section>
     
     <section>
-        <h2>Create wordsets</h2>
+        <h2>{{'wordsets.CREATENEWWORDSET' | translate}}</h2>
         <article>
-            <label for="wordsetName">{{ 'NEWWORDSETNAME' | translate }}</label>
+            <label for="wordsetName">{{ 'wordsets.NEWWORDSETNAME' | translate }}</label>
             <input type="text" name="create name" id="wordsetName" [(ngModel)]="wordsetName">
         </article>
         <article>
-            <label for="wordsetIcon">{{ 'NEWWORDSETICON' | translate }}</label>
-            <input type="file" name="create icon" id="wordsetIcon" [(ngModel)]="wordsetIcon">
+            <label for="wordsetIcon">{{ 'wordsets.NEWWORDSETICON' | translate }}</label>
+            <input type="file" name="create icon" id="wordsetIcon" (change)="onFileSelected($event)">
         </article>
         <article>
-            <label for="wordsetLanguage">{{ 'NEWORDSETLANGUAGE' | translate }}</label>
+            <label for="wordsetLanguage">{{ 'wordsets.NEWORDSETLANGUAGE' | translate }}</label>
             <input type="text" name="create language" id="wordsetLanguage" [(ngModel)]="wordsetLanguage">
         </article>
-        <button (click)="createNewWordset($event)">{{'CONFIMRWORDSETCREATION'| translate}}</button>
+        <button (click)="createNewWordset($event)">{{'wordsets.CONFIMRWORDSETCREATION'| translate}}</button>
     </section>
 
     <section>
-        <h2>Edit wordsets</h2>
+        <h2>{{'wordsets.EDITWORDSETS' | translate}}</h2>
         <select name="chose wordset" id="selectWORDSET" [(ngModel)]="chosenWordset">
             @for (wordset of userWordsets; track $index) {
                 <option [value]="$index">{{wordset.name}}</option>
             }
         </select>
         <article>
-            <label for="editWordsetName">{{'EDITWORDSETNAME' | translate}}</label>
+            <label for="editWordsetName">{{'wordsets.EDITWORDSETNAME' | translate}}</label>
             <input type="text" name="edit name" id="editWordsetName" [(ngModel)]="wordsetEditName">
         </article>
         <article>
-            <label for="editWordsetIcon">{{'EDITWORDSETICON' | translate}}</label>
-            <input type="file" name="edit icon" id="editWordsetIcon" [(ngModel)]="wordsetEditIcon">
+            <label for="editWordsetIcon">{{'wordsets.EDITWORDSETICON' | translate}}</label>
+            <input type="file" name="edit icon" id="editWordsetIcon" (change)="onFileSelected($event)">
         </article>
         <article>
-            <label for="editWordsetLanguage">{{'EDITWORDSETLANGUAGE' | translate }}</label>
+            <label for="editWordsetLanguage">{{'wordsets.EDITWORDSETLANGUAGE' | translate }}</label>
             <input type="text" name="edit language" id="editWordsetLanguage" [(ngModel)]="wordsetEditLanguage">
         </article>
-        <button (click)="updateWordset($event)">{{'CONFIRMWORDSETEDIT' | translate}}</button>
+        <button (click)="updateWordset($event)">{{'wordsets.CONFIRMWORDSETEDIT' | translate}}</button>
     </section>
 </main>
 

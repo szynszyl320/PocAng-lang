@@ -126,4 +126,16 @@ export class GroupsComponent {
     }
   }
 
+  groupIconSet(group: any) {
+    return this.authService.getGroupIcon(group);
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.groupIcon = file;
+      this.groupEditIcon = file;
+    }
+  }
+
 }

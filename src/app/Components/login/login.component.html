@@ -1,10 +1,10 @@
 @if (currentUser) {
     <nav>
-        <h3>Welcome, {{ currentUser?.name }} {{currentUser?.avatar}}</h3>
-        <button (click)="changeTab('groups')">{{'GROUPS' | translate}}</button>
-        <button (click)="changeTab('wordlists')">{{'WORDLISTS' | translate}}</button>
-        <button (click)="changeTab('learning')">{{'LEARNING' | translate}}</button>
-        <button (click)="logout()">{{'LOGOUT' | translate}}</button>
+        <h3>{{'login.WELCOME' | translate}}, {{ currentUser?.name }} <img src="{{avatar}}" alt=""></h3>
+        <button (click)="changeTab('groups')">{{'login.GROUPS' | translate}}</button>
+        <button (click)="changeTab('wordlists')">{{'login.WORDLISTS' | translate}}</button>
+        <button (click)="changeTab('learning')">{{'login.LEARNING' | translate}}</button>
+        <button (click)="logout()">{{'login.LOGOUT' | translate}}</button>
     </nav>
     @switch (menuSelector) {
         @case ('groups') {
@@ -22,9 +22,9 @@
         <main>
             <header><h1>Installed</h1></header>
             <form (submit)="login($event)">
-                <input type="email" name="email" placeholder="Email" [(ngModel)]="email" required/>
-                <input type="password" name="password" placeholder="{{ 'PASSWORD' | translate }}" [(ngModel)]="password" required />
-                <button type="submit">{{ 'LOGIN' | translate }}</button>
+                <input type="email" name="email" placeholder="{{ 'login.EMAIL' | translate }}" [(ngModel)]="email" required/>
+                <input type="password" name="password" placeholder="{{ 'login.PASSWORD' | translate }}" [(ngModel)]="password" required />
+                <button type="submit">{{ 'login.LOGIN' | translate }}</button>
             </form>    
         </main>
         <button (click)="loginInit()" class="back"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 800"><g stroke-width="59" stroke="hsl(227, 71%, 57%)" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="rotate(44, 400, 400)"><line x1="280.5" y1="280.5" x2="519.5" y2="519.5" marker-end="url(#SvgjsMarker1160)"></line></g><defs><marker markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" viewBox="0 0 5 5" orient="auto" id="SvgjsMarker1160"><polygon points="0,5 1.6666666666666667,2.5 0,0 5,2.5" fill="hsl(227, 71%, 57%)"></polygon></marker></defs></svg></button>
@@ -32,12 +32,12 @@
         <main>
             <header><h1>Installed</h1></header>
             <form (submit)="signup($event)">
-                <input type="email" name="email" placeholder="Email" [(ngModel)]="email" required />
-                <input type="text" name="name" placeholder="{{ 'NAME' | translate }}" [(ngModel)]="name" required />
-                <input type="password" name="password" placeholder="{{ 'PASSWORD' | translate }}" [(ngModel)]="password" required />
-                <input type="password" name="password" placeholder="{{ 'PASSWORDCONFIRM' | translate }}" [(ngModel)]="confirmPassword" required />
-                <input type="file" name="avatar" id="avatar" placeholder="{{ 'USERICON' | translate }}" [(ngModel)]="icon">
-                <button type="submit">{{ 'SIGNUP' | translate }}</button>
+                <input type="email" name="email" placeholder="{{ 'login.EMAIL' | translate }}" [(ngModel)]="email" required />
+                <input type="text" name="name" placeholder="{{ 'login.NAME' | translate }}" [(ngModel)]="name" required />
+                <input type="password" name="password" placeholder="{{ 'login.PASSWORD' | translate }}" [(ngModel)]="password" required />
+                <input type="password" name="password" placeholder="{{ 'login.PASSWORDCONFIRM' | translate }}" [(ngModel)]="confirmPassword" required />
+                <input type="file" name="avatar" id="avatar" placeholder="{{ 'login.USERICON' | translate }}">
+                <button type="submit">{{ 'login.SIGNUP' | translate }}</button>
             </form>
             <button class="back" (click)="signupInit()"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 800"><g stroke-width="59" stroke="hsl(227, 71%, 57%)" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="rotate(44, 400, 400)"><line x1="280.5" y1="280.5" x2="519.5" y2="519.5" marker-end="url(#SvgjsMarker1160)"></line></g><defs><marker markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" viewBox="0 0 5 5" orient="auto" id="SvgjsMarker1160"><polygon points="0,5 1.6666666666666667,2.5 0,0 5,2.5" fill="hsl(227, 71%, 57%)"></polygon></marker></defs></svg></button>
         </main>
@@ -48,8 +48,8 @@
               <h3>To jest wersja demonstracyjna</h3>
             </header>
             <article class="installed-article">
-              <button class="installed-button" (click)="loginInit()">{{ 'LOGIN' | translate }}</button>
-              <button class="installed-button" (click)="signupInit()">{{ 'SIGNUP' | translate }}</button>
+              <button class="installed-button" (click)="loginInit()">{{ 'login.LOGIN' | translate }}</button>
+              <button class="installed-button" (click)="signupInit()">{{ 'login.SIGNUP' | translate }}</button>
             </article>
         </main>
   
