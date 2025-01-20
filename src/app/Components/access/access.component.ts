@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { AuthService } from '../../services/auth.service'
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -27,6 +27,8 @@ export class UseraccessComponent {
   userEmail: string = '';
 
   groupName: string = '';
+
+  componentClose = output<boolean>();
 
   constructor(private authService: AuthService) {}
 
@@ -111,6 +113,10 @@ export class UseraccessComponent {
       console.error('failed to revoke access', error);
       alert('failed to revoke access from group')
     }
+  }
+
+  closeWindow() {
+    this.componentClose.emit(false);
   }
 
 }

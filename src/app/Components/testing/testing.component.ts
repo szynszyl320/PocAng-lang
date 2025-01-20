@@ -29,6 +29,9 @@ export class TestingComponent {
   questionId: number = 0;
   length: number = 0;
   staticLenght: number = this.length;
+  isLastCorrect? : boolean;
+  replyClass : string = '';
+  displayReply : boolean = false;
 
   componentClose = output<boolean>();
 
@@ -48,9 +51,8 @@ export class TestingComponent {
       ((this.questionSet.length > 20)? this.length = 20 : this.length = this.questionSet.length)
       this.staticLenght = this.length;
       this.generateSubset();
-      console.log(this.length, this.questionSet);
     });
-    
+    this.createActivity();
   }
   
   generateSubset() {
@@ -84,7 +86,12 @@ export class TestingComponent {
     if (this.question.valueTwo == this.answer) {
       this.questionSubSet.splice(id, 1);
       this.length--;
-      this.answer = '';
+      this.replyClass = 'correctInput';
+      this.isLastCorrect = true;
+      this.displayReply = true;
+    } else {
+      this.replyClass = 'incorrectInput'
+      this.isLastCorrect = false;
     }
     this.answer = '';
     this.lenghtCheck();
@@ -93,11 +100,19 @@ export class TestingComponent {
 
   async createActivity() {
     try {
-      console.log(this.currentUser.id);
-      const record = await this.authService.createActivity(this.currentUser.id);
-      console.log(record);
+      const today = new Date().toISOString().split('T')[0];       
+      const activityList = (await this.authService.getUserActivity(this.currentUser.id)).items;
+      for (const activity of activityList) {
+        if (activity['created'].split(' ')[0] == today) {
+          this.authService.updateActivity(activity);
+          return 0;
+        }
+      }
+      const record = await this.authService.createActivity(this.currentUser.id)
+      return record;
     } catch (error) {
       console.error('failed to create activity', error);
+      return 1;
     }
   }
 

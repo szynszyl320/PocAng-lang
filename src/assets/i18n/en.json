@@ -85,5 +85,7 @@
 
     "CHECKANSWER": "Check answer",
     "LEAVETEST": "Leave test",
-    "USE": "Use"
+    "USE": "Use",
+    "LASTQUESTIONCORRECT": "Last answer was correct",
+    "LASTQUESTIONINCORRECT": "Last answer was incorrect"
 }

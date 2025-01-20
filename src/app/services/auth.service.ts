@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, count, Observable } from 'rxjs';
 import PocketBase from 'pocketbase';
 
 @Injectable({
@@ -313,7 +313,8 @@ export class AuthService {
   async createActivity(userId: string) {
     try {
       const data = {
-        userId: userId
+        userId: userId,
+        count: 1
       }
       const record = await this.pb.collection('user_activity').create(data);
       return record;
@@ -322,5 +323,28 @@ export class AuthService {
     }
   }
 
+  async updateActivity(activity: any) {
+    try {
+      const updateData = {
+        count: activity.count+1
+      }
+      const record = await this.pb.collection('user_activity').update(activity.id, updateData);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getUserActivity(userId: string) {
+    try {
+      const records = await this.pb.collection('user_activity').getList(1, 50, {
+        filter: `userId = "${userId}"`
+      })
+      return records;
+    } catch (error) {
+      throw error;
+    }
+  }
+
 }
+
 

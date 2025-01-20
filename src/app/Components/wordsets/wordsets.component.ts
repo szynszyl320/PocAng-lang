@@ -37,6 +37,11 @@ export class WordlistsComponent {
   userAccessForm = false;
   userAccess: number = 0;
 
+  handleAppClose(event: boolean) {
+    this.userAccessForm = false;
+    this.wordlistEditForm = false;
+  }
+
   constructor(private authService: AuthService) {}
 
   ngOnInit() {

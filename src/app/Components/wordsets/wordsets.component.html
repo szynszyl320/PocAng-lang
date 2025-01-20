@@ -48,11 +48,9 @@
 </main>
 
 @if (wordlistEditForm) {
-    <app-wordsetcreator [wordset]="userWordsets[wordlistEdit]" />
-    <button class="closeButton" (click)="setEditWordlist(0)">Close</button>
+    <app-wordsetcreator [wordset]="userWordsets[wordlistEdit]" (componentClose)="handleAppClose($event)"></app-wordsetcreator>
 }
 
 @if (userAccessForm) {
-    <app-useraccess [wordset]="userWordsets[userAccess]" />
-    <button class="closeButton" (click)="userAccessEdit(0)">Close</button>
+    <app-useraccess [wordset]="userWordsets[userAccess]" (componentClose)="handleAppClose($event)"></app-useraccess>
 }

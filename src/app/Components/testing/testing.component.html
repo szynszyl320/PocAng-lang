@@ -3,9 +3,14 @@
     <article>
         <div>{{ question.type }}</div>
         <div>{{ question.valueOne }}</div>
-        <input type="text" name="user input" id="valueTwo" [(ngModel)]="answer">
-        <button (click)="answerCheck(questionId)">{{'CHECKANSWER' | translate}}</button>
+        <form>
+            <input type="text" name="user input" id="valueTwo" [(ngModel)]="answer" autocomplete="off">
+            <button type="submit" (click)="answerCheck(questionId)">{{'CHECKANSWER' | translate}}</button>
+        </form>
         <div>{{length}}/{{staticLenght}}</div>
+        @if (displayReply) {
+            <div class="{{replyClass}}">{{ ((isLastCorrect == true )? 'LASTQUESTIONCORRECT' : 'LASTQUESTIONINCORRECT') | translate }}</div>
+        }
     </article>
 
     <button (click)="closeWindow()">{{'LEAVETEST' | translate}}</button>

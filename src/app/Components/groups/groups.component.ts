@@ -80,7 +80,6 @@ export class GroupsComponent {
   async getUserGroups() {
     try {
       this.groupList = (await this.authService.getOwnedGroups(this.currentUser)).items;
-      console.log(this.groupList);
     } catch (error) {
       console.error('Failed to fetch any groups', error);
       alert('failed to find any groups');

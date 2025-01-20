@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { TranslationService } from '../../services/translation.service';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -8,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [FormsModule, TranslateModule],
+  imports: [FormsModule, TranslateModule, CommonModule],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css'
 })
@@ -21,6 +22,9 @@ export class SettingsComponent {
   name: string = '';
   avatar: any;
   
+  userActivities: Array<any> = [];
+  daysArray: Array<any> = [];
+
   password: string = '';
   oldPassword: string = '';
 
@@ -32,15 +36,14 @@ export class SettingsComponent {
 
   settingsTab: string = "Language";
 
-  constructor(private translationSerivce: TranslationService, private themeService: ThemeService, private authService: AuthService) {
+  constructor(private translationSerivce: TranslationService, private themeService: ThemeService, private authService: AuthService) {}
 
-  }
-  
   ngOnInit(): void {
+    this.loadUserPreferences();
     this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user;
     });
-    this.loadCookies();
+    this.getUserActivity();
   }
 
   switchLanguage(lang: string) {
@@ -72,7 +75,6 @@ export class SettingsComponent {
 
   updatePassword(event: Event) {
     event.preventDefault();
-    console.log(this.oldPassword);
     try {
       this.authService.updatePassword(this.password, this.oldPassword, this.currentUser.id);
     } catch (error) {
@@ -82,37 +84,65 @@ export class SettingsComponent {
     this.oldPassword = '';
   }
 
-  getCookieValue(cookieName: string) {
-    const cookies = document.cookie.split(';');
-  
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-  
-       if (cookie.startsWith(`${cookieName}=`)) {
-        return cookie.substring(cookieName.length + 1);
-      }
+  async getUserActivity() {
+    try {
+      this.userActivities = (await this.authService.getUserActivity(this.currentUser.id)).items  
+      this.generateCurrentMonthArray();
+      this.mergeDaysWithActivities();
+    } catch (error) {
+      console.error(`failed to find any activity for ${this.currentUser.name}`, error);
     }
-    return "0";
-}
-
-  saveSettings() {
-    const expirationDay = new Date();
-    expirationDay.setMonth(expirationDay.getMonth() +2);
-    document.cookie = `languagePreference= ${this.languageValue}; expires=${expirationDay.toUTCString}; path=/`
-    document.cookie = `themePreference= ${this.themeValue}; expires=${expirationDay.toUTCString}; path=/`
   }
 
-  refreshCookies() {
-    const expirationDay = new Date();
-    expirationDay.setMonth(expirationDay.getMonth() +2);
-    document.cookie = `languagePreference= ${this.languageValue}; expires=${expirationDay.toUTCString}; path=/`
-    document.cookie = `themePreference= ${this.themeValue}; expires=${expirationDay.toUTCString}; path=/`
+  saveUserPeferences() {
+    try {
+      const userPreferences = {
+        language : ((this.languageValue != null)? this.languageValue : 'light' ),
+        theme: ((this.themeValue != null)? this.themeValue : 'en')
+      } 
+      localStorage.setItem('installedConfig', JSON.stringify(userPreferences));  
+    } catch (error) {
+      console.error('failed to save preferences',error);
+    }
   }
 
-  loadCookies() {
-    this.languageValue = this.getCookieValue("languagePreference");
-    this.themeValue = this.getCookieValue("themePreference");
-    this.refreshCookies();
+  loadUserPreferences() {
+    try {
+      const config = JSON.parse(localStorage.getItem('installedConfig') ?? '');
+      this.languageValue = config.language;
+      this.switchLanguage(config.language);
+      this.themeValue = config.theme;
+      this.switchTheme(config.theme);
+    } catch (error) { 
+      console.error('failed to find or load any preferences', error);
+    }
+  }
+
+  generateCurrentMonthArray() {
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    
+    for (let day = 1; day <= daysInMonth; day++) {
+      const currentDay = new Date(currentYear, currentMonth, day);
+      this.daysArray.push({
+        date: currentDay.toISOString().split('T')[0],
+        count: 0
+      });
+    }
+  }
+
+  mergeDaysWithActivities(): void {
+    this.userActivities.forEach(activity => {
+      const activityDate = activity.created.split(' ')[0];
+      const matchIndex = this.daysArray.findIndex(day => 
+        day.date == activityDate
+      );
+      if (matchIndex !== -1) {
+        this.daysArray[matchIndex].count = activity.count; 
+      }
+    });
   }
 
 }

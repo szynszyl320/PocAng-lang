@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { AuthService } from '../../services/auth.service'
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -30,6 +30,8 @@ export class WordsetcreatorComponent {
   newQuestionValueOne: string = '';
   newQuestionValueTwo: string = '';
 
+  componentClose = output<boolean>(); 
+
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
@@ -40,13 +42,13 @@ export class WordsetcreatorComponent {
       this.wordsetObject = value
       this.manualEditorText = JSON.stringify(this.wordsetObject.wordlist, null, 0);
       this.assistedCreatorContent = JSON.parse(this.manualEditorText);
-
     })  
   }
 
   tabSelector(value: string) {
     this.tab = value;
   }
+
 
   addNewQuestionAssist() {
     try {
@@ -93,5 +95,10 @@ export class WordsetcreatorComponent {
       alert("{{'SAVEFAILED' | translate}}")
     }
   }
+
+  closeWindow() {
+    this.componentClose.emit(false);
+  }
+
 
 }
