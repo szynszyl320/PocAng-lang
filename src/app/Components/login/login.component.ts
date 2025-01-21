@@ -29,7 +29,7 @@ export class LoginComponent {
   loginForm: boolean = false;
   signupForm: boolean = false;
   
-  menuSelector: string = 'learning';
+  menuSelector: string = 'wordsets';
 
   constructor(private authService: AuthService) {}
 

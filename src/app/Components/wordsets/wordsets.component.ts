@@ -32,10 +32,15 @@ export class WordlistsComponent {
   placeholderArray: Array<any> = [];
   
   wordlistEdit: number = 0;
-  wordlistEditForm = false;
+  wordlistEditForm: boolean = false;
   
-  userAccessForm = false;
+  userAccessForm: boolean = false;
   userAccess: number = 0;
+
+  wordsetEditForm: boolean = false;
+  edditedwordset:any;
+
+  wordsetCreationForm: boolean = false;
 
   handleAppClose(event: boolean) {
     this.userAccessForm = false;
@@ -69,7 +74,7 @@ export class WordlistsComponent {
   async createNewWordset(event: Event) {
     event.preventDefault();
     try {
-      await this.authService.createWordset(this.currentUser.id, this.wordsetName, this.wordsetIcon, this.wordsetLanguage);
+      await this.authService.createWordset(this.currentUser.id, this.wordsetName, this.wordsetIcon, this.wordsetLanguage, null);
       this.getUserWordsets();
       
       this.wordsetEditName = '';
@@ -113,11 +118,81 @@ export class WordlistsComponent {
     if (file) {
       this.wordsetIcon = file;
       this.wordsetEditIcon = file;
-    }
+    } 
   }
 
   getWordsetIcon(wordset:any) {
     return this.authService.getWordsetIcon(wordset);
+  }
+
+  async importFile(event: any): Promise<void> {
+    try {
+      const file: File = event.target.files[0];
+      
+      if (!file) {
+        throw new Error('No file selected');
+      }
+  
+      const fileContent = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        
+        reader.onload = (e) => {
+          resolve(e.target?.result as string);
+        };
+        
+        reader.onerror = (error) => {
+          reject(error);
+        };
+        
+        reader.readAsText(file);
+      });
+  
+      const jsonData = JSON.parse(fileContent);
+
+      if (!jsonData.name || !jsonData.language || !jsonData.wordlist) {
+        throw new Error('Invalid file structure');
+      }
+  
+      await this.authService.createWordset(this.currentUser.id, jsonData.name, null, jsonData.language, jsonData.wordlist);
+  
+    } catch (error) {
+      console.error('Failed to import wordset:', error);
+    }
+  }
+
+  exportFile(wordset: any, event: Event) {
+    try { 
+      console.log(wordset);
+      
+      const newDataFile = {
+        name: wordset.name,
+        language: wordset.language,
+        wordlist: wordset.wordlist
+      }
+      const jsonData = JSON.stringify(newDataFile, null, 2);
+
+      const blob = new Blob([jsonData], { type: 'application/json' });
+
+      const link = document.createElement('a');
+      link.setAttribute('href', URL.createObjectURL(blob));
+      link.setAttribute('download', wordset.name + '.json');
+
+      document.body.appendChild(link);
+      link.click();
+
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Failed to export wordset');
+    }
+  }
+
+  creationFromToggle() {
+    this.wordsetCreationForm = !this.wordsetCreationForm;
+  }
+
+  editFormToggle(input: number) {
+    this.wordsetEditForm = !this.wordsetEditForm;
+    this.edditedwordset = this.userWordsets[input];
   }
 
 }

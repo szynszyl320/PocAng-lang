@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, count, Observable } from 'rxjs';
 import PocketBase from 'pocketbase';
+import { WordsetcreatorComponent } from '../Components/wordsetcreator/wordsetcreator.component';
 
 @Injectable({
   providedIn: 'root',
@@ -38,28 +39,44 @@ export class AuthService {
     }
   }
 
+  private async getDefaultIconAsFile(type: string): Promise<File> {
+    let defaultIconUrl = '';
+    if (type == 'user') {
+      defaultIconUrl = '../../assets/images/user.png';
+    } else if (type == 'group.png') {
+      defaultIconUrl = '../../assets/images/group.png'
+    } else {
+      defaultIconUrl = '../../assets/images/wordset.png'
+    }
+    
+    const response = await fetch(defaultIconUrl);
+    const blob = await response.blob();
+    return new File([blob], 'user.png', { type: 'image/png' });
+  }
+
   //checked
-  async signUp(email: string, password: string, confirmPassword: string, name: string, icon: File) {
+  async signUp(email: string, password: string, confirmPassword: string, name: string, icon: File | null) {
     try {
+      const avatarFile = icon || await this.getDefaultIconAsFile('user');
+      
       const newUser = {
         email: email,
         password: password,
         passwordConfirm: confirmPassword,
         name: name,
-        verified: true,
         emailVisibilty: true,
-        avatar: icon
+        avatar: avatarFile
       }
       const record = await this.pb.collection('users').create(newUser);
       await this.login(email, password);
       return record;
     } catch (error) {
-      throw error
+      throw error;
     }
   }
 
   getAvatar(user: any) {
-    const record = this.pb.files.getURL(user, user.avatar);
+    const record = this.pb.files.getURL(user, user.avatar, {'thumb': '100x100'});
     return record;
   }
 
@@ -122,11 +139,13 @@ export class AuthService {
   }
 
   //checked
-  async createNewGroup(name: string, icon: File, ownerId: string, users: Array<string>) {
+  async createNewGroup(name: string, icon: File | null, ownerId: string, users: Array<string>) {
     try {
+      const iconFile = icon || await this.getDefaultIconAsFile('group');
+
       const groupData = {
         "name": name,
-        "icon": icon,
+        "icon": iconFile,
         "ownerId": ownerId,
         "users": users
       }
@@ -151,7 +170,7 @@ export class AuthService {
   }
 
   public getGroupIcon(group: any) {
-    const record = this.pb.files.getURL(group, group.icon);
+    const record = this.pb.files.getURL(group, group.icon, {'thumb': '50x50'});
     return record;
   }
 
@@ -168,14 +187,16 @@ export class AuthService {
   }
 
   //checked
-  async createWordset(userId: string, name: string, icon: File, language: string) {
+  async createWordset(userId: string, name: string, icon: File | null, language: string, wordlist: Array<any> | null) {
     try {
+      const iconFile = icon || await this.getDefaultIconAsFile('wordset');
+
       const wordsetData = {
         "name": name,
-        "icon": icon,
+        "icon": iconFile,
         "language": language,
         "creatorId": userId,
-        "wordlist": []
+        "wordlist": ((wordlist != null)? wordlist : [])
       }
       this.pb.collection('wordset').create(wordsetData);
     } catch (error) {
@@ -209,7 +230,7 @@ export class AuthService {
 
   
   public getWordsetIcon(wordset: any) {
-    const record = this.pb.files.getURL(wordset, wordset.icon);
+    const record = this.pb.files.getURL(wordset, wordset.icon, {'thumb': '50x50'});
     return record;
   }
 

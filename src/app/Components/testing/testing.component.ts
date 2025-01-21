@@ -52,7 +52,6 @@ export class TestingComponent {
       this.staticLenght = this.length;
       this.generateSubset();
     });
-    this.createActivity();
   }
   
   generateSubset() {

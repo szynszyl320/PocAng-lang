@@ -4,24 +4,43 @@ main {
     justify-content: center;
     height: 100vh;
     background-color: var(--body-background-color);
-    gap: 5vh;
 }
 
 section {
     display: flex;
     flex-direction: column;
     gap: 1vh;
-    overflow-y: scroll;
-    max-height: 40vh;
     background-color: var(--main-background-color);
     border-radius: 4vh;
     padding: 2.5vh;
     box-shadow: 0 0 1vh 0.5vh var(--main-box-shadow-color);
-    min-height: 30vh;
+    min-height: 70vh;
+    max-height: 70vh;
+    margin-top: 10vh;
+    width: 90vw;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    gap: 1rem;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.grid-item {
+    padding: 2vh 3vh;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 section h2{
-    font-size: 2.5vh;
+    font-size: 5vh;
     font-weight: 500;
     color: #333;
     background-color: #f5f5f5;
@@ -40,15 +59,8 @@ button {
     transition: background-color 0.3s;
 }
 
-div {
-    display: flex;
-}
-
-div article{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1vh;
+button:hover {
+    background-color: var(--button-background-color-hover);
 }
 
 input, select {
@@ -58,9 +70,38 @@ input, select {
     font-size: 2vh;
 }
 
-.closeButton {
-    z-index: 4;
+.icon {
+    width: 10vh;
+    height: 10vh;
+    object-fit: contain;
+}
+
+.editForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
     position: absolute;
-    left: 2%;
-    bottom: 2%;
+    top: 10%;
+    left: 8%;
+    background-color: whitesmoke;
+    border-radius: 1vh;
+    padding: 2vh;
+    box-shadow: 0 0 1vh 0.5vh var(--main-box-shadow-color);
+    max-height: 80vh;
+    width: 80vw;
+}
+
+.formSubtext {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    background-color: #d7d1d1;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+.editForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
 }

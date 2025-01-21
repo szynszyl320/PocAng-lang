@@ -1,8 +1,11 @@
 @if (currentUser) {
     <nav>
-        <h3>{{'login.WELCOME' | translate}}, {{ currentUser?.name }} <img src="{{avatar}}" alt=""></h3>
+        <div>
+            <img src="{{avatar}}" alt="">
+            <h3>{{'login.WELCOME' | translate}}, {{ currentUser?.name }}</h3>
+        </div>
         <button (click)="changeTab('groups')">{{'login.GROUPS' | translate}}</button>
-        <button (click)="changeTab('wordlists')">{{'login.WORDLISTS' | translate}}</button>
+        <button (click)="changeTab('wordsets')">{{'login.WORDLISTS' | translate}}</button>
         <button (click)="changeTab('learning')">{{'login.LEARNING' | translate}}</button>
         <button (click)="logout()">{{'login.LOGOUT' | translate}}</button>
     </nav>
@@ -10,7 +13,7 @@
         @case ('groups') {
             <app-groups></app-groups>
         }
-        @case ('wordlists') {
+        @case ('wordsets') {
             <app-wordlists></app-wordlists>
         }
         @case ('learning') {
@@ -53,7 +56,6 @@
             </article>
         </main>
   
-    }
-    
+    }    
 }
 <app-settings></app-settings>

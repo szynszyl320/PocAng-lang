@@ -63,7 +63,7 @@
     "wordsets": {
         "YOURWORDSETS": "Your Wordsets",
         "CREATENEWWORDSET": "Create new wordset",
-        "EDITWORDSETS": "Edit wordset",
+        "EDITWORDSETS": "Edit",
         "NEWWORDSETNAME": "New wordset name",
         "NEWWORDSETICON": "New wordset icon",
         "NEWORDSETLANGUAGE": "New wordset language",
@@ -80,8 +80,12 @@
         "PLACEFORSENTENCE": "Place for answer",
         "ADDNEWWORD": "Add new word",
         "EDITWORDLIST": "Edit wordlist",
-        "EDITACCESS": "Edit access",
-        "DELETEWORDSET": "Delete wordset"
+        "EDITACCESS": "Access",
+        "DELETEWORDSET": "Delete",
+        "EXPORTWORDSET": "Export",
+        "ICON": "Icon",
+        "NAME": "Name",
+        "LANGUAGE": "Language"
     },
     
     "access": {
@@ -96,15 +100,19 @@
         "REVOKEGROUPACCESS": "Revoke group access"
     },
 
-    "USERWORDSETS": "Wordsets shared with you",
-    "GROUPWORDSETS": "Wordsets shared with your groups",
-    "YOURWORDSETS": "Your Wordsets",
-    "WORDSETNAME": "Wordset name",
-    "WORDSETLANGUAGE": "Wordset language",
+    "learning": {
+        "USERWORDSETS": "Wordsets shared with you",
+        "GROUPWORDSETS": "Wordsets shared with your groups",
+        "YOURWORDSETS": "Your Wordsets",
+        "WORDSETNAME": "Wordset name",
+        "USE": "Use",
+        "WORDSETLANGUAGE": "Wordset language"
+    },
 
-    "CHECKANSWER": "Check answer",
-    "LEAVETEST": "Leave test",
-    "USE": "Use",
-    "LASTQUESTIONCORRECT": "Last answer was correct",
-    "LASTQUESTIONINCORRECT": "Last answer was incorrect"
+    "testing": {
+        "CHECKANSWER": "Check answer",
+        "LEAVETEST": "Leave test",
+        "LASTQUESTIONCORRECT": "Last answer was correct",
+        "LASTQUESTIONINCORRECT": "Last answer was incorrect"
+    }
 }

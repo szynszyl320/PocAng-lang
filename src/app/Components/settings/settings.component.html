@@ -18,6 +18,7 @@
                         </select>    
                     </article>
                 </section>
+                <button class="saveButton" (click)="saveUserPeferences()">{{ 'settings.SAVE' | translate }}</button>
             }    
             @case ("Language") {
                 <section>
@@ -33,32 +34,38 @@
                         </select>
                     </article>
                 </section>
+                <button class="saveButton" (click)="saveUserPeferences()">{{ 'settings.SAVE' | translate }}</button>
             }
             @case ("Account") {
-                <section>
-                    <article>
-                        <label for="nameChange">{{ 'settings.CHANGENAME' | translate }}</label>
-                        <input type="text" id="nameChange" [(ngModel)]="name">
-                    </article>
-                    <article>
-                        <label for="emailVisibility">{{ 'settings.CHANGEVISIBILITY' | translate }}</label>
-                        <input type="checkbox" id="emailVisibility" [(ngModel)]="emailVisibility">
-                    </article>
-                    <article>
-                        <label for="avatar">{{'settings.CHANGEAVATAR' | translate}}</label>
-                        <input type="file" name="user avatar" id="avatar" (change)="onFileSelected($event)" accept="image/*">
-                    </article>
-                    <button (click)="updateUser($event)">{{ 'settings.SAVECHANGES' | translate }}</button>
-                    <hr>
-                    <article>
-                        <label for="passwordChange">{{ 'settings.CHANGEPASSWORD' | translate }}</label>
-                        <input type="password" id="passwordChange" [(ngModel)]="password"/>
-                    </article>
-                    <article>
-                        <label for="oldPassword">{{ 'settings.OLDPASSWORD' | translate }}</label>
-                        <input type="password" id="oldPassword" [(ngModel)]="oldPassword" />
-                    </article>
-                    <button (click)="updatePassword($event)">{{ 'settings.CHANGEPASSWORDCONFIRM' | translate }}</button>
+                <section class="userManipulation">
+                    <form>
+                        <h3>{{'settings.USERCONFIG' | translate}}</h3>
+                        <article>
+                            <label for="nameChange">{{ 'settings.CHANGENAME' | translate }}</label>
+                            <input type="text" id="nameChange" name="change name" [(ngModel)]="name">
+                        </article>
+                        <article>
+                            <label for="emailVisibility">{{ 'settings.CHANGEVISIBILITY' | translate }}</label>
+                            <input type="checkbox" id="emailVisibility" name="user emailVisibility" [(ngModel)]="emailVisibility">
+                        </article>
+                        <article>
+                            <label for="avatar">{{'settings.CHANGEAVATAR' | translate}}</label>
+                            <input type="file" name="user avatar" id="avatar" (change)="onFileSelected($event)" accept="image/*">
+                        </article>
+                        <button (click)="updateUser($event)">{{ 'settings.SAVECHANGES' | translate }}</button>
+                    </form>
+                    <form>
+                        <h3>{{'settings.PASSWORDCHNAGE' | translate}}</h3>
+                        <article>
+                            <label for="passwordChange">{{ 'settings.CHANGEPASSWORD' | translate }}</label>
+                            <input type="password" id="passwordChange" name="old password" [(ngModel)]="password"/>
+                        </article>
+                        <article>
+                            <label for="oldPassword">{{ 'settings.OLDPASSWORD' | translate }}</label>
+                            <input type="password" id="oldPassword" name="old password" [(ngModel)]="oldPassword" />
+                        </article>
+                        <button (click)="updatePassword($event)">{{ 'settings.CHANGEPASSWORDCONFIRM' | translate }}</button>
+                    </form>
                 </section>
             }
             @case ('activity') {
@@ -80,7 +87,6 @@
                 </section>
             }
         }         
-        <button class="saveButton" (click)="saveUserPeferences()">{{ 'settings.SAVE' | translate }}</button>
         
     </main>
 }

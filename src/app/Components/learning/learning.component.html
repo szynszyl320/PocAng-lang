@@ -1,42 +1,42 @@
 <main>
     <section>
-        <h2>{{'USERWORDSETS' | translate}}</h2>
+        <h2>{{'learning.USERWORDSETS' | translate}}</h2>
         <div>
             @for (access of userAccessedWordsets; track $index) {
                 <article>
                     <div>{{ access.expand.wordsetId.name }}</div>
                     <div>{{ access.expand.wordsetId.language }}</div>
-                    <button (click)="displayForm($index, 'user')">{{'USE' | translate}}</button>
+                    <button (click)="displayForm($index, 'user')">{{'learning.USE' | translate}}</button>
                 </article>
             }
         </div>
     </section>
 
     <section>
-        <h2>{{'GROUPWORDSETS' | translate}}</h2>
+        <h2>{{'learning.GROUPWORDSETS' | translate}}</h2>
         <div>
             @for (access of groupAccessedWordsets; track $index) {
                 <article>
                     <div>{{ access.expand.wordsetId.name }}</div>
                     <div>{{ access.expand.wordsetId.language }}</div>
-                    <button (click)="displayForm($index, 'group')">{{'USE' | translate}}</button>
+                    <button (click)="displayForm($index, 'group')">{{'learning.USE' | translate}}</button>
                 </article>
             }
         </div>
     </section>
 
     <section>
-        <h2>{{'YOURWORDSETS' | translate}}</h2>
+        <h2>{{'learning.YOURWORDSETS' | translate}}</h2>
         <div>
             <article>
-                <div>{{'WORDSETNAME' | translate}}</div>
-                <div>{{'WORDSETLANGUAGE' | translate}}</div>
+                <div>{{'learning.WORDSETNAME' | translate}}</div>
+                <div>{{'learning.WORDSETLANGUAGE' | translate}}</div>
             </article>
             @for (access of userWordsets; track $index) {
                 <article>
                     <div>{{access.name}}</div>
                     <div>{{access.language}}</div>
-                    <button (click)="displayForm($index, 'owned')">{{'USE' | translate}}</button>
+                    <button (click)="displayForm($index, 'owned')">{{'learning.USE' | translate}}</button>
                 </article>
             }
         </div>
