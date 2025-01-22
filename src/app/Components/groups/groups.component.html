@@ -20,6 +20,7 @@
             <h2>{{'groups.USERS' | translate}}</h2>
             <div class="userGrid">
                 @for (user of usedGroup.expand.users; track $index) {
+                    <img [src]="getUserAvatar(user)" alt="user avatar">
                     <div class="userGrid-item">{{user.name}}</div>
                     <button class="userGrid-item" (click)="removeFromGroup(usedGroup, $index)">{{ 'groups.REMOVEUSERFROMGROUP' | translate }}</button>                    
                 }
@@ -59,9 +60,8 @@
 }    
 
 @if (createGroupForm) {
-    <main class="editForm">
+    <main class="editForm" style="flex-direction: row;">
         <form>
-            <button (click)="createNewGroup($event)">{{'groups.CONFIRMCREATION' | translate}}</button>
             <article class="formSubtext">
                 <label for="groupName">{{'groups.GROUPNAME' | translate}}</label>
                 <input type="text" id="groupName" [(ngModel)]="groupName" name="group name">
@@ -70,6 +70,7 @@
                 <label for="groupIcon">{{ 'groups.GROUPICON' | translate }}</label>
                 <input type="file" id="groupIcon" (change)="onFileSelected($event)" name="group icon">
             </article>
+            <button (click)="createNewGroup($event)">{{'groups.CONFIRMCREATION' | translate}}</button>
         </form>
         <form>
             <h4>{{'groups.ADDNEWUSER' | translate}}</h4>
@@ -84,12 +85,19 @@
             <button (click)="getSpecificUser($event)">{{'groups.ADDUSER' | translate}}</button>
             <h4>{{'groups.EMAILHASTOBEVISIBLE' | translate}}</h4>
         </form>
-        <article>
+        <div class="container">
             <h4>{{'groups.ADDEDUSERS' | translate}}</h4>
-            @for (user of userList; track $index) {
-                <p>{{ 'groups.EMAIL' | translate }}: {{ user.name }} {{ 'groups.NAME' | translate }}: {{ user.email }}</p> 
-            }
-        </article>
+            <article class="userGrid grid">
+                    <div class="userGrid-item"></div>
+                    <div class="userGrid-item">{{'groups.NAME' | translate}}</div>
+                    <div class="userGrid-item">{{'groups.EMAIL' | translate}}</div>
+                @for (user of userList; track $index) {
+                    <img class="icon userGrid-item" [src]="getUserAvatar(user)" alt="user avatar">
+                    <div class="userGrid-item">{{ user.name }}</div>
+                    <div class="userGrid-item">{{ user.email }}</div>
+                }
+            </article>
+        </div>
         <button (click)="showCreateGroupToggle()">{{ 'groups.CLOSE' | translate }}</button>
     </main>
 }

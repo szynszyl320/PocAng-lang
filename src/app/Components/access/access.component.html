@@ -2,50 +2,47 @@
 
    <section>
         <h2>{{'access.USERACCESS' | translate}}</h2>
-        <div>
-            <article>
-                <div>{{'access.USEREMAIL' | translate}}</div>
-                <div>{{'access.USERNAME' | translate}}</div>
-                <div>{{'access.REVOKEFROMUSER' | translate}}</div>
-            </article>
+        <div class="grid">
+            <div class="grid-item">{{'access.USEREMAIL' | translate}}</div>
+            <div class="grid-item">{{'access.USERNAME' | translate}}</div>
+            <div class="grid-item">{{'access.REVOKEFROMUSER' | translate}}</div>
             @for (access of userAccessList; track $index) {
-            <article>
-                <div>{{ access.expand.userId.email }}</div>
-                <div>{{ access.expand.userId.name }}</div>
-                <button (click)="revokeUserAccess(access.id, $event)">{{'access.REVOKEFROMUSER' | translate}}</button>
-            </article>
+                <div class="grid-item">{{ access.expand.userId.email }}</div>
+                <div class="grid-item">{{ access.expand.userId.name }}</div>
+                <button class="grid-item" (click)="revokeUserAccess(access.id, $event)">{{'access.REVOKEFROMUSER' | translate}}</button>
             }
         </div>
-        <div>
-            <article>
+        <form>
+            <h3>{{'access.GRANTACCESSTOUSER' | translate}}</h3>
+            <article class="form-subtext">
                 <label for="userEmail">{{'access.USEREMAIL' | translate}}</label>
                 <input type="email" name="user email" id="userEmail" [(ngModel)]="userEmail">
             </article>
-            <article>
+            <article class="form-subtext">
                 <label for="userName">{{'access.USERNAME' | translate}}</label>
                 <input type="text" name="user name" id="userName" [(ngModel)]="userName">
             </article>
             <button (click)="grantUserAccess($event)">{{'access.GRANTACCESS' | translate}}</button>
-        </div>
+        </form>
     </section> 
 
     <section>
         <h2>{{'access.GROUPACCESS' | translate}}</h2>
-        <div>
+        <div class="grid">
             @for (access of groupAccessList; track $index) {
-                <article>
-                    <div>{{access.expand.groupId.name}}</div>
-                    <button (click)="revokeGroupAccess($event, access.i)">{{'access.REVOKEGROUPACCESS' |  translate}}</button>
-                </article>
+                <img class="grid-item icon" [src]="groupIconSet(access.expand.groupId)" alt="group icon">
+                <div class="grid-item">{{access.expand.groupId.name}}</div>
+                <button class="grid-item" (click)="revokeGroupAccess($event, access.i)">{{'access.REVOKEGROUPACCESS' |  translate}}</button>
             }
         </div>
-        <div>
+        <form>
+            <h3>{{'access.GRANTACCESSTOGROUP' | translate}}</h3>
             <article>
                 <label for="groupName">{{'access.GROUPNAME' | translate}}</label>
                 <input type="text" name="name" id="groupName" [(ngModel)]="groupName">
             </article>
             <button (click)="grantGroupAccess($event)">{{'access.GRANTACCESS' | translate}}</button>
-        </div>
+        </form>
     </section>
 
     <button (click)="closeWindow()">{{'access.EXIT' | translate}}</button>

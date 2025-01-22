@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service'
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -6,6 +6,7 @@ import { SettingsComponent } from '../settings/settings.component';
 import { GroupsComponent } from '../groups/groups.component';
 import { WordlistsComponent } from '../wordsets/wordsets.component';
 import { LearningComponent } from '../learning/learning.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,43 +16,50 @@ import { LearningComponent } from '../learning/learning.component';
   styleUrl: './login.component.css'
 })
 
-export class LoginComponent {
-  currentUser: any = null;
+export class LoginComponent implements OnInit {
   
+  currentUser: any = null;
+  loading = false;
+  error: string | null = null;
+
   email: string = '';
   name: string = '';
   icon: any;
   password: string = '';
   confirmPassword: string = ''; 
 
-  avatar?: string;
-
   loginForm: boolean = false;
   signupForm: boolean = false;
   
   menuSelector: string = 'learning';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user;
+      if (user) {
+        this.menuSelector = 'learning'
+      }
     });
-    this.avatar = this.authService.getAvatar(this.currentUser);
   }
 
 
-  login(event: Event) {
+  async login(event: Event) {
     event.preventDefault();
+    this.loading = true;
+    this.error = null;
+
     try {
-      this.authService.login(this.email, this.password)
+      // Wait for the login to complete
+      await this.authService.login(this.email, this.password);
       
       this.email = '';
       this.password = '';
       this.loginForm = false;
-
+  
     } catch (error) {
-      console.log('failed to login', error);
+      console.error('failed to login', error);
       alert('failed to login, check password and email'); 
     }
   }
@@ -73,6 +81,10 @@ export class LoginComponent {
       console.log('failed to signup', error);
       alert('failed to signup, check if the email has not been used already');
     }
+  }
+
+  getUserAvatar(user: any) {
+    return this.authService.getAvatar(user);
   }
 
   logout() {

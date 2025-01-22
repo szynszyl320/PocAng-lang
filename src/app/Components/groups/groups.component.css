@@ -48,8 +48,8 @@ section h2{
 }
 
 .icon {
-    width: 10vh;
-    height: 10vh;
+    width: 5rem;
+    height: 5rem;
     object-fit: contain;
 }
 
@@ -110,7 +110,7 @@ button {
 
 .userGrid {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
     gap: 1vh;
 }
 

@@ -156,6 +156,10 @@ export class GroupsComponent {
     }
   }
 
+  getUserAvatar(user: any) {
+    return this.authService.getAvatar(user);
+  }
+
   showUserToggle(input: number) {
     this.userListModal = !this.userListModal;
     this.usedGroup = this.groupList[input];

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, count, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import PocketBase from 'pocketbase';
-import { WordsetcreatorComponent } from '../Components/wordsetcreator/wordsetcreator.component';
-import { group } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root',
@@ -32,9 +30,10 @@ export class AuthService {
   // checked
   async login(email: string, password: string) {
     try {
-      const user = await this.pb.collection('users').authWithPassword(email, password);
-      this.currentUserSubject.next(this.currentUserSubject);
-      return user;
+      const authData = await this.pb.collection('users').authWithPassword(email, password);
+      this.currentUserSubject.next(null);
+      this.currentUserSubject.next(this.pb.authStore.record);
+      return authData;
     } catch (error) {
       throw error;
     }

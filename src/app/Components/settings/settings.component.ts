@@ -60,6 +60,7 @@ export class SettingsComponent {
 
   changeTab(value: string) {
     this.settingsTab = value;
+    this.getUserActivity();
   }
 
   updateUser(event: Event) {

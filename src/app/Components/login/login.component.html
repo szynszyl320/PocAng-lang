@@ -1,7 +1,7 @@
 @if (currentUser) {
     <nav>
         <div>
-            <img src="{{avatar}}" alt="">
+            <img [src]="getUserAvatar(currentUser)" alt="user avatar">
             <h3>{{'login.WELCOME' | translate}}, {{ currentUser?.name }}</h3>
         </div>
         <button (click)="changeTab('groups')">{{'login.GROUPS' | translate}}</button>
