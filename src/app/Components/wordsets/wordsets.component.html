@@ -4,9 +4,9 @@
         <h2>{{'wordsets.YOURWORDSETS' | translate}}</h2>
         <button (click)="creationFromToggle()">{{'wordsets.CREATENEWWORDSET' | translate}}</button>
         <div class="grid">
-            <div class="grid-item">{{'wordsets.ICON' | translate}}</div>
-            <div class="grid-item">{{'wordsets.NAME' | translate}}</div>
-            <div class="grid-item">{{'wordsets.LANGUAGE' | translate}}</div>
+            <h3 class="grid-item">{{'wordsets.ICON' | translate}}</h3>
+            <h3 class="grid-item">{{'wordsets.NAME' | translate}}</h3>
+            <h3 class="grid-item">{{'wordsets.LANGUAGE' | translate}}</h3>
             <div class="grid-item"></div>
             <div class="grid-item"></div>
             <div class="grid-item"></div>
@@ -14,8 +14,8 @@
             <div class="grid-item"></div>
             @for (wordset of userWordsets; track $index) {
                 <img class="icon grid-item" [src]="getWordsetIcon(wordset)" alt="Icon">   
-                <div class="grid-item">{{ wordset.name }}</div>
-                <div class="grid-item">{{ wordset.language}}</div> 
+                <h2 class="grid-item">{{ wordset.name }}</h2>
+                <h2 class="grid-item">{{ wordset.language}}</h2> 
                 <button class="grid-item" (click)="setEditWordlist($index)">{{'wordsets.EDITWORDLIST' | translate}}</button> 
                 <button class="grid-item" (click)="userAccessEdit($index)">{{'wordsets.EDITACCESS' | translate}}</button>
                 <button class="grid-item" (click)="deleteWordset($event, wordset.id)">{{'wordsets.DELETEWORDSET' | translate}}</button>

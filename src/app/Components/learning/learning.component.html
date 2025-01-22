@@ -1,45 +1,56 @@
 <main>
     <section>
         <h2>{{'learning.USERWORDSETS' | translate}}</h2>
-        <div>
-            @for (access of userAccessedWordsets; track $index) {
-                <article>
-                    <div>{{ access.expand.wordsetId.name }}</div>
-                    <div>{{ access.expand.wordsetId.language }}</div>
-                    <button (click)="displayForm($index, 'user')">{{'learning.USE' | translate}}</button>
-                </article>
-            }
-        </div>
+        @if (userAccessedWordsets.length != 0) {
+            <div class="grid">
+                <div class="grid-item"></div>
+                <div class="grid-item">{{'learning.WORDSETNAME' | translate}}</div>
+                <div class="grid-item">{{'learning.WORDSETLANGUAGE' | translate}}</div>
+                <div class="grid-item"></div>
+                @for (access of userAccessedWordsets; track $index) {
+                    <img class="icon grid-item" [src]="getWordsetIcon(access.expand.wordsetId)" alt="wordset icon">
+                    <div class="grid-item">{{ access.expand.wordsetId.name }}</div>
+                    <div class="grid-item">{{ access.expand.wordsetId.language }}</div>
+                    <button class="grid-item" (click)="displayForm($index, 'user')">{{'learning.USE' | translate}}</button>
+                }
+            </div>
+        }
     </section>
 
     <section>
         <h2>{{'learning.GROUPWORDSETS' | translate}}</h2>
-        <div>
-            @for (access of groupAccessedWordsets; track $index) {
-                <article>
-                    <div>{{ access.expand.wordsetId.name }}</div>
-                    <div>{{ access.expand.wordsetId.language }}</div>
-                    <button (click)="displayForm($index, 'group')">{{'learning.USE' | translate}}</button>
-                </article>
-            }
-        </div>
+        @if (groupAccessedWordsets.length != 0) {
+            <div class="grid">
+                <div class="grid-item"></div>
+                <div class="grid-item">{{'learning.WORDSETNAME' | translate}}</div>
+                <div class="grid-item">{{'learning.WORDSETLANGUAGE' | translate}}</div>
+                <div class="grid-item"></div>
+                @for (access of groupAccessedWordsets; track $index) {
+                    <img class="icon grid-item" [src]="getWordsetIcon(access.expand.wordsetId)" alt="wordset icon">
+                    <div class="grid-item">{{ access.expand.wordsetId.name }}</div>
+                    <div class="grid-item">{{ access.expand.wordsetId.language }}</div>
+                    <button class="grid-item" (click)="displayForm($index, 'group')">{{'learning.USE' | translate}}</button>
+                }
+            </div>
+        }
     </section>
 
     <section>
         <h2>{{'learning.YOURWORDSETS' | translate}}</h2>
-        <div>
-            <article>
-                <div>{{'learning.WORDSETNAME' | translate}}</div>
-                <div>{{'learning.WORDSETLANGUAGE' | translate}}</div>
-            </article>
-            @for (access of userWordsets; track $index) {
-                <article>
-                    <div>{{access.name}}</div>
-                    <div>{{access.language}}</div>
-                    <button (click)="displayForm($index, 'owned')">{{'learning.USE' | translate}}</button>
-                </article>
-            }
-        </div>
+        @if (userWordsets.length != 0) {
+            <div class="grid">
+                <div class="grid-item"></div>
+                <div class="grid-item">{{'learning.WORDSETNAME' | translate}}</div>
+                <div class="grid-item">{{'learning.WORDSETLANGUAGE' | translate}}</div>
+                <div class="grid-item"></div>
+                @for (wordset of userWordsets; track $index) {
+                    <img class="icon grid-item" [src]="getWordsetIcon(wordset)" alt="wordset icon">
+                    <div class="grid-item">{{wordset.name}}</div>
+                    <div class="grid-item">{{wordset.language}}</div>
+                    <button class="grid-item" (click)="displayForm($index, 'owned')">{{'learning.USE' | translate}}</button>
+                }
+            </div>
+        }
     </section>
 </main>
 

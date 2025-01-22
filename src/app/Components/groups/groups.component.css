@@ -3,29 +3,54 @@ main {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f5f5f5;
-    gap: 8vh;
+    background-color: var(--body-background-color);
 }
 
 section {
     display: flex;
     flex-direction: column;
     gap: 1vh;
-    overflow-y: scroll;
-    max-height: 80vh;
     background-color: var(--main-background-color);
     border-radius: 4vh;
     padding: 2.5vh;
     box-shadow: 0 0 1vh 0.5vh var(--main-box-shadow-color);
     min-height: 70vh;
+    max-height: 70vh;
+    margin-top: 10vh;
+    width: 90vw;
 }
 
 section h2{
-    font-size: 2.5vh;
+    font-size: 5vh;
     font-weight: 500;
     color: #333;
     background-color: #f5f5f5;
     border-radius: 1vh;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    gap: 1rem;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.grid-item {
+    padding: 2vh 3vh;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    width: 10vh;
+    height: 10vh;
+    object-fit: contain;
 }
 
 button {
@@ -40,37 +65,114 @@ button {
     transition: background-color 0.3s;
 }
 
-div {
+.editForm {
     display: flex;
     flex-direction: column;
+    gap: 1vh;
+    position: absolute;
+    top: 10%;
+    left: 8%;
+    background-color: whitesmoke;
+    border-radius: 1vh;
+    padding: 2vh;
+    box-shadow: 0 0 1vh 0.5vh var(--main-box-shadow-color);
+    max-height: 80vh;
+    width: 80vw;
 }
 
-.user-item {
+.formSubtext {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    background-color: #d7d1d1;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+.editForm form, .container {
+    border: 1px solid #ddd;
+    padding: 5rem;
+    border-radius: 1vh;
+    min-height: 50vh;
+}
+
+.editForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+}
+
+.edditingForm {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 5vh;
 }
 
-.user-item button{
-    padding: 0.25vh;
-    font-size: 1.5vh;    
-}
-
-.user-item button:hover{
-    background-color: #f5f5f5;
-}
-
-div article{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.userGrid {
+    display: grid;
+    grid-template-columns: auto auto;
     gap: 1vh;
 }
 
-input, select {
-    border: 1px solid var(--input-border-color);
-    border-radius: 1vh;
-    padding: 0.5vh 1vh;
-    font-size: 2vh;
+.userGrid-item {
+    padding: 10px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Tablet */
+@media screen and (max-width: 1024px) {
+    .editForm form, .container {
+        padding: 3rem;
+        min-height: 45vh;
+    }
+    
+    .edditingForm {
+        gap: 3vh;
+    }
+    
+    .userGrid {
+        gap: 0.8vh;
+    }
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+    .editForm form, .container {
+        padding: 2rem;
+        min-height: auto;
+    }
+    
+    .edditingForm {
+        flex-direction: column;
+        gap: 2vh;
+    }
+    
+    .userGrid {
+        grid-template-columns: auto;
+        gap: 0.5vh;
+    }
+    
+    .formSubtext {
+        gap: 0.5vh;
+        padding: 3px;
+    }
+}
+
+/* Small Desktop */
+@media screen and (min-width: 1024px) and (max-width: 1480px) {
+    .editForm form, .container {
+        padding: 4rem;
+        min-height: 48vh;
+    }
+    
+    .edditingForm {
+        gap: 4vh;
+    }
+    
+    .userGrid {
+        gap: 0.9vh;
+    }
+}

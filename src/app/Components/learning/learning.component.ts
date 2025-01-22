@@ -78,5 +78,8 @@ export class LearningComponent {
     this.testingForm = false;
   }
 
+  getWordsetIcon(wordset:any) {
+    return this.authService.getWordsetIcon(wordset);
+  }
 
 }

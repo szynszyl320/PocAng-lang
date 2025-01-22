@@ -35,6 +35,14 @@ export class GroupsComponent {
   groupEditIcon: any;
   editGroupIndex: any;
 
+  usedGroup: any;
+
+  userListModal: boolean = false;
+
+  editGroupForm: boolean = false;
+
+  createGroupForm: boolean = false;
+
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
@@ -102,7 +110,7 @@ export class GroupsComponent {
       this.getUserGroups();
     } catch (error) {
       console.error('failed to log error', error);
-      alert('faild to remove user')
+      alert('failed to remove user')
     }
   }
 
@@ -110,10 +118,9 @@ export class GroupsComponent {
     event.preventDefault();
     try {
       const user = await this.authService.findUserByEmailName(this.addUserEmail, this.addUserName);
-      const selectedGroup = this.groupList[this.selectedGroup]
-      selectedGroup.users.push(user.id);
+      this.usedGroup.users.push(user.id);
       
-      this.updateGroup(selectedGroup, selectedGroup.name, selectedGroup.icon, selectedGroup.users)
+      this.updateGroup(this.usedGroup, this.usedGroup.name, this.usedGroup.icon, this.usedGroup.users)
       
       this.selectedGroup = '';
       this.addUserEmail = '';
@@ -121,8 +128,19 @@ export class GroupsComponent {
       
       this.getUserGroups();
     } catch (error) {
-      console.log('failed to add user', error);
+      console.error('failed to add user', error);
       alert(`failed to add ${this.addUserName} to ${this.selectedGroup.name}`)
+    }
+  }
+
+  async deleteGroup(groupId: string, event: Event) {
+    event.preventDefault();
+    try {
+      this.authService.deleteGroup(groupId);
+      this.getUserGroups();
+    } catch (error) {
+      console.error('failed to delete group', error);
+      alert(`failed to remove group`)
     }
   }
 
@@ -136,6 +154,20 @@ export class GroupsComponent {
       this.groupIcon = file;
       this.groupEditIcon = file;
     }
+  }
+
+  showUserToggle(input: number) {
+    this.userListModal = !this.userListModal;
+    this.usedGroup = this.groupList[input];
+  }
+
+  showGroupEditToggle(input: number) {
+    this.editGroupForm = !this.editGroupForm;
+    this.usedGroup = this.groupList[input];
+  } 
+
+  showCreateGroupToggle() {
+    this.createGroupForm = !this.createGroupForm;
   }
 
 }

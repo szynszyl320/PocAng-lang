@@ -90,7 +90,7 @@ export class WordlistsComponent {
   async updateWordset(event: Event) {
     event.preventDefault();
     try {
-      this.authService.updateWordset(this.userWordsets[this.chosenWordset], this.wordsetEditName, this.wordsetEditIcon, this.wordsetEditLanguage, this.placeholderArray)
+      this.authService.updateWordset(this.edditedwordset, this.wordsetEditName, this.wordsetEditIcon, this.wordsetEditLanguage, this.placeholderArray)
       this.getUserWordsets();
       
       this.wordsetEditName = '';

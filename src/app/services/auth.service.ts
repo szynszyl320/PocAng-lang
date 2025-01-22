@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, count, Observable } from 'rxjs';
 import PocketBase from 'pocketbase';
 import { WordsetcreatorComponent } from '../Components/wordsetcreator/wordsetcreator.component';
+import { group } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root',
@@ -172,6 +173,14 @@ export class AuthService {
   public getGroupIcon(group: any) {
     const record = this.pb.files.getURL(group, group.icon, {'thumb': '50x50'});
     return record;
+  }
+
+  async deleteGroup(groupId: string) {
+    try {
+      const record = await this.pb.collection('groups').delete(groupId);
+    } catch (error) {
+      throw error;
+    }
   }
 
   //checked

@@ -120,3 +120,57 @@ button:hover {
 .installed-button {
     min-width: 120px;
 }
+
+/* Tablet */
+@media screen and (max-width: 1024px) {
+    nav {
+        padding: 0.8rem;
+        height: 8vh;
+        gap: 0.8rem;
+    }
+
+    nav button {
+        padding: 1.2rem 2.5rem;
+    }
+
+    nav div {
+        gap: 0.8rem;
+    }
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem 0.5rem;
+        position: relative;
+    }
+
+    nav button {
+        padding: 1rem 2rem;
+        width: 90%;
+    }
+
+    nav div {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+}
+
+/* Small Desktop */
+@media screen and (min-width: 1024px) and (max-width: 1480px) {
+    nav {
+        height: 9vh;
+        padding: 0.9rem;
+    }
+
+    nav button {
+        padding: 1.3rem 2.8rem;
+    }
+
+    nav div {
+        gap: 0.9rem;
+    }
+}
