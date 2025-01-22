@@ -13,7 +13,7 @@ main {
 
 h1 {
     font-size: 2rem;
-    color: #333;
+    color: var(--heading-color);
     margin-bottom: 2rem;
     font-weight: 600;
 }
@@ -121,19 +121,19 @@ input[type="checkbox"] {
 }
 
 .activity-none {
-    background-color: #ebedf0;
+    background-color: var(--activity-none);
 }
 
 .activity-low {
-    background-color: #9be9a8;
+    background-color: var(--activity-low);
 }
 
 .activity-medium {
-    background-color: #40c463;
+    background-color: var(--activity-medium);
 }
 
 .activity-high {
-    background-color: #216e39;
+    background-color: var(--activity-high);
 }
 
 /* Settings toggle button */

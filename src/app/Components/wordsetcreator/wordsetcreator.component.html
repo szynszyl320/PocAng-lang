@@ -1,7 +1,8 @@
 <main>
     <nav>
-        <button (click)="tabSelector('assisted')">Creation assist</button>
-        <button (click)="tabSelector('manual')">Manual</button>
+        <button (click)="tabSelector('assisted')">{{'wordsetcreator.CREATIONASSIST' | translate}}</button>
+        <button (click)="tabSelector('manual')">{{'wordsetcreator.MANUALCREATION' | translate}}</button>
+        <p>{{'wordsetcreator.PLACEHOLDER' | translate}}</p>
     </nav>
 
     <div>
@@ -9,28 +10,28 @@
             @case ('assisted') {
                 <section>
 
-                    <h2>Assisted creating</h2>
+                    <h2>{{'wordsetcreator.ASSISTEDCREATING' | translate}}</h2>
 
                     <section class="list">
-                        <article><div>{{'QUESTIONTYPE' | translate}}</div><div>{{'QUESTIONVALUEONE' | translate}}</div><div>{{'QUESTIONVALUETWO' | translate}}</div></article>
+                        <article><div>{{'wordsetcreator.QUESTIONTYPE' | translate}}</div><div>{{'wordsetcreator.QUESTIONVALUEONE' | translate}}</div><div>{{'wordsetcreator.QUESTIONVALUETWO' | translate}}</div></article>
                         @for (question of assistedCreatorContent; track $index) {
                             <article>
                                 <div>{{question.type}}</div>
                                 <div>{{question.valueOne}}</div>
                                 <div>{{question.valueTwo}}</div>
-                                <button (click)="deleteQuestion($index)">{{'DELETEFROMWORDLIST' | translate}}</button>
+                                <button (click)="deleteQuestion($index)">{{'wordsetcreator.DELETEFROMWORDLIST' | translate}}</button>
                             </article>
                         }
                     </section>
 
                     <article>
                         <select name="type" id="questionType" [(ngModel)]="newQuestionType">
-                            <option value="translate">{{'TRANSALTION' | translate}}</option>
-                            <option value="fillIn">{{'FILLIN' | translate}}</option>
+                            <option value="translate">{{'wordsetcreator.TRANSALTION' | translate}}</option>
+                            <option value="fillIn">{{'wordsetcreator.FILLIN' | translate}}</option>
                         </select>
-                        <input type="text" name="field 1" id="fieldOne" placeholder="{{'PLACEFORSENTENCEORWORD' | translate}}" [(ngModel)]="newQuestionValueOne">
-                        <input type="text" name="filed 2" id="fieldTwo" placeholder="{{'PLACEFORSENTENCE' | translate}}" [(ngModel)]="newQuestionValueTwo">
-                        <button (click)="addNewQuestionAssist()">{{'ADDNEWWORD' | translate}}</button>
+                        <input type="text" name="field 1" id="fieldOne" placeholder="{{'wordsetcreator.PLACEFORSENTENCEORWORD' | translate}}" [(ngModel)]="newQuestionValueOne">
+                        <input type="text" name="filed 2" id="fieldTwo" placeholder="{{'wordsetcreator.PLACEFORSENTENCE' | translate}}" [(ngModel)]="newQuestionValueTwo">
+                        <button (click)="addNewQuestionAssist()">{{'wordsetcreator.ADDNEWWORD' | translate}}</button>
                     </article>
 
                 </section>
@@ -38,15 +39,15 @@
             @case ('manual') {            
                 <section>
 
-                    <h2>Manual writing</h2>
+                    <h2>{{'wordsetcreator.MANUALWRITING' | translate}}</h2>
 
                     <textarea name="manual writing" id="manualWriter" [(ngModel)]="manualEditorText"></textarea>
 
-                    <button (click)="addnewQuestionManual()">{{'SAVE' | translate}}</button>
+                    <button (click)="addnewQuestionManual()">{{'wordsetcreator.SAVE' | translate}}</button>
                 </section>
             }
         }
     </div>
 
-    <button (click)="closeWindow()">{{'wordsetcreator.CLOSE'}}</button>
+    <button (click)="closeWindow()">{{'wordsetcreator.CLOSE' | translate}}</button>
 </main>

@@ -21,8 +21,8 @@ section {
 }
 
 .grid {  
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--grid-border-color);
+    box-shadow: 0 4px 6px var(--main-box-shadow-color);
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     padding: 2rem;
@@ -42,8 +42,8 @@ section {
 section h2{
     font-size: 5vh;
     font-weight: 500;
-    color: #333;
-    background-color: #f5f5f5;
+    color: var(--heading-color);
+    background-color: var(--section-background);
     border-radius: 1vh;
 }
 

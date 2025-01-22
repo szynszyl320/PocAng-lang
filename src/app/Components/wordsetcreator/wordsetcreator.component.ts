@@ -49,7 +49,6 @@ export class WordsetcreatorComponent {
     this.tab = value;
   }
 
-
   addNewQuestionAssist() {
     try {
         this.assistedCreatorContent.push({
@@ -75,6 +74,7 @@ export class WordsetcreatorComponent {
       this.assistedCreatorContent.splice(questionId,1);
       this.manualEditorText = JSON.stringify(this.assistedCreatorContent);
       this.authService.updateWordset(this.wordsetObject, this.wordsetObject.name, this.wordsetObject.icon, this.wordsetObject.language, this.assistedCreatorContent)
+      
       console.log('wordset updated successfully');
     } catch (error) {
       console.log('failed to delte question', error);

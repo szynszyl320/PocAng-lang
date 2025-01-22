@@ -29,8 +29,6 @@ export class WordlistsComponent {
   wordsetEditIcon: any;
   wordsetEditLanguage: string = '';
   
-  placeholderArray: Array<any> = [];
-  
   wordlistEdit: number = 0;
   wordlistEditForm: boolean = false;
   
@@ -45,6 +43,7 @@ export class WordlistsComponent {
   handleAppClose(event: boolean) {
     this.userAccessForm = false;
     this.wordlistEditForm = false;
+    this.getUserWordsets();
   }
 
   constructor(private authService: AuthService) {}
@@ -69,13 +68,15 @@ export class WordlistsComponent {
   async getUserWordsets() {
     const wordsets = (await this.authService.getUserWordsets(this.currentUser.id)).items
     this.userWordsets = wordsets;
+    console.log(wordsets);
   }
 
   async createNewWordset(event: Event) {
     event.preventDefault();
     try {
       await this.authService.createWordset(this.currentUser.id, this.wordsetName, this.wordsetIcon, this.wordsetLanguage, null);
-      this.getUserWordsets();
+      await new Promise(resolve => setTimeout(resolve, 100));
+      await this.getUserWordsets();
       
       this.wordsetEditName = '';
       this.wordsetIcon = null;
@@ -90,8 +91,9 @@ export class WordlistsComponent {
   async updateWordset(event: Event) {
     event.preventDefault();
     try {
-      this.authService.updateWordset(this.edditedwordset, this.wordsetEditName, this.wordsetEditIcon, this.wordsetEditLanguage, this.placeholderArray)
-      this.getUserWordsets();
+      this.authService.updateWordset(this.edditedwordset, this.wordsetEditName, this.wordsetEditIcon, this.wordsetEditLanguage, null)
+      await new Promise(resolve => setTimeout(resolve, 100));
+      await this.getUserWordsets();
       
       this.wordsetEditName = '';
       this.wordsetEditIcon = null;
@@ -107,7 +109,8 @@ export class WordlistsComponent {
     event.preventDefault()
     try {
       this.authService.deleteWordset(wordsetId);
-      this.getUserWordsets();
+      await new Promise(resolve => setTimeout(resolve, 100));
+      await this.getUserWordsets();
     } catch (error) {
       console.error('failed to delte wordset', error);
     }
@@ -155,6 +158,7 @@ export class WordlistsComponent {
   
       await this.authService.createWordset(this.currentUser.id, jsonData.name, null, jsonData.language, jsonData.wordlist);
   
+      await this.getUserWordsets();
     } catch (error) {
       console.error('Failed to import wordset:', error);
     }
@@ -194,6 +198,8 @@ export class WordlistsComponent {
     this.wordsetEditForm = !this.wordsetEditForm;
     this.edditedwordset = this.userWordsets[input];
   }
+
+ 
 
 }
 

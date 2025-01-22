@@ -60,6 +60,7 @@ export class SettingsComponent {
 
   changeTab(value: string) {
     this.settingsTab = value;
+    this.daysArray = [];
     this.getUserActivity();
   }
 

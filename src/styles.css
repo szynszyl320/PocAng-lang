@@ -16,6 +16,18 @@ body {
     --input-border-color: #ddd;
     --main-box-shadow-color: rgba(0, 0, 0, 0.1);
     --text-color: black;
+
+    /* New variables */
+    --heading-color: #333;
+    --section-background: #f5f5f5;
+    --grid-border-color: #ddd;
+    --form-subtext-background: #d7d1d1;
+    --icon-background: #f5f5f5;
+    --success-color: #40c463;
+    --activity-low: #9be9a8;
+    --activity-medium: #40c463;
+    --activity-high: #216e39;
+    --activity-none: #ebedf0;
 }
 
 /* Dark theme - global variables */
@@ -29,5 +41,17 @@ body {
     --input-border-color: #444;
     --main-box-shadow-color: rgba(0, 0, 0, 0.3);
     --text-color: rgb(255, 255, 255);
+
+    /* New variables */
+    --heading-color: #e0e0e0;
+    --section-background: #2d2d2d;
+    --grid-border-color: #444;
+    --form-subtext-background: #3d3d3d;
+    --icon-background: #2d2d2d;
+    --success-color: #2ea043;
+    --activity-low: #427f4d;
+    --activity-medium: #2ea043;
+    --activity-high: #216e39;
+    --activity-none: #2d2d2d;
 }
 

@@ -1,27 +1,43 @@
 <main> 
 
-    <article>
-        @if (question.type == 'translate') {        
-            <div>{{'testing.TRANSALTE' | translate}}</div>
-            <div>{{ question.valueOne }}</div>
-            <form>
-                <input type="text" name="user input translate" id="valueTwoTranslate" [(ngModel)]="answer" autocomplete="off">
-                <button type="submit" (click)="answerCheck(questionId)">{{'testing.CHECKANSWER' | translate}}</button>
-            </form>
-        } @else if (question.type == 'fillIn') {
-            <div>{{'testing.FILLIN' | translate}}</div>
-            <form>
-                <div>{{question.valueOne.replace('PLACEHOLDER', "__" + answer + "__")}}</div>
-                <input type="text" name="user input fill in" id="valueTwoFillIn" [(ngModel)]="answer" autocomplete="off">
-                <button type="submit" (click)="answerCheck(questionId)">{{'testing.CHECKANSWER' | translate}}</button>
-            </form>
-        }
-        <div>{{length}}/{{staticLenght}}</div>
-        @if (displayReply) {
-            <div class="{{replyClass}}">{{ ((isLastCorrect == true )? 'testing.LASTQUESTIONCORRECT' : 'testing.LASTQUESTIONINCORRECT') | translate }}</div>
-        }
-    </article>
+    @if (testFinished) {
+       <article>
+            <h2>{{'testing.YOUHAVEFINISHED' | translate}}</h2>
+            <p>{{'testing.HAVEANSWERED' | translate}}: {{ticker}} {{'testing.TIMES' | translate}}</p>
+            <p>{{'testing.USEDHINT' | translate}}: {{hintTicker}} {{'testing.TIMES' | translate}}</p>
+            <button (click)="closeWindow()">{{'testing.LEAVETEST' | translate}}</button>   
+        </article>
+    } @else {
+        <article>
+            @if (question.type == 'translate') {        
+                <div>{{'testing.TRANSALTE' | translate}}</div>
+                <div>{{ question.valueOne }}</div>
+                <form>
+                    <input type="text" name="user input translate" id="valueTwoTranslate" [(ngModel)]="answer" autocomplete="off">
+                    <button type="submit" (click)="answerCheck(questionId)">{{'testing.CHECKANSWER' | translate}}</button>
+                </form>
+            } @else if (question.type == 'fillIn') {
+                <div>{{'testing.FILLIN' | translate}}</div>
+                <form>
+                    <div>{{question.valueOne.replace('PLACEHOLDER', "__" + answer + "__")}}</div>
+                    <input type="text" name="user input fill in" id="valueTwoFillIn" [(ngModel)]="answer" autocomplete="off">
+                    <button type="submit" (click)="answerCheck(questionId)">{{'testing.CHECKANSWER' | translate}}</button>
+                </form>
+            }
+            <div>{{length}}/{{staticLenght}}</div>
+            @if (displayReply) {
+                <div class="{{replyClass}}">{{ ((isLastCorrect == true )? 'testing.LASTQUESTIONCORRECT' : 'testing.LASTQUESTIONINCORRECT') | translate }}</div>
+            }
+        </article>
 
-    <button (click)="closeWindow()">{{'testing.LEAVETEST' | translate}}</button>
+        <article>
+            <button (click)="revealHint()">{{'testing.PRESSFORHINT' | translate}}</button>
+            @if (hintActive) {
+                <p>{{generatehint(question.valueTwo)}}</p>
+            }
+        </article>
+
+        <button (click)="closeWindow()">{{'testing.LEAVETEST' | translate}}</button>   
+    }
 
 </main>

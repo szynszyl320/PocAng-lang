@@ -34,7 +34,9 @@
         "OLDPASSWORD": "Old password",
         "CHANGEPASSWORDCONFIRM": "Confirm password change",
         "CHANGEAVATAR": "Change avatar",
-        "USERACTIVITY": "User activity"
+        "USERACTIVITY": "User activity",
+        "USERCONFIG": "User config",
+        "PASSWORDCHNAGE": "Password change"
     },
 
     "groups": {
@@ -57,7 +59,11 @@
         "EDITGROUPICON": "Edit group icon",
         "EDITGROUPCONFIRM": "Confirm",
         "ADDNEWUSER": "Add new user",
-        "NAME": "Name"
+        "NAME": "Name",
+        "SHOWUSERS": "Display users",
+        "DELETEGROUP": "Delete group",
+        "CLOSE": "Close",
+        "USERS": "Users"
     },
     
     "wordsets": {
@@ -85,9 +91,31 @@
         "EXPORTWORDSET": "Export",
         "ICON": "Icon",
         "NAME": "Name",
-        "LANGUAGE": "Language"
+        "LANGUAGE": "Language",
+        "FIELDISREQUIRED": "This field is required",
+        "IMPORTWORDSET": "Import wordset",
+        "WORDSETIMPORT": "Just choose the file to import, it will run automatically"
     },
     
+    "wordsetcreator": {
+        "CREATIONASSIST": "Create with assist",
+        "MANUALCREATION": "Create manually",
+        "ASSISTEDCREATING": "Creator assist",
+        "QUESTIONTYPE": "Question type",
+        "QUESTIONVALUEONE": "'Question'",
+        "QUESTIONVALUETWO": "Answer",
+        "DELETEFROMWORDLIST": "Delete the question",
+        "TRANSALTION": "Translation",
+        "FILLIN": "Fill in the statement",
+        "PLACEFORSENTENCEORWORD": "Field for question",
+        "PLACEFORSENTENCE": "Place for answer",
+        "ADDNEWWORD": "Add new question",
+        "MANUALWRITING": "Manual creator",
+        "SAVE": "Save",
+        "CLOSE": "Close",
+        "PLACEHOLDER": "Write PLACEHOLDER where the word is supposed to go in Fill in questions"
+    },
+
     "access": {
         "USERACCESS": "User access",
         "USEREMAIL": "Email",
@@ -113,6 +141,13 @@
         "CHECKANSWER": "Check answer",
         "LEAVETEST": "Leave test",
         "LASTQUESTIONCORRECT": "Last answer was correct",
-        "LASTQUESTIONINCORRECT": "Last answer was incorrect"
+        "LASTQUESTIONINCORRECT": "Last answer was incorrect",
+        "TRANSALTE": "Translate",
+        "FILLIN": "Fill in the statement with the correct word",
+        "PRESSFORHINT": "Press to receive a hint",
+        "HAVEANSWERED": "You have answered questions",
+        "USEDHINT": "You have used hints",
+        "TIMES": "Times",
+        "YOUHAVEFINISHED": "Congratulations! You have finished the test!"
     }
 }

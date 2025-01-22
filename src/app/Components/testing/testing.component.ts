@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service'
 import {  FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'app-testing',
@@ -33,6 +34,13 @@ export class TestingComponent {
   replyClass : string = '';
   displayReply : boolean = false;
 
+  testFinished: boolean = false;
+
+  ticker: number = 0;
+
+  hintActive: boolean = false;
+  hintTicker: number = 0;
+
   componentClose = output<boolean>();
 
   constructor(private authService: AuthService) {}
@@ -55,6 +63,7 @@ export class TestingComponent {
   }
   
   generateSubset() {
+    this.ticker = 0;
     this.questionSubSet = [];
     const usedValues = new Array<number>   
     for(let i = 0; i < this.length; i++) {
@@ -71,7 +80,7 @@ export class TestingComponent {
   lenghtCheck() {
     if (this.questionSubSet.length == 0) {
       this.createActivity();
-      this.componentClose.emit(false);
+      this.testFinished = true;
     }
   }
 
@@ -88,10 +97,12 @@ export class TestingComponent {
       this.replyClass = 'correctInput';
       this.isLastCorrect = true;
       this.displayReply = true;
+      this.hintActive = false;
     } else {
       this.replyClass = 'incorrectInput'
       this.isLastCorrect = false;
     }
+    this.ticker++;
     this.answer = '';
     this.lenghtCheck();
     this.chooseQuestion();
@@ -113,6 +124,16 @@ export class TestingComponent {
       console.error('failed to create activity', error);
       return 1;
     }
+  }
+
+  generatehint(input: string) {
+    let hint = input.substring(0, Math.floor(input.length/2));
+    return hint += '_'.repeat(input.length - hint.length)
+  }
+
+  revealHint() {
+    this.hintActive = true;
+    this.hintTicker++;
   }
 
   closeWindow() {

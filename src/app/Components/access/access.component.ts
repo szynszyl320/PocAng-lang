@@ -30,6 +30,8 @@ export class UseraccessComponent {
 
   componentClose = output<boolean>();
 
+  refreshWordsets = output<boolean>();
+
   constructor(private authService: AuthService) {}
 
   ngOnInit() {

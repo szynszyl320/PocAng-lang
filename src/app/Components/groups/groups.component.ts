@@ -79,6 +79,8 @@ export class GroupsComponent {
       this.userIdList = [];
       this.userList = [];
     
+      await new Promise(resolve => setTimeout(resolve, 100));
+      await this.getUserGroups();
     } catch (error) {
       console.error('Failed to create group:', error); 
       alert('group could not be created');
@@ -97,6 +99,8 @@ export class GroupsComponent {
   async updateGroup(group: any, groupName: string, groupIcon: File, users: Array<any>) {
     try {
       this.authService.updateGroup(group, groupName, groupIcon, users);
+      await new Promise(resolve => setTimeout(resolve, 100));
+      await this.getUserGroups();
     } catch (error) {
       console.error('Failed to update', error);
       alert(`failed to update ${groupName}`)
@@ -126,7 +130,8 @@ export class GroupsComponent {
       this.addUserEmail = '';
       this.addUserName = '';
       
-      this.getUserGroups();
+      await new Promise(resolve => setTimeout(resolve, 100));
+      await this.getUserGroups();
     } catch (error) {
       console.error('failed to add user', error);
       alert(`failed to add ${this.addUserName} to ${this.selectedGroup.name}`)
@@ -137,7 +142,9 @@ export class GroupsComponent {
     event.preventDefault();
     try {
       this.authService.deleteGroup(groupId);
-      this.getUserGroups();
+      
+      await new Promise(resolve => setTimeout(resolve, 100));
+      await this.getUserGroups();
     } catch (error) {
       console.error('failed to delete group', error);
       alert(`failed to remove group`)

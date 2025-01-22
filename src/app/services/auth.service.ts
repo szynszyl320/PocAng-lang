@@ -213,13 +213,13 @@ export class AuthService {
   }
 
   //checked
-  async updateWordset(wordset: any, name: string, icon: File, language: string, wordlist: Array<any>) {
+  async updateWordset(wordset: any, name: string, icon: File, language: string, wordlist: Array<any> | null) {
     try {
       const newWordsetData = {
         "name": ((name != null && name != '')? name : wordset.name),
         "icon": ((icon != null)? icon : wordset.icon),
         "language": ((language != null && language != '')? language : wordset.language),
-        "wordlist": ((wordlist != null)? wordlist : wordset.wordlist)
+        "wordlist": ((wordlist == null)? wordset.wordlist : wordlist)
       }
       const record = this.pb.collection('wordset').update(wordset.id, newWordsetData);
     } catch (error) {
