@@ -18,6 +18,10 @@
         "THEMECHANGE": "Change your theme",
         "LIGHTTHEME": "Light theme",
         "DARKTHEME": "Dark theme",
+        "SEPIATHEME": "Sepia theme",
+        "FORESTTHEME": "Forest theme",
+        "OCEANTHEME": "Ocean theme",
+        "LAVENDERTHEME": "Lavender theme",
         "LANGUAGECHANGE": "Change your language",
         "ENGLISH": "English",
         "POLISH": "Polish",
@@ -34,7 +38,7 @@
         "OLDPASSWORD": "Old password",
         "CHANGEPASSWORDCONFIRM": "Confirm password change",
         "CHANGEAVATAR": "Change avatar",
-        "USERACTIVITY": "User activity",
+        "USERACTIVITY": "User activity this month",
         "USERCONFIG": "User config",
         "PASSWORDCHNAGE": "Password change"
     },
@@ -125,6 +129,7 @@
         "GROUPACCESS": "Group access",
         "GRANTACCESS": "Grant access",
         "GRANTACCESSTOUSER": "Grant access to user",
+        "GRANTACCESSTOGROUP": "Grant access to group",
         "EXIT": "Close",
         "GROUPNAME": "Group name",
         "REVOKEGROUPACCESS": "Revoke group access"

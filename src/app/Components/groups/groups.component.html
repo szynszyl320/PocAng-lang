@@ -75,7 +75,7 @@
 </main>
 
 <!-- User List Modal -->
-@if (userListModal || editGroupForm || createGroupForm) {
+@if (userListModal) {
     <div class="fixed inset-0 bg-[var(--overlay-background)] z-40">
         <div class="fixed inset-2 sm:inset-4 md:inset-8 lg:inset-[10%] bg-[var(--whit-main-background-color)] rounded-lg sm:rounded-xl 
                     p-3 sm:p-4 md:p-6 overflow-y-auto z-50">
@@ -85,7 +85,7 @@
                 <div class="space-y-3 sm:space-y-4">
                     @for (user of usedGroup.expand.users; track $index) {
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 
-                                  p-3 sm:p-4 bg-gray-50 rounded-lg">
+                                  p-3 sm:p-4 bg-[var(--section-background-secondary)] rounded-lg">
                             <div class="flex items-center gap-3">
                                 <img class="w-8 sm:w-10 h-8 sm:h-10 rounded-full" [src]="getUserAvatar(user)" alt="user avatar">
                                 <span class="font-medium text-sm sm:text-base">{{user.name}}</span>
@@ -103,7 +103,7 @@
                 <!-- Add User Form -->
                 <form class="space-y-4 sm:space-y-6">
                     <h3 class="text-xl font-medium">{{'groups.ADDUSER' | translate}}</h3>
-                    <div class="bg-gray-100 rounded-lg p-3 sm:p-4 space-y-2">
+                    <div class="bg-[var(--section-background-secondary)] rounded-lg p-3 sm:p-4 space-y-2">
                         <label class="block text-xs sm:text-sm font-medium">{{'groups.EMAIL' | translate}}</label>
                         <input type="email" 
                                class="w-full p-2 sm:p-3 text-sm sm:text-base border border-[var(--input-border-color)] 
@@ -111,7 +111,7 @@
                                [(ngModel)]="addUserEmail" 
                                name="user email">
                     </div>
-                    <div class="bg-gray-100 rounded-lg p-3 sm:p-4 space-y-2">
+                    <div class="bg-[var(--section-background-secondary)] rounded-lg p-3 sm:p-4 space-y-2">
                         <label class="block text-xs sm:text-sm font-medium">{{'groups.NAME' | translate}}</label>
                         <input type="text" 
                                class="w-full p-2 sm:p-3 text-sm sm:text-base border border-[var(--input-border-color)] 
@@ -126,8 +126,8 @@
                                 (click)="addToGroup($event)">
                             {{'groups.ADDUSERTOGROUP' | translate}}
                         </button>
-                        <button class="flex-1 p-4 bg-gray-200 text-gray-700 rounded-lg text-base font-medium 
-                                     hover:bg-gray-300 transition-colors"
+                        <button class="flex-1 p-4 bg-[var(--section-background-secondary)] text-[var(--secondary-text)] rounded-lg text-base 
+                                     font-medium hover:bg-[var(--secondary-button-hover)] transition-colors"
                                 (click)="showUserToggle(0)">
                             {{'groups.CLOSE' | translate}}
                         </button>
@@ -145,7 +145,7 @@
             <div class="max-w-2xl mx-auto space-y-6">
                 <h2 class="text-2xl font-medium mb-6">{{'groups.EDITGROUP' | translate}}</h2>
                 <form class="space-y-6">
-                    <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                    <div class="bg-[var(--section-background-secondary)] rounded-lg p-4 space-y-2">
                         <label class="block text-sm font-medium">{{'groups.EDITGROUPNAME' | translate}}</label>
                         <input type="text" 
                                class="w-full p-3 border border-[var(--input-border-color)] rounded-lg text-base 
@@ -153,7 +153,7 @@
                                [(ngModel)]="groupEditName" 
                                name="name edit">
                     </div>
-                    <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                    <div class="bg-[var(--section-background-secondary)] rounded-lg p-4 space-y-2">
                         <label class="block text-sm font-medium">{{'groups.EDITGROUPICON' | translate}}</label>
                         <input type="file" 
                                class="w-full p-3 border border-[var(--input-border-color)] rounded-lg text-base 
@@ -168,8 +168,8 @@
                                 (click)="updateGroup(usedGroup, groupEditName, groupEditIcon, usedGroup.users)">
                             {{'groups.EDITGROUPCONFIRM' | translate}}
                         </button>
-                        <button class="flex-1 p-4 bg-gray-200 text-gray-700 rounded-lg text-base font-medium 
-                                     hover:bg-gray-300 transition-colors"
+                        <button class="flex-1 p-4 bg-[var(--section-background-secondary)] text-[var(--secondary-text)] rounded-lg text-base 
+                                     font-medium hover:bg-[var(--secondary-button-hover)] transition-colors"
                                 (click)="showGroupEditToggle(0)">
                             {{'groups.CLOSE' | translate}}
                         </button>
@@ -188,7 +188,7 @@
                 <h2 class="text-2xl font-medium mb-6">{{'groups.CREATENEWGROUP' | translate}}</h2>
                 <!-- Create Group Form -->
                 <form class="space-y-6">
-                    <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                    <div class="bg-[var(--section-background-secondary)] rounded-lg p-4 space-y-2">
                         <label class="block text-sm font-medium">{{'groups.GROUPNAME' | translate}}</label>
                         <input type="text" 
                                class="w-full p-3 border border-[var(--input-border-color)] rounded-lg text-base 
@@ -196,7 +196,7 @@
                                [(ngModel)]="groupName" 
                                name="group name">
                     </div>
-                    <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                    <div class="bg-[var(--section-background-secondary)] rounded-lg p-4 space-y-2">
                         <label class="block text-sm font-medium">{{'groups.GROUPICON' | translate}}</label>
                         <input type="file" 
                                class="w-full p-3 border border-[var(--input-border-color)] rounded-lg text-base 
@@ -217,7 +217,7 @@
                 <!-- Add Users Form -->
                 <form class="space-y-6">
                     <h3 class="text-xl font-medium">{{'groups.ADDNEWUSER' | translate}}</h3>
-                    <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                    <div class="bg-[var(--section-background-secondary)] rounded-lg p-4 space-y-2">
                         <label class="block text-sm font-medium">{{'groups.EMAIL' | translate}}</label>
                         <input type="email" 
                                class="w-full p-3 border border-[var(--input-border-color)] rounded-lg text-base 
@@ -225,7 +225,7 @@
                                [(ngModel)]="userEmail" 
                                name="email">
                     </div>
-                    <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                    <div class="bg-[var(--section-background-secondary)] rounded-lg p-4 space-y-2">
                         <label class="block text-sm font-medium">{{'groups.NAME' | translate}}</label>
                         <input type="text" 
                                class="w-full p-3 border border-[var(--input-border-color)] rounded-lg text-base 
@@ -245,7 +245,7 @@
                 <div class="space-y-4">
                     <h4 class="text-xl font-medium">{{'groups.ADDEDUSERS' | translate}}</h4>
                     @for (user of userList; track $index) {
-                        <div class="flex items-center justify-between gap-4 p-4 bg-[var(--section-background)] rounded-lg">
+                        <div class="flex items-center justify-between gap-4 p-4 bg-[var(--section-background-secondary)] rounded-lg">
                             <div class="flex items-center gap-4">
                                 <img class="w-10 h-10 rounded-full" [src]="getUserAvatar(user)" alt="user avatar">
                                 <span class="font-medium">{{ user.name }}</span>
@@ -254,8 +254,8 @@
                         </div>
                     }
                 </div>
-                <button class="w-full p-4 bg-gray-200 text-gray-700 rounded-lg text-base font-medium 
-                             hover:bg-gray-300 transition-colors"
+                <button class="w-full p-4 bg-[var(--section-background-secondary)] text-[var(--secondary-text)] rounded-lg text-base 
+                             font-medium hover:bg-[var(--secondary-button-hover)] transition-colors"
                         (click)="showCreateGroupToggle()">
                     {{ 'groups.CLOSE' | translate }}
                 </button>

@@ -36,7 +36,11 @@
         "CHANGEAVATAR": "Changer l'avatar",
         "USERACTIVITY": "Activité de l'utilisateur",
         "USERCONFIG": "Configuration utilisateur",
-        "PASSWORDCHNAGE": "Changement de mot de passe"
+        "PASSWORDCHNAGE": "Changement de mot de passe",
+        "SEPIATHEME": "Thème sépia",
+        "FORESTTHEME": "Thème forêt",
+        "OCEANTHEME": "Thème océan",
+        "LAVENDERTHEME": "Thème lavande"
     },
 
     "groups": {
@@ -63,7 +67,8 @@
         "SHOWUSERS": "Afficher les utilisateurs",
         "DELETEGROUP": "Supprimer le groupe",
         "CLOSE": "Fermer",
-        "USERS": "Utilisateurs"
+        "USERS": "Utilisateurs",
+        "ICON": "Icône"
     },
 
     "wordsets": {
@@ -112,7 +117,8 @@
         "ADDNEWWORD": "Ajouter une nouvelle question",
         "MANUALWRITING": "Création manuelle",
         "SAVE": "Enregistrer",
-        "CLOSE": "Fermer"
+        "CLOSE": "Fermer",
+        "PLACEHOLDER": "Écrivez PLACEHOLDER où le mot doit aller dans les questions de type Compléter"
     },
 
     "access": {
@@ -124,7 +130,9 @@
         "GRANTACCESS": "Accorder l'accès",
         "EXIT": "Fermer",
         "GROUPNAME": "Nom du groupe",
-        "REVOKEGROUPACCESS": "Révoquer l'accès du groupe"
+        "REVOKEGROUPACCESS": "Révoquer l'accès du groupe",
+        "GRANTACCESSTOUSER": "Accorder l'accès à l'utilisateur",
+        "GRANTACCESSTOGROUP": "Accorder l'accès au groupe"
     },
 
     "learning": {

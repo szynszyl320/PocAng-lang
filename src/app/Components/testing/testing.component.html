@@ -1,47 +1,46 @@
-<main class="absolute left-1/2 -translate-x-1/2 top-4 w-[95%] md:w-[80%] max-w-[800px] p-4 md:p-8 bg-[var(--whit-main-background-color)] shadow-lg rounded-xl"> 
+<main class="absolute left-1/2 -translate-x-1/2 top-2 w-[98%] md:w-[80%] max-w-[800px] p-3 md:p-8 bg-[var(--whit-main-background-color)] shadow-lg rounded-xl"> 
     @if (testFinished) {
-        <article class="flex flex-col gap-3 md:gap-8 mb-4 md:mb-12">
-            <h2 class="text-lg md:text-2xl">{{'testing.YOUHAVEFINISHED' | translate}}</h2>
-            <p class="text-sm md:text-lg">{{'testing.HAVEANSWERED' | translate}}: {{ticker}} {{'testing.TIMES' | translate}}</p>
-            <p class="text-sm md:text-lg">{{'testing.USEDHINT' | translate}}: {{hintTicker}} {{'testing.TIMES' | translate}}</p>
-            <button class="w-full px-4 py-2.5 md:py-3.5 bg-[var(--button-background-color)] hover:bg-[var(--button-background-color-hover)] text-[var(--button-color)] rounded-lg text-sm md:text-lg font-medium cursor-pointer" (click)="closeWindow()">{{'testing.LEAVETEST' | translate}}</button>   
+        <article class="flex flex-col gap-4 md:gap-8 mb-4 md:mb-12">
+            <h2 class="text-xl md:text-2xl">{{'testing.YOUHAVEFINISHED' | translate}}</h2>
+            <p class="text-base md:text-lg">{{'testing.HAVEANSWERED' | translate}}: {{ticker}} {{'testing.TIMES' | translate}}</p>
+            <p class="text-base md:text-lg">{{'testing.USEDHINT' | translate}}: {{hintTicker}} {{'testing.TIMES' | translate}}</p>
+            <button class="w-full px-4 py-3 md:py-3.5 bg-[var(--button-background-color)] hover:bg-[var(--button-background-color-hover)] text-[var(--button-color)] rounded-lg text-base md:text-lg font-medium cursor-pointer" (click)="closeWindow()">{{'testing.LEAVETEST' | translate}}</button>   
         </article>
     } @else {
-        <article class="flex flex-col gap-3 md:gap-8 mb-4 md:mb-12">
+        <article class="flex flex-col gap-4 md:gap-8 mb-4 md:mb-12">
             @if (question.type == 'translate') {        
-                <div class="p-2.5 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-base md:text-2xl">{{'testing.TRANSALTE' | translate}}</div>
-                <div class="p-2.5 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-base md:text-2xl">{{ question.valueOne }}</div>
-                <form class="flex flex-col gap-2 md:gap-4">
+                <div class="p-3 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-lg md:text-2xl">{{'testing.TRANSALTE' | translate}}</div>
+                <div class="p-3 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-lg md:text-2xl">{{ question.valueOne }}</div>
+                <form class="flex flex-col gap-3 md:gap-4">
                     <input type="text" name="user input translate" id="valueTwoTranslate" [(ngModel)]="answer" autocomplete="off" 
-                           class="px-2.5 md:px-4.5 py-2.5 md:py-3.5 border-2 border-[var(--border-color)] rounded-lg text-base md:text-xl text-center focus:outline-none focus:border-[var(--button-background-color)] transition-colors duration-300">
-                    <button type="submit" class="w-full px-4 py-2.5 md:py-3.5 bg-[var(--button-background-color)] hover:bg-[var(--button-background-color-hover)] text-[var(--button-color)] rounded-lg text-sm md:text-lg font-medium cursor-pointer" 
+                           class="px-3 md:px-4.5 py-3 md:py-3.5 border-2 border-[var(--border-color)] rounded-lg text-lg md:text-xl text-center focus:outline-none focus:border-[var(--button-background-color)] transition-colors duration-300">
+                    <button type="submit" class="w-full px-4 py-3 md:py-3.5 bg-[var(--button-background-color)] hover:bg-[var(--button-background-color-hover)] text-[var(--button-color)] rounded-lg text-base md:text-lg font-medium cursor-pointer" 
                             (click)="answerCheck(questionId)">{{'testing.CHECKANSWER' | translate}}</button>
                 </form>
             } @else if (question.type == 'fillIn') {
-                <div class="p-2.5 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-base md:text-2xl">{{'testing.FILLIN' | translate}}</div>
-                <form class="flex flex-col gap-2 md:gap-4">
-                    <div class="p-2.5 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-base md:text-2xl">{{question.valueOne.replace('PLACEHOLDER', "__" + answer + "__")}}</div>
+                <div class="p-3 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-lg md:text-2xl">{{'testing.FILLIN' | translate}}</div>
+                <form class="flex flex-col gap-3 md:gap-4">
+                    <div class="p-3 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-lg md:text-2xl">{{question.valueOne.replace('PLACEHOLDER', "__" + answer + "__")}}</div>
                     <input type="text" name="user input fill in" id="valueTwoFillIn" [(ngModel)]="answer" autocomplete="off"
-                           class="px-2.5 md:px-4.5 py-2.5 md:py-3.5 border-2 border-[var(--border-color)] rounded-lg text-base md:text-xl text-center focus:outline-none focus:border-[var(--button-background-color)] transition-colors duration-300">
-                    <button type="submit" class="w-full px-4 py-2.5 md:py-3.5 bg-[var(--button-background-color)] hover:bg-[var(--button-background-color-hover)] text-[var(--button-color)] rounded-lg text-sm md:text-lg font-medium cursor-pointer"
+                           class="px-3 md:px-4.5 py-3 md:py-3.5 border-2 border-[var(--border-color)] rounded-lg text-lg md:text-xl text-center focus:outline-none focus:border-[var(--button-background-color)] transition-colors duration-300">
+                    <button type="submit" class="w-full px-4 py-3 md:py-3.5 bg-[var(--button-background-color)] hover:bg-[var(--button-background-color-hover)] text-[var(--button-color)] rounded-lg text-base md:text-lg font-medium cursor-pointer"
                             (click)="answerCheck(questionId)">{{'testing.CHECKANSWER' | translate}}</button>
                 </form>
             }
-            <div class="p-2.5 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-base md:text-2xl">{{length}}/{{staticLenght}}</div>
+            <div class="p-3 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-lg md:text-2xl">{{length}}/{{staticLenght}}</div>
             @if (displayReply) {
-                <div class="{{replyClass}} p-2.5 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-base md:text-2xl">{{ ((isLastCorrect == true )? 'testing.LASTQUESTIONCORRECT' : 'testing.LASTQUESTIONINCORRECT') | translate }}</div>
+                <div class="{{replyClass}} p-3 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-lg md:text-2xl">{{ ((isLastCorrect == true )? 'testing.LASTQUESTIONCORRECT' : 'testing.LASTQUESTIONINCORRECT') | translate }}</div>
             }
         </article>
 
-        <article class="flex flex-col gap-3 md:gap-8 mb-4 md:mb-12">
-            <button class="w-full px-4 py-2.5 md:py-3.5 bg-[var(--button-background-color)] hover:bg-[var(--button-background-color-hover)] text-[var(--button-color)] rounded-lg text-sm md:text-lg font-medium cursor-pointer" 
+        <article class="flex flex-col gap-4 md:gap-8 mb-4 md:mb-12">
+            <button class="w-full px-4 py-3 md:py-3.5 bg-[var(--button-background-color)] hover:bg-[var(--button-background-color-hover)] text-[var(--button-color)] rounded-lg text-base md:text-lg font-medium cursor-pointer" 
                     (click)="revealHint()">{{'testing.PRESSFORHINT' | translate}}</button>
             @if (hintActive) {
-                <p class="p-2.5 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-base md:text-2xl">{{generatehint(question.valueTwo)}}</p>
+                <p class="p-3 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-lg md:text-2xl tracking-widest">{{generatehint(question.valueTwo)}}</p>
             }
         </article>
 
-        <button class="w-full px-4 py-2.5 md:py-3.5 bg-[var(--button-background-color)] hover:bg-[var(--button-background-color-hover)] text-[var(--button-color)] rounded-lg text-sm md:text-lg font-medium cursor-pointer" 
-                (click)="closeWindow()">{{'testing.LEAVETEST' | translate}}</button>   
+        <button class="danger-button text-base w-full py-3" (click)="closeWindow()">{{'testing.LEAVETEST' | translate}}</button>   
     }
 </main>

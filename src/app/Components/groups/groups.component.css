@@ -1,0 +1,10 @@
+
+
+.danger-button {
+    background-color: var(--danger-button-background);
+    color: var(--danger-button-text);
+}
+
+.danger-button:hover {
+    background-color: var(--danger-button-hover);
+}

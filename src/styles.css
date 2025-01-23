@@ -62,61 +62,220 @@ body {
     --warning-text: #9a3412;             /* Dark orange text */
     --info-background: #dbeafe;          /* Soft blue background */
     --info-text: #1e40af;               /* Dark blue text */
+
+    --heading-color: #374151;
+    --background-light: #f3f4f6;
+    --overlay-backdrop: rgba(0, 0, 0, 0.5);
+    --overlay-white: #ffffff;
+    --border-color: #e5e7eb;
+
+    /* New variables */
+    --section-background-secondary: #f3f4f6;  /* replaces gray-50/gray-100 */
 }
 
 /* Dark theme - global variables */
 [data-theme="dark"] {
-    --body-background-color: #1a1a1a;
-    --navbar-background-color: #2d2d2d;
-    --button-background-color: #4361ee;
-    --button-color: white;
-    --button-background-color-hover: #3145b6;
-    --whit-main-background-color: #2d2d2d;
-    --input-border-color: #444;
-    --main-box-shadow-color: rgba(0, 0, 0, 0.3);
-    --text-color: rgb(255, 255, 255);
+    --body-background-color: #0a0a0a;
+    --navbar-background-color: #171717;
+    --button-background-color: #4c6fff;
+    --button-color: #ffffff;
+    --button-background-color-hover: #3b5ef7;
+    --whit-main-background-color: #171717;
+    --input-border-color: #666;
+    --main-box-shadow-color: rgba(0, 0, 0, 0.7);
+    --text-color: #ffffff;
 
     /* New variables */
-    --heading-color: #e0e0e0;
-    --section-background: #2d2d2d;
-    --grid-border-color: #444;
-    --form-subtext-background: #3d3d3d;
-    --icon-background: #2d2d2d;
-    --success-color: #2ea043;
-    --activity-low: #427f4d;
-    --activity-medium: #2ea043;
-    --activity-high: #216e39;
-    --activity-none: #2d2d2d;
+    --heading-color: #3f3e3e;
+    --section-background: #171717;
+    --grid-border-color: #666;
+    --form-subtext-background: #333;
+    --icon-background: #171717;
+    --success-color: #4cdf70;
+    --activity-low: #5da772;
+    --activity-medium: #4cdf70;
+    --activity-high: #35a04e;
+    --activity-none: #929191;
 
     /* Status colors */
-    --error-color: #ff4444;
+    --error-color: #ff8080;
     
     /* Testing colors */
-    --correct-answer-color: #2ea043;
-    --incorrect-answer-color: #ff4444;
+    --correct-answer-color: #4cdf70;
+    --incorrect-answer-color: #ff8080;
 
     /* New dark theme variables */
-    --overlay-background: rgba(0, 0, 0, 0.7);
-    --overlay-backdrop: rgba(0, 0, 0, 0.3);
-    --secondary-button-background: #4b5563;
-    --secondary-button-hover: #374151;
-    --secondary-text: #9ca3af;
-    --border-color: #374151;
-    --overlay-white: rgba(45, 45, 45, 0.95);
+    --overlay-background: rgba(0, 0, 0, 0.9);
+    --overlay-backdrop: rgba(0, 0, 0, 0.7);
+    --secondary-button-background: #404040;
+    --secondary-button-hover: #525252;
+    --secondary-text: #e0e0e0;
+    --border-color: #4a4a4a;
+    --overlay-white: rgba(23, 23, 23, 0.98);
 
     /* Action button colors */
-    --danger-button-background: #b91c1c;  /* Darker red for dark theme */
-    --danger-button-hover: #991b1b;
-    --danger-button-text: #fecaca;        /* Lighter text for contrast */
-    --warning-button-background: #c2410c;
-    --warning-button-hover: #9a3412;
+    --danger-button-background: #ff4040;
+    --danger-button-hover: #e62e2e;
+    --danger-button-text: #ffffff;
+    --warning-button-background: #ff7a1f;
+    --warning-button-hover: #f06000;
     
     /* Feedback colors */
-    --error-background: #450a0a;
-    --error-text: #fecaca;
-    --warning-background: #431407;
-    --warning-text: #fed7aa;
-    --info-background: #172554;
-    --info-text: #bfdbfe;
+    --error-background: #3d0a0a;
+    --error-text: #ffe0e0;
+    --warning-background: #3d1a05;
+    --warning-text: #ffecd1;
+    --info-background: #102266;
+    --info-text: #e0edff;
+
+    /* New variables */
+    --section-background-secondary: #262626;  /* darker variant for dark mode */
+}
+
+
+/* Sepia theme */
+[data-theme="sepia"] {
+    --body-background-color: #f4ecd8;
+    --navbar-background-color: #e4d5b7;
+    --button-background-color: #8b4513;
+    --button-color: #f4ecd8;
+    --button-background-color-hover: #723a10;
+    --whit-main-background-color: #f4ecd8;
+    --input-border-color: #8b4513;
+    --main-box-shadow-color: rgba(139, 69, 19, 0.2);
+    --text-color: #5c4033;
+    
+    --heading-color: #8b4513;
+    --section-background: #f4ecd8;
+    --grid-border-color: #8b4513;
+    --form-subtext-background: #e4d5b7;
+    --icon-background: #f4ecd8;
+    --success-color: #2e8b57;
+    --activity-low: #90ee90;
+    --activity-medium: #2e8b57;
+    --activity-high: #006400;
+    --activity-none: #d3c7b1;
+
+    --error-color: #8b0000;
+    --correct-answer-color: #2e8b57;
+    --incorrect-answer-color: #8b0000;
+
+    --overlay-background: rgba(139, 69, 19, 0.5);
+    --overlay-backdrop: rgba(244, 236, 216, 0.9);
+    --secondary-button-background: #d3c7b1;
+    --secondary-button-hover: #c4b5a0;
+    --secondary-text: #5c4033;
+    --border-color: #8b4513;
+    --overlay-white: rgba(244, 236, 216, 0.98);
+
+    --section-background-secondary: #e4d5b7;
+}
+
+/* Forest theme */
+[data-theme="forest"] {
+    --body-background-color: #f0f4f0;
+    --navbar-background-color: #e0e8e0;
+    --button-background-color: #5c7c5c;
+    --button-color: #ffffff;
+    --button-background-color-hover: #4a684a;
+    --whit-main-background-color: #f0f4f0;
+    --input-border-color: #a3b8a3;
+    --main-box-shadow-color: rgba(92, 124, 92, 0.2);
+    --text-color: #2c3c2c;
+    
+    --heading-color: #3c4c3c;
+    --section-background: #f0f4f0;
+    --grid-border-color: #a3b8a3;
+    --form-subtext-background: #e0e8e0;
+    --icon-background: #f0f4f0;
+    --success-color: #609460;
+    --activity-low: #afc4af;
+    --activity-medium: #609460;
+    --activity-high: #3c5c3c;
+    --activity-none: #e0e8e0;
+    
+    --error-color: #965050;
+    --correct-answer-color: #609460;
+    --incorrect-answer-color: #965050;
+    
+    --overlay-background: rgba(92, 124, 92, 0.5);
+    --overlay-backdrop: rgba(240, 244, 240, 0.9);
+    --secondary-button-background: #dce4dc;
+    --secondary-button-hover: #cad4ca;
+    --secondary-text: #2c3c2c;
+    --border-color: #a3b8a3;
+    --section-background-secondary: #e0e8e0;
+}
+
+/* Ocean theme */
+[data-theme="ocean"] {
+    --body-background-color: #f0f4f6;
+    --navbar-background-color: #e0e8ec;
+    --button-background-color: #5c7c8c;
+    --button-color: #ffffff;
+    --button-background-color-hover: #4a687a;
+    --whit-main-background-color: #f0f4f6;
+    --input-border-color: #a3b8c6;
+    --main-box-shadow-color: rgba(92, 124, 140, 0.2);
+    --text-color: #2c3c44;
+    
+    --heading-color: #3c4c54;
+    --section-background: #f0f4f6;
+    --grid-border-color: #a3b8c6;
+    --form-subtext-background: #e0e8ec;
+    --icon-background: #f0f4f6;
+    --success-color: #60949c;
+    --activity-low: #afc4cc;
+    --activity-medium: #60949c;
+    --activity-high: #3c5c64;
+    --activity-none: #e0e8ec;
+    
+    --error-color: #965858;
+    --correct-answer-color: #60949c;
+    --incorrect-answer-color: #965858;
+    
+    --overlay-background: rgba(92, 124, 140, 0.5);
+    --overlay-backdrop: rgba(240, 244, 246, 0.9);
+    --secondary-button-background: #dce4e8;
+    --secondary-button-hover: #cad4d8;
+    --secondary-text: #2c3c44;
+    --border-color: #a3b8c6;
+    --section-background-secondary: #e0e8ec;
+}
+
+/* Lavender theme */
+[data-theme="lavender"] {
+    --body-background-color: #f4f0f6;
+    --navbar-background-color: #e8e0ec;
+    --button-background-color: #7c5c8c;
+    --button-color: #ffffff;
+    --button-background-color-hover: #684a7a;
+    --whit-main-background-color: #f4f0f6;
+    --input-border-color: #b8a3c6;
+    --main-box-shadow-color: rgba(124, 92, 140, 0.2);
+    --text-color: #3c2c44;
+    
+    --heading-color: #4c3c54;
+    --section-background: #f4f0f6;
+    --grid-border-color: #b8a3c6;
+    --form-subtext-background: #e8e0ec;
+    --icon-background: #f4f0f6;
+    --success-color: #807c94;
+    --activity-low: #c4afcc;
+    --activity-medium: #807c94;
+    --activity-high: #5c3c64;
+    --activity-none: #e8e0ec;
+    
+    --error-color: #965864;
+    --correct-answer-color: #807c94;
+    --incorrect-answer-color: #965864;
+    
+    --overlay-background: rgba(124, 92, 140, 0.5);
+    --overlay-backdrop: rgba(244, 240, 246, 0.9);
+    --secondary-button-background: #e4dce8;
+    --secondary-button-hover: #d4cad8;
+    --secondary-text: #3c2c44;
+    --border-color: #b8a3c6;
+    --section-background-secondary: #e8e0ec;
 }
 

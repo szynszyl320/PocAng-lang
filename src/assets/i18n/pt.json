@@ -36,7 +36,11 @@
         "CHANGEAVATAR": "Alterar avatar",
         "USERACTIVITY": "Atividade do usuário",
         "USERCONFIG": "Configuração do usuário",
-        "PASSWORDCHNAGE": "Alteração de senha"
+        "PASSWORDCHNAGE": "Alteração de senha",
+        "SEPIATHEME": "Tema sépia",
+        "FORESTTHEME": "Tema floresta",
+        "OCEANTHEME": "Tema oceano",
+        "LAVENDERTHEME": "Tema lavanda"
     },
 
     "groups": {
@@ -63,7 +67,8 @@
         "SHOWUSERS": "Exibir usuários",
         "DELETEGROUP": "Excluir grupo",
         "CLOSE": "Fechar",
-        "USERS": "Usuários"
+        "USERS": "Usuários",
+        "ICON": "Ícone"
     },
 
     "wordsets": {
@@ -112,7 +117,8 @@
         "ADDNEWWORD": "Adicionar nova pergunta",
         "MANUALWRITING": "Criador manual",
         "SAVE": "Salvar",
-        "CLOSE": "Fechar"
+        "CLOSE": "Fechar",
+        "PLACEHOLDER": "Escreva PLACEHOLDER onde a palavra deve ir em questões do tipo Preencher"
     },
 
     "access": {
@@ -124,7 +130,9 @@
         "GRANTACCESS": "Conceder acesso",
         "EXIT": "Fechar",
         "GROUPNAME": "Nome do grupo",
-        "REVOKEGROUPACCESS": "Revogar acesso do grupo"
+        "REVOKEGROUPACCESS": "Revogar acesso do grupo",
+        "GRANTACCESSTOUSER": "Conceder acesso ao usuário",
+        "GRANTACCESSTOGROUP": "Conceder acesso ao grupo"
     },
 
     "learning": {

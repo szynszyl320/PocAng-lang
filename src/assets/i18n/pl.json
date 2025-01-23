@@ -36,7 +36,11 @@
         "CHANGEAVATAR": "Zmień awatar",
         "USERACTIVITY": "Aktywność użytkownika",
         "USERCONFIG": "Konfiguracja użytkownika",
-        "PASSWORDCHNAGE": "Zmiana hasła"
+        "PASSWORDCHNAGE": "Zmiana hasła",
+        "SEPIATHEME": "Motyw sepia",
+        "FORESTTHEME": "Motyw leśny",
+        "OCEANTHEME": "Motyw oceaniczny",
+        "LAVENDERTHEME": "Motyw lawendowy"
     },
 
     "groups": {
@@ -63,7 +67,8 @@
         "SHOWUSERS": "Wyświetl użytkowników",
         "DELETEGROUP": "Usuń grupę",
         "CLOSE": "Zamknij",
-        "USERS": "Użytkownicy"
+        "USERS": "Użytkownicy",
+        "ICON": "Ikona"
     },
     
     "wordsets": {
@@ -112,7 +117,8 @@
         "ADDNEWWORD": "Dodaj nowe pytanie",
         "MANUALWRITING": "Kreator ręczny",
         "SAVE": "Zapisz",
-        "CLOSE": "Zamknij"
+        "CLOSE": "Zamknij",
+        "PLACEHOLDER": "Wpisz PLACEHOLDER w miejscu gdzie ma być wstawione słowo w pytaniach typu Uzupełnij"
     },
 
     "access": {
@@ -124,7 +130,9 @@
         "GRANTACCESS": "Przyznaj dostęp",
         "EXIT": "Zamknij",
         "GROUPNAME": "Nazwa grupy",
-        "REVOKEGROUPACCESS": "Odbierz dostęp grupie"
+        "REVOKEGROUPACCESS": "Odbierz dostęp grupie",
+        "GRANTACCESSTOUSER": "Przyznaj dostęp użytkownikowi",
+        "GRANTACCESSTOGROUP": "Przyznaj dostęp grupie"
     },
 
     "learning": {

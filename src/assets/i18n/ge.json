@@ -36,7 +36,11 @@
         "CHANGEAVATAR": "Avatar ändern",
         "USERACTIVITY": "Benutzeraktivität",
         "USERCONFIG": "Benutzerkonfiguration",
-        "PASSWORDCHNAGE": "Passwortänderung"
+        "PASSWORDCHNAGE": "Passwortänderung",
+        "SEPIATHEME": "Sepia-Design",
+        "FORESTTHEME": "Wald-Design",
+        "OCEANTHEME": "Ozean-Design",
+        "LAVENDERTHEME": "Lavendel-Design"
     },
 
     "groups": {
@@ -63,7 +67,8 @@
         "SHOWUSERS": "Benutzer anzeigen",
         "DELETEGROUP": "Gruppe löschen",
         "CLOSE": "Schließen",
-        "USERS": "Benutzer"
+        "USERS": "Benutzer",
+        "ICON": "Symbol"
     },
 
     "wordsets": {
@@ -112,7 +117,8 @@
         "ADDNEWWORD": "Neue Frage hinzufügen",
         "MANUALWRITING": "Manueller Ersteller",
         "SAVE": "Speichern",
-        "CLOSE": "Schließen"
+        "CLOSE": "Schließen",
+        "PLACEHOLDER": "Schreiben Sie PLACEHOLDER, wo das Wort in Lückenfragen eingefügt werden soll"
     },
 
     "access": {
@@ -124,7 +130,9 @@
         "GRANTACCESS": "Zugriff gewähren",
         "EXIT": "Schließen",
         "GROUPNAME": "Gruppenname",
-        "REVOKEGROUPACCESS": "Gruppenzugriff entziehen"
+        "REVOKEGROUPACCESS": "Gruppenzugriff entziehen",
+        "GRANTACCESSTOUSER": "Zugriff für Benutzer gewähren",
+        "GRANTACCESSTOGROUP": "Zugriff für Gruppe gewähren"
     },
 
     "learning": {
