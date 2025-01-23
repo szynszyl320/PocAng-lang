@@ -63,7 +63,8 @@
         "SHOWUSERS": "Display users",
         "DELETEGROUP": "Delete group",
         "CLOSE": "Close",
-        "USERS": "Users"
+        "USERS": "Users",
+        "ICON": "Icon"
     },
     
     "wordsets": {
@@ -123,6 +124,7 @@
         "REVOKEFROMUSER": "Revoke access from user",
         "GROUPACCESS": "Group access",
         "GRANTACCESS": "Grant access",
+        "GRANTACCESSTOUSER": "Grant access to user",
         "EXIT": "Close",
         "GROUPNAME": "Group name",
         "REVOKEGROUPACCESS": "Revoke group access"

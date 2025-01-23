@@ -1,53 +1,115 @@
-<main>
-    <nav>
-        <button (click)="tabSelector('assisted')">{{'wordsetcreator.CREATIONASSIST' | translate}}</button>
-        <button (click)="tabSelector('manual')">{{'wordsetcreator.MANUALCREATION' | translate}}</button>
-        <p>{{'wordsetcreator.PLACEHOLDER' | translate}}</p>
-    </nav>
+<div class="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 flex items-center justify-center">
+    <main class="relative w-full h-full bg-gray-50 overflow-hidden flex flex-col
+                 md:w-[95%] md:h-[85vh] md:max-w-[1000px] md:rounded-xl md:bg-white">
+        
+        <!-- Header Section -->
+        <header class="sticky top-0 bg-white border-b border-gray-200 z-20 px-4 py-3 md:p-6">
+            <nav class="flex flex-col gap-2 md:flex-row md:gap-4">
+                <div class="grid grid-cols-2 gap-2 md:flex md:gap-4">
+                    <button (click)="tabSelector('assisted')" 
+                            class="px-4 py-3 rounded-lg bg-[#4a90e2] text-white text-sm font-medium
+                                   active:scale-[0.98] transition-transform
+                                   md:px-6 md:text-base">
+                        {{'wordsetcreator.CREATIONASSIST' | translate}}
+                    </button>
+                    <button (click)="tabSelector('manual')" 
+                            class="px-4 py-3 rounded-lg bg-[#4a90e2] text-white text-sm font-medium
+                                   active:scale-[0.98] transition-transform
+                                   md:px-6 md:text-base">
+                        {{'wordsetcreator.MANUALCREATION' | translate}}
+                    </button>
+                </div>
+                <p class="text-sm text-gray-600 px-1">{{'wordsetcreator.PLACEHOLDER' | translate}}</p>
+            </nav>
+        </header>
 
-    <div>
-        @switch (tab) {
-            @case ('assisted') {
-                <section>
+        <!-- Main Content Area -->
+        <div class="flex-1 overflow-y-auto">
+            @switch (tab) {
+                @case ('assisted') {
+                    <section class="p-4 flex flex-col gap-4 md:p-6">
+                        <h2 class="text-lg font-bold text-gray-800 px-1">
+                            {{'wordsetcreator.ASSISTEDCREATING' | translate}}
+                        </h2>
 
-                    <h2>{{'wordsetcreator.ASSISTEDCREATING' | translate}}</h2>
+                        <!-- List Section -->
+                        <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                            <div class="border-b border-gray-200 p-3 bg-gray-50 text-sm font-medium grid grid-cols-3 gap-2">
+                                <div>{{'wordsetcreator.QUESTIONTYPE' | translate}}</div>
+                                <div>{{'wordsetcreator.QUESTIONVALUEONE' | translate}}</div>
+                                <div>{{'wordsetcreator.QUESTIONVALUETWO' | translate}}</div>
+                            </div>
+                            
+                            <div class="divide-y divide-gray-100 max-h-[40vh] overflow-y-auto">
+                                @for (question of assistedCreatorContent; track $index) {
+                                    <div class="p-3 text-sm">
+                                        <div class="grid grid-cols-3 gap-2 mb-2">
+                                            <div>{{question.type}}</div>
+                                            <div>{{question.valueOne}}</div>
+                                            <div>{{question.valueTwo}}</div>
+                                        </div>
+                                        <button (click)="deleteQuestion($index)" 
+                                                class="w-full px-3 py-2 mt-1 rounded bg-red-50 text-red-600 text-sm
+                                                       hover:bg-red-100 active:bg-red-200">
+                                            {{'wordsetcreator.DELETEFROMWORDLIST' | translate}}
+                                        </button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
 
-                    <section class="list">
-                        <article><div>{{'wordsetcreator.QUESTIONTYPE' | translate}}</div><div>{{'wordsetcreator.QUESTIONVALUEONE' | translate}}</div><div>{{'wordsetcreator.QUESTIONVALUETWO' | translate}}</div></article>
-                        @for (question of assistedCreatorContent; track $index) {
-                            <article>
-                                <div>{{question.type}}</div>
-                                <div>{{question.valueOne}}</div>
-                                <div>{{question.valueTwo}}</div>
-                                <button (click)="deleteQuestion($index)">{{'wordsetcreator.DELETEFROMWORDLIST' | translate}}</button>
-                            </article>
-                        }
+                        <!-- Input Form -->
+                        <div class="bg-white rounded-lg border border-gray-200 p-4 space-y-3">
+                            <select name="type" id="questionType" [(ngModel)]="newQuestionType" 
+                                    class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+                                <option value="translate">{{'wordsetcreator.TRANSALTION' | translate}}</option>
+                                <option value="fillIn">{{'wordsetcreator.FILLIN' | translate}}</option>
+                            </select>
+                            <input type="text" name="field 1" id="fieldOne" 
+                                   class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg text-sm"
+                                   placeholder="{{'wordsetcreator.PLACEFORSENTENCEORWORD' | translate}}" 
+                                   [(ngModel)]="newQuestionValueOne">
+                            <input type="text" name="filed 2" id="fieldTwo" 
+                                   class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg text-sm"
+                                   placeholder="{{'wordsetcreator.PLACEFORSENTENCE' | translate}}" 
+                                   [(ngModel)]="newQuestionValueTwo">
+                            <button (click)="addNewQuestionAssist()" 
+                                    class="w-full p-3 rounded-lg bg-[#4a90e2] text-white font-medium
+                                           active:scale-[0.98] transition-transform">
+                                {{'wordsetcreator.ADDNEWWORD' | translate}}
+                            </button>
+                        </div>
                     </section>
-
-                    <article>
-                        <select name="type" id="questionType" [(ngModel)]="newQuestionType">
-                            <option value="translate">{{'wordsetcreator.TRANSALTION' | translate}}</option>
-                            <option value="fillIn">{{'wordsetcreator.FILLIN' | translate}}</option>
-                        </select>
-                        <input type="text" name="field 1" id="fieldOne" placeholder="{{'wordsetcreator.PLACEFORSENTENCEORWORD' | translate}}" [(ngModel)]="newQuestionValueOne">
-                        <input type="text" name="filed 2" id="fieldTwo" placeholder="{{'wordsetcreator.PLACEFORSENTENCE' | translate}}" [(ngModel)]="newQuestionValueTwo">
-                        <button (click)="addNewQuestionAssist()">{{'wordsetcreator.ADDNEWWORD' | translate}}</button>
-                    </article>
-
-                </section>
+                }
+                @case ('manual') {            
+                    <section class="p-4 flex flex-col gap-4 md:p-6">
+                        <h2 class="text-lg font-bold text-gray-800 px-1">
+                            {{'wordsetcreator.MANUALWRITING' | translate}}
+                        </h2>
+                        
+                        <div class="bg-white rounded-lg border border-gray-200 p-4 space-y-3">
+                            <textarea name="manual writing" id="manualWriter" 
+                                      [(ngModel)]="manualEditorText" 
+                                      class="w-full p-3 min-h-[200px] bg-gray-50 border border-gray-200 rounded-lg text-sm"
+                            ></textarea>
+                            <button (click)="addnewQuestionManual()" 
+                                    class="w-full p-3 rounded-lg bg-[#4a90e2] text-white font-medium
+                                           active:scale-[0.98] transition-transform">
+                                {{'wordsetcreator.SAVE' | translate}}
+                            </button>
+                        </div>
+                    </section>
+                }
             }
-            @case ('manual') {            
-                <section>
+        </div>
 
-                    <h2>{{'wordsetcreator.MANUALWRITING' | translate}}</h2>
-
-                    <textarea name="manual writing" id="manualWriter" [(ngModel)]="manualEditorText"></textarea>
-
-                    <button (click)="addnewQuestionManual()">{{'wordsetcreator.SAVE' | translate}}</button>
-                </section>
-            }
-        }
-    </div>
-
-    <button (click)="closeWindow()">{{'wordsetcreator.CLOSE' | translate}}</button>
-</main>
+        <!-- Footer Section -->
+        <footer class="sticky bottom-0 bg-white border-t border-gray-200 p-4 md:p-6">
+            <button (click)="closeWindow()" 
+                    class="w-full p-3 rounded-lg bg-gray-800 text-white font-medium
+                           active:scale-[0.98] transition-transform">
+                {{'wordsetcreator.CLOSE' | translate}}
+            </button>
+        </footer>
+    </main>
+</div>

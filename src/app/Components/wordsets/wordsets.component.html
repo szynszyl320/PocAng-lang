@@ -1,82 +1,218 @@
-<main>
+<main class="min-h-screen bg-[var(--body-background-color)] p-4 md:p-6 lg:p-8">
+    <section class="mx-auto max-w-7xl bg-[var(--main-background-color)] rounded-2xl p-6 md:p-8 shadow-lg">
+        <!-- Header -->
+        <div class="space-y-4 mb-6">
+            <h2 class="text-2xl md:text-3xl lg:text-4xl font-medium text-[var(--heading-color)] text-center">
+                {{'wordsets.YOURWORDSETS' | translate}}
+            </h2>
+            <button class="w-full max-w-md mx-auto block p-4 bg-[var(--button-background-color)] 
+                         text-[var(--button-color)] rounded-lg text-lg font-medium 
+                         hover:bg-[var(--button-background-color-hover)] transition-colors" 
+                    (click)="creationFromToggle()">
+                {{'wordsets.CREATENEWWORDSET' | translate}}
+            </button>
+        </div>
 
-    <section>
-        <h2>{{'wordsets.YOURWORDSETS' | translate}}</h2>
-        <button (click)="creationFromToggle()">{{'wordsets.CREATENEWWORDSET' | translate}}</button>
-        <div class="grid">
-            <h3 class="grid-item">{{'wordsets.ICON' | translate}}</h3>
-            <h3 class="grid-item">{{'wordsets.NAME' | translate}}</h3>
-            <h3 class="grid-item">{{'wordsets.LANGUAGE' | translate}}</h3>
-            <div class="grid-item"></div>
-            <div class="grid-item"></div>
-            <div class="grid-item"></div>
-            <div class="grid-item"></div>
-            <div class="grid-item"></div>
+        <!-- Responsive Grid -->
+        <div class="border border-[var(--grid-border-color)] rounded-lg p-4">
+            <!-- Grid Headers - Hidden on mobile -->
+            <div class="hidden md:grid md:grid-cols-8 md:gap-4 mb-4">
+                <h3 class="font-medium text-center">{{'wordsets.ICON' | translate}}</h3>
+                <h3 class="font-medium text-center">{{'wordsets.NAME' | translate}}</h3>
+                <h3 class="font-medium text-center">{{'wordsets.LANGUAGE' | translate}}</h3>
+                <div class="col-span-5"></div>
+            </div>
+
+            <!-- Grid Items -->
             @for (wordset of userWordsets; track $index) {
-                <img class="icon grid-item" [src]="getWordsetIcon(wordset)" alt="Icon">   
-                <h2 class="grid-item">{{ wordset.name }}</h2>
-                <h2 class="grid-item">{{ wordset.language}}</h2> 
-                <button class="grid-item" (click)="setEditWordlist($index)">{{'wordsets.EDITWORDLIST' | translate}}</button> 
-                <button class="grid-item" (click)="userAccessEdit($index)">{{'wordsets.EDITACCESS' | translate}}</button>
-                <button class="grid-item" (click)="deleteWordset($event, wordset.id)">{{'wordsets.DELETEWORDSET' | translate}}</button>
-                <button class="grid-item" (click)="exportFile(wordset, $event)">{{'wordsets.EXPORTWORDSET' | translate}}</button>
-                <button class="grid-item" (click)="editFormToggle($index)">{{'wordsets.EDITWORDSETS' | translate}}</button>
+                <!-- Mobile Card View -->
+                <div class="md:hidden mb-6 bg-white rounded-lg p-4 shadow-sm">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img class="w-12 h-12 object-contain" [src]="getWordsetIcon(wordset)" alt="Icon">
+                        <div>
+                            <div class="font-medium">{{ wordset.name }}</div>
+                            <div class="text-gray-600">{{ wordset.language }}</div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                     rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors" 
+                                (click)="setEditWordlist($index)">
+                            {{'wordsets.EDITWORDLIST' | translate}}
+                        </button>
+                        <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                     rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors" 
+                                (click)="userAccessEdit($index)">
+                            {{'wordsets.EDITACCESS' | translate}}
+                        </button>
+                        <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                     rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors" 
+                                (click)="deleteWordset($event, wordset.id)">
+                            {{'wordsets.DELETEWORDSET' | translate}}
+                        </button>
+                        <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                     rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors" 
+                                (click)="exportFile(wordset, $event)">
+                            {{'wordsets.EXPORTWORDSET' | translate}}
+                        </button>
+                        <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                     rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors" 
+                                (click)="editFormToggle($index)">
+                            {{'wordsets.EDITWORDSETS' | translate}}
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Desktop/Tablet Grid View -->
+                <div class="hidden md:grid md:grid-cols-8 md:gap-4 md:items-center mb-2">
+                    <img class="w-12 h-12 object-contain justify-self-center" 
+                         [src]="getWordsetIcon(wordset)" alt="Icon">
+                    <div class="truncate">{{ wordset.name }}</div>
+                    <div class="truncate">{{ wordset.language }}</div>
+                    <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                 rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors" 
+                            (click)="setEditWordlist($index)">
+                        {{'wordsets.EDITWORDLIST' | translate}}
+                    </button>
+                    <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                 rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors" 
+                            (click)="userAccessEdit($index)">
+                        {{'wordsets.EDITACCESS' | translate}}
+                    </button>
+                    <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                 rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors" 
+                            (click)="deleteWordset($event, wordset.id)">
+                        {{'wordsets.DELETEWORDSET' | translate}}
+                    </button>
+                    <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                 rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors" 
+                            (click)="exportFile(wordset, $event)">
+                        {{'wordsets.EXPORTWORDSET' | translate}}
+                    </button>
+                    <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                 rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors" 
+                            (click)="editFormToggle($index)">
+                        {{'wordsets.EDITWORDSETS' | translate}}
+                    </button>
+                </div>
             }
         </div>
     </section>
-    
+
+    <!-- Edit Form Modal -->
     @if (wordsetEditForm) {
-        <main class="editForm">
-            <h2>{{'wordsets.EDITWORDSETS' | translate}}</h2>
-            <form>
-                <article class="formSubtext">
-                    <label for="editWordsetName">{{'wordsets.EDITWORDSETNAME' | translate}}</label>
-                    <input type="text" name="edit name" id="editWordsetName" [(ngModel)]="wordsetEditName">
-                </article>
-                <article class="formSubtext">
-                    <label for="editWordsetIcon">{{'wordsets.EDITWORDSETICON' | translate}}</label>
-                    <input type="file" name="edit icon" id="editWordsetIcon" (change)="onFileSelected($event)">
-                </article>
-                <article class="formSubtext">
-                    <label for="editWordsetLanguage">{{'wordsets.EDITWORDSETLANGUAGE' | translate }}</label>
-                    <input type="text" name="edit language" id="editWordsetLanguage" [(ngModel)]="wordsetEditLanguage">
-                </article>
-                <button (click)="updateWordset($event)">{{'wordsets.CONFIRMWORDSETEDIT' | translate}}</button>
-            </form>
-            <button (click)="editFormToggle(0)">{{'wordsets.CLOSE' | translate}}</button>
-        </main>
+        <div class="fixed inset-0 bg-black/50 z-40">
+            <div class="fixed inset-4 md:inset-8 lg:inset-[10%] bg-white rounded-xl p-6 overflow-y-auto z-50">
+                <div class="max-w-2xl mx-auto space-y-6">
+                    <h2 class="text-2xl font-medium mb-6">{{'wordsets.EDITWORDSETS' | translate}}</h2>
+                    <form class="space-y-6">
+                        <!-- Form Fields -->
+                        <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                            <label class="block text-sm font-medium">{{'wordsets.EDITWORDSETNAME' | translate}}</label>
+                            <input type="text" 
+                                   class="w-full p-3 border border-[var(--input-border-color)] 
+                                          rounded-lg text-base focus:ring-2 focus:ring-[var(--button-background-color)]"
+                                   [(ngModel)]="wordsetEditName"
+                                   name="edit name">
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                            <label class="block text-sm font-medium">{{'wordsets.EDITWORDSETICON' | translate}}</label>
+                            <input type="file" 
+                                   class="w-full p-3 border border-[var(--input-border-color)] 
+                                          rounded-lg text-base focus:ring-2 focus:ring-[var(--button-background-color)]"
+                                   (change)="onFileSelected($event)"
+                                   name="edit icon">
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                            <label class="block text-sm font-medium">{{'wordsets.EDITWORDSETLANGUAGE' | translate}}</label>
+                            <input type="text" 
+                                   class="w-full p-3 border border-[var(--input-border-color)] 
+                                          rounded-lg text-base focus:ring-2 focus:ring-[var(--button-background-color)]"
+                                   [(ngModel)]="wordsetEditLanguage"
+                                   name="edit language">
+                        </div>
+                        <div class="flex gap-4 pt-4">
+                            <button class="flex-1 p-4 bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                           rounded-lg text-base font-medium hover:bg-[var(--button-background-color-hover)] 
+                                           transition-colors" 
+                                    (click)="updateWordset($event)">
+                                {{'wordsets.CONFIRMWORDSETEDIT' | translate}}
+                            </button>
+                            <button class="flex-1 p-4 bg-gray-200 text-gray-700 rounded-lg text-base 
+                                           font-medium hover:bg-gray-300 transition-colors" 
+                                    (click)="editFormToggle(0)">
+                                {{'wordsets.CLOSE' | translate}}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     }
 
+    <!-- Creation Form Modal -->
     @if (wordsetCreationForm) {
-        <main class="editForm">
-            <h2>{{'wordsets.CREATENEWWORDSET' | translate}}</h2>
-            <form>
-                <article class="formSubtext">
-                    <label for="wordsetName">{{ 'wordsets.NEWWORDSETNAME' | translate }}</label>
-                    <input type="text" name="create name" id="wordsetName" [(ngModel)]="wordsetName">
-                    <sub>{{'wordsets.FIELDISREQUIRED' | translate}}</sub>
-                </article>
-                <article class="formSubtext">
-                    <label for="wordsetIcon">{{ 'wordsets.NEWWORDSETICON' | translate }}</label>
-                    <input type="file" name="create icon" id="wordsetIcon" (change)="onFileSelected($event)">
-                </article>
-                <article class="formSubtext">
-                    <label for="wordsetLanguage">{{ 'wordsets.NEWORDSETLANGUAGE' | translate }}</label>
-                    <input type="text" name="create language" id="wordsetLanguage" [(ngModel)]="wordsetLanguage">
-                    <sub>{{'wordsets.FIELDISREQUIRED' | translate}}</sub>
-                </article>
-                <button (click)="createNewWordset($event)">{{'wordsets.CONFIMRWORDSETCREATION'| translate}}</button>    
-            </form>
-            <hr>
-            <form>
-                <h2>{{'wordsets.IMPORTWORDSET' | translate}}</h2>
-                <article class="formSubtext">
-                    <label for="wordsetImport">{{'wordsets.WORDSETIMPORT' | translate}}</label>
-                    <input type="file" name="wordset import" id="wordsetImport" (change)="importFile($event)">
-                </article>    
-            </form>    
-            <button (click)="creationFromToggle()">{{'wordsets.CLOSE' | translate}}</button>
-        </main>
+        <div class="fixed inset-0 bg-black/50 z-40">
+            <div class="fixed inset-4 md:inset-8 lg:inset-[10%] bg-white rounded-xl p-6 overflow-y-auto z-50">
+                <div class="max-w-2xl mx-auto space-y-6">
+                    <h2 class="text-2xl font-medium mb-6">{{'wordsets.CREATENEWWORDSET' | translate}}</h2>
+                    <form class="space-y-6">
+                        <!-- Form Fields -->
+                        <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                            <label class="block text-sm font-medium">{{'wordsets.NEWWORDSETNAME' | translate}}</label>
+                            <input type="text" 
+                                   class="w-full p-3 border border-[var(--input-border-color)] 
+                                          rounded-lg text-base focus:ring-2 focus:ring-[var(--button-background-color)]"
+                                   [(ngModel)]="wordsetName"
+                                   name="create name">
+                            <sub class="text-sm text-gray-600">{{'wordsets.FIELDISREQUIRED' | translate}}</sub>
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                            <label class="block text-sm font-medium">{{'wordsets.NEWWORDSETICON' | translate}}</label>
+                            <input type="file" 
+                                   class="w-full p-3 border border-[var(--input-border-color)] 
+                                          rounded-lg text-base focus:ring-2 focus:ring-[var(--button-background-color)]"
+                                   (change)="onFileSelected($event)"
+                                   name="create icon">
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                            <label class="block text-sm font-medium">{{'wordsets.NEWORDSETLANGUAGE' | translate}}</label>
+                            <input type="text" 
+                                   class="w-full p-3 border border-[var(--input-border-color)] 
+                                          rounded-lg text-base focus:ring-2 focus:ring-[var(--button-background-color)]"
+                                   [(ngModel)]="wordsetLanguage"
+                                   name="create language">
+                            <sub class="text-sm text-gray-600">{{'wordsets.FIELDISREQUIRED' | translate}}</sub>
+                        </div>
+                        <div class="flex gap-4 pt-4">
+                            <button class="flex-1 p-4 bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                           rounded-lg text-base font-medium hover:bg-[var(--button-background-color-hover)] 
+                                           transition-colors" 
+                                    (click)="createNewWordset($event)">
+                                {{'wordsets.CONFIMRWORDSETCREATION' | translate}}
+                            </button>
+                            <button class="flex-1 p-4 bg-gray-200 text-gray-700 rounded-lg text-base 
+                                           font-medium hover:bg-gray-300 transition-colors" 
+                                    (click)="creationFromToggle()">
+                                {{'wordsets.CLOSE' | translate}}
+                            </button>
+                        </div>
+                    </form>
+                    <hr>
+                    <form class="space-y-6">
+                        <h2 class="text-2xl font-medium mb-6">{{'wordsets.IMPORTWORDSET' | translate}}</h2>
+                        <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                            <label class="block text-sm font-medium">{{'wordsets.WORDSETIMPORT' | translate}}</label>
+                            <input type="file" 
+                                   class="w-full p-3 border border-[var(--input-border-color)] 
+                                          rounded-lg text-base focus:ring-2 focus:ring-[var(--button-background-color)]"
+                                   (change)="importFile($event)"
+                                   name="wordset import">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     }
 </main>
 

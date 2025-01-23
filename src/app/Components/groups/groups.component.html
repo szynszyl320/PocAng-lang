@@ -1,105 +1,267 @@
-<main>
-    <section>
-        <h2>{{ 'groups.YOURGROUPS' | translate }}</h2>
-        <button (click)="showCreateGroupToggle()">{{ 'groups.CREATENEWGROUP' | translate }}</button>
-        <div class="grid">
-            @for (group of groupList; track $index) {   
-                <img [src]="groupIconSet(group)" alt="Icon" class="icon grid-item">
-                <h2 class="grid-item">{{ group.name }}</h2>
-                <button class="grid-item" (click)="showUserToggle($index)">{{'groups.SHOWUSERS' | translate}}</button>
-                <button class="grid-item" (click)="showGroupEditToggle($index)">{{'groups.EDITGROUP' | translate}}</button>
-                <button class="grid-item" (click)="deleteGroup(group.id, $event)">{{'groups.DELETEGROUP' | translate}}</button>
+<main class="min-h-screen bg-[var(--body-background-color)] p-2 sm:p-4 md:p-6 lg:p-8">
+    <section class="mx-auto max-w-7xl bg-[var(--main-background-color)] rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg">
+        <!-- Header -->
+        <div class="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
+            <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-[var(--heading-color)] text-center">
+                {{ 'groups.YOURGROUPS' | translate }}
+            </h2>
+            <button class="w-full max-w-md mx-auto block p-4 bg-[var(--button-background-color)] 
+                         text-[var(--button-color)] rounded-lg text-lg font-medium 
+                         hover:bg-[var(--button-background-color-hover)] transition-colors"
+                    (click)="showCreateGroupToggle()">
+                {{ 'groups.CREATENEWGROUP' | translate }}
+            </button>
+        </div>
+
+        <!-- Groups Grid -->
+        <div class="border border-[var(--grid-border-color)] rounded-lg p-2 sm:p-4">
+            <!-- Grid Headers - Hidden on mobile -->
+            <div class="hidden md:grid md:grid-cols-5 md:gap-4 mb-4">
+                <h3 class="font-medium text-center">{{'groups.ICON' | translate}}</h3>
+                <h3 class="font-medium text-center">{{'groups.NAME' | translate}}</h3>
+                <div class="col-span-3"></div>
+            </div>
+
+            <!-- Grid Items -->
+            @for (group of groupList; track $index) {
+                <!-- Mobile Card View -->
+                <div class="md:hidden mb-3 sm:mb-4 bg-white rounded-lg p-3 sm:p-4 shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img class="w-10 sm:w-12 h-10 sm:h-12 object-contain" [src]="groupIconSet(group)" alt="Icon">
+                        <div class="font-medium text-sm sm:text-base">{{ group.name }}</div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button class="px-2 py-1.5 text-xs sm:text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                     rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors"
+                                (click)="showUserToggle($index)">
+                            {{'groups.SHOWUSERS' | translate}}
+                        </button>
+                        <button class="px-2 py-1.5 text-xs sm:text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                     rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors"
+                                (click)="showGroupEditToggle($index)">
+                            {{'groups.EDITGROUP' | translate}}
+                        </button>
+                        <button class="px-2 py-1.5 text-xs sm:text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                     rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors"
+                                (click)="deleteGroup(group.id, $event)">
+                            {{'groups.DELETEGROUP' | translate}}
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Desktop/Tablet Grid View -->
+                <div class="hidden md:grid md:grid-cols-5 md:gap-4 md:items-center mb-2">
+                    <img class="w-12 h-12 object-contain justify-self-center" [src]="groupIconSet(group)" alt="Icon">
+                    <div class="truncate">{{ group.name }}</div>
+                    <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                 rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors"
+                            (click)="showUserToggle($index)">
+                        {{'groups.SHOWUSERS' | translate}}
+                    </button>
+                    <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                 rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors"
+                            (click)="showGroupEditToggle($index)">
+                        {{'groups.EDITGROUP' | translate}}
+                    </button>
+                    <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                 rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors"
+                            (click)="deleteGroup(group.id, $event)">
+                        {{'groups.DELETEGROUP' | translate}}
+                    </button>
+                </div>
             }
         </div>
     </section>
-</main> 
+</main>
 
+<!-- User List Modal -->
 @if (userListModal) {
-    <main class="edditingForm editForm">
-        <div class="container">
-            <h2>{{'groups.USERS' | translate}}</h2>
-            <div class="userGrid">
-                @for (user of usedGroup.expand.users; track $index) {
-                    <img [src]="getUserAvatar(user)" alt="user avatar">
-                    <div class="userGrid-item">{{user.name}}</div>
-                    <button class="userGrid-item" (click)="removeFromGroup(usedGroup, $index)">{{ 'groups.REMOVEUSERFROMGROUP' | translate }}</button>                    
-                }
-           </div>
+    <div class="fixed inset-0 bg-black/50 z-40">
+        <div class="fixed inset-2 sm:inset-4 md:inset-8 lg:inset-[10%] bg-white rounded-lg sm:rounded-xl 
+                    p-3 sm:p-4 md:p-6 overflow-y-auto z-50">
+            <div class="max-w-2xl mx-auto space-y-4 sm:space-y-6">
+                <h2 class="text-xl sm:text-2xl font-medium mb-4 sm:mb-6">{{'groups.USERS' | translate}}</h2>
+                <!-- Users Grid -->
+                <div class="space-y-3 sm:space-y-4">
+                    @for (user of usedGroup.expand.users; track $index) {
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 
+                                  p-3 sm:p-4 bg-gray-50 rounded-lg">
+                            <div class="flex items-center gap-3">
+                                <img class="w-8 sm:w-10 h-8 sm:h-10 rounded-full" [src]="getUserAvatar(user)" alt="user avatar">
+                                <span class="font-medium text-sm sm:text-base">{{user.name}}</span>
+                            </div>
+                            <button class="w-full sm:w-auto px-2 py-1.5 text-xs sm:text-sm bg-[var(--button-background-color)] 
+                                         text-[var(--button-color)] rounded-lg font-medium 
+                                         hover:bg-[var(--button-background-color-hover)] transition-colors"
+                                    (click)="removeFromGroup(usedGroup, $index)">
+                                {{ 'groups.REMOVEUSERFROMGROUP' | translate }}
+                            </button>
+                        </div>
+                    }
+                </div>
+
+                <!-- Add User Form -->
+                <form class="space-y-4 sm:space-y-6">
+                    <h3 class="text-xl font-medium">{{'groups.ADDUSER' | translate}}</h3>
+                    <div class="bg-gray-100 rounded-lg p-3 sm:p-4 space-y-2">
+                        <label class="block text-xs sm:text-sm font-medium">{{'groups.EMAIL' | translate}}</label>
+                        <input type="email" 
+                               class="w-full p-2 sm:p-3 text-sm sm:text-base border border-[var(--input-border-color)] 
+                                      rounded-lg focus:ring-2 focus:ring-[var(--button-background-color)]"
+                               [(ngModel)]="addUserEmail" 
+                               name="user email">
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-3 sm:p-4 space-y-2">
+                        <label class="block text-xs sm:text-sm font-medium">{{'groups.NAME' | translate}}</label>
+                        <input type="text" 
+                               class="w-full p-2 sm:p-3 text-sm sm:text-base border border-[var(--input-border-color)] 
+                                      rounded-lg focus:ring-2 focus:ring-[var(--button-background-color)]"
+                               [(ngModel)]="addUserName" 
+                               name="addusername">
+                    </div>
+                    <div class="flex gap-4">
+                        <button class="flex-1 p-4 bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                     rounded-lg text-base font-medium hover:bg-[var(--button-background-color-hover)] 
+                                     transition-colors"
+                                (click)="addToGroup($event)">
+                            {{'groups.ADDUSERTOGROUP' | translate}}
+                        </button>
+                        <button class="flex-1 p-4 bg-gray-200 text-gray-700 rounded-lg text-base font-medium 
+                                     hover:bg-gray-300 transition-colors"
+                                (click)="showUserToggle(0)">
+                            {{'groups.CLOSE' | translate}}
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-       <form>
-            <h2>{{'groups.ADDUSER' | translate}}</h2>
-            <article class="formSubtext">
-                <label for="addUserEmail">{{'groups.EMAIL' | translate}}</label>
-                <input type="email" id="addUserEmail" [(ngModel)]="addUserEmail" name="user email">
-            </article>
-            <article class="formSubtext">
-                <label for="addUserName">{{'groups.NAME' | translate}}</label>
-                <input type="text" id="addUserName" [(ngModel)]="addUserName" name="addusername">
-            </article>
-            <button (click)="addToGroup($event)">{{'groups.ADDUSERTOGROUP' | translate}}</button>
-        </form>
-       <button (click)="showUserToggle(0)">{{'groups.CLOSE' | translate}}</button>
-    </main>
+    </div>
 }
 
+<!-- Edit Group Modal -->
 @if (editGroupForm) {
-    <main class="editForm">
-        <form>
-            <article class="formSubtext">
-                <label for="editGroupName">{{'groups.EDITGROUPNAME' | translate}}</label>
-                <input type="text" id="editGroupName" [(ngModel)]="groupEditName" name="name edit">
-            </article>
-            <article class="formSubtext">
-                <label for="editGroupIcon">{{'groups.EDITGROUPICON' | translate}}</label>
-                <input type="file" id="editGroupIcon" (change)="onFileSelected($event)" name="icon edit">
-            </article>
-            <button type="submit" (click)="updateGroup(usedGroup, groupEditName, groupEditIcon, usedGroup.users)">{{'EDITGROUPCONFIRM' | translate}}</button>
-        </form>
-        <button (click)="showGroupEditToggle(0)">{{'groups.CLOSE' | translate}}</button>
-    </main>
-}    
-
-@if (createGroupForm) {
-    <main class="editForm" style="flex-direction: row;">
-        <form>
-            <article class="formSubtext">
-                <label for="groupName">{{'groups.GROUPNAME' | translate}}</label>
-                <input type="text" id="groupName" [(ngModel)]="groupName" name="group name">
-            </article>
-            <article class="formSubtext">   
-                <label for="groupIcon">{{ 'groups.GROUPICON' | translate }}</label>
-                <input type="file" id="groupIcon" (change)="onFileSelected($event)" name="group icon">
-            </article>
-            <button (click)="createNewGroup($event)">{{'groups.CONFIRMCREATION' | translate}}</button>
-        </form>
-        <form>
-            <h4>{{'groups.ADDNEWUSER' | translate}}</h4>
-            <article class="formSubtext">
-                <label for="userEmail">{{ 'groups.EMAIL' | translate }}</label>
-                <input type="email" id="userEmail" [(ngModel)]="userEmail" name="email">
-            </article>
-            <article class="formSubtext">
-                <label for="userName">{{ 'groups.NAME' | translate }}</label>
-                <input type="text" id="userName" [(ngModel)]="userName" name="username"> 
-            </article>
-            <button (click)="getSpecificUser($event)">{{'groups.ADDUSER' | translate}}</button>
-            <h4>{{'groups.EMAILHASTOBEVISIBLE' | translate}}</h4>
-        </form>
-        <div class="container">
-            <h4>{{'groups.ADDEDUSERS' | translate}}</h4>
-            <article class="userGrid grid">
-                    <div class="userGrid-item"></div>
-                    <div class="userGrid-item">{{'groups.NAME' | translate}}</div>
-                    <div class="userGrid-item">{{'groups.EMAIL' | translate}}</div>
-                @for (user of userList; track $index) {
-                    <img class="icon userGrid-item" [src]="getUserAvatar(user)" alt="user avatar">
-                    <div class="userGrid-item">{{ user.name }}</div>
-                    <div class="userGrid-item">{{ user.email }}</div>
-                }
-            </article>
+    <div class="fixed inset-0 bg-black/50 z-40">
+        <div class="fixed inset-4 md:inset-8 lg:inset-[10%] bg-white rounded-xl p-6 overflow-y-auto z-50">
+            <div class="max-w-2xl mx-auto space-y-6">
+                <h2 class="text-2xl font-medium mb-6">{{'groups.EDITGROUP' | translate}}</h2>
+                <form class="space-y-6">
+                    <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                        <label class="block text-sm font-medium">{{'groups.EDITGROUPNAME' | translate}}</label>
+                        <input type="text" 
+                               class="w-full p-3 border border-[var(--input-border-color)] rounded-lg text-base 
+                                      focus:ring-2 focus:ring-[var(--button-background-color)]"
+                               [(ngModel)]="groupEditName" 
+                               name="name edit">
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                        <label class="block text-sm font-medium">{{'groups.EDITGROUPICON' | translate}}</label>
+                        <input type="file" 
+                               class="w-full p-3 border border-[var(--input-border-color)] rounded-lg text-base 
+                                      focus:ring-2 focus:ring-[var(--button-background-color)]"
+                               (change)="onFileSelected($event)" 
+                               name="icon edit">
+                    </div>
+                    <div class="flex gap-4">
+                        <button class="flex-1 p-4 bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                     rounded-lg text-base font-medium hover:bg-[var(--button-background-color-hover)] 
+                                     transition-colors"
+                                (click)="updateGroup(usedGroup, groupEditName, groupEditIcon, usedGroup.users)">
+                            {{'EDITGROUPCONFIRM' | translate}}
+                        </button>
+                        <button class="flex-1 p-4 bg-gray-200 text-gray-700 rounded-lg text-base font-medium 
+                                     hover:bg-gray-300 transition-colors"
+                                (click)="showGroupEditToggle(0)">
+                            {{'groups.CLOSE' | translate}}
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <button (click)="showCreateGroupToggle()">{{ 'groups.CLOSE' | translate }}</button>
-    </main>
+    </div>
+}
+
+<!-- Create Group Modal -->
+@if (createGroupForm) {
+    <div class="fixed inset-0 bg-black/50 z-40">
+        <div class="fixed inset-4 md:inset-8 lg:inset-[10%] bg-white rounded-xl p-6 overflow-y-auto z-50">
+            <div class="max-w-2xl mx-auto space-y-6">
+                <h2 class="text-2xl font-medium mb-6">{{'groups.CREATENEWGROUP' | translate}}</h2>
+                <!-- Create Group Form -->
+                <form class="space-y-6">
+                    <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                        <label class="block text-sm font-medium">{{'groups.GROUPNAME' | translate}}</label>
+                        <input type="text" 
+                               class="w-full p-3 border border-[var(--input-border-color)] rounded-lg text-base 
+                                      focus:ring-2 focus:ring-[var(--button-background-color)]"
+                               [(ngModel)]="groupName" 
+                               name="group name">
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                        <label class="block text-sm font-medium">{{'groups.GROUPICON' | translate}}</label>
+                        <input type="file" 
+                               class="w-full p-3 border border-[var(--input-border-color)] rounded-lg text-base 
+                                      focus:ring-2 focus:ring-[var(--button-background-color)]"
+                               (change)="onFileSelected($event)" 
+                               name="group icon">
+                    </div>
+                    <button class="w-full p-4 bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                 rounded-lg text-base font-medium hover:bg-[var(--button-background-color-hover)] 
+                                 transition-colors"
+                            (click)="createNewGroup($event)">
+                        {{'groups.CONFIRMCREATION' | translate}}
+                    </button>
+                </form>
+
+                <hr>
+
+                <!-- Add Users Form -->
+                <form class="space-y-6">
+                    <h3 class="text-xl font-medium">{{'groups.ADDNEWUSER' | translate}}</h3>
+                    <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                        <label class="block text-sm font-medium">{{'groups.EMAIL' | translate}}</label>
+                        <input type="email" 
+                               class="w-full p-3 border border-[var(--input-border-color)] rounded-lg text-base 
+                                      focus:ring-2 focus:ring-[var(--button-background-color)]"
+                               [(ngModel)]="userEmail" 
+                               name="email">
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                        <label class="block text-sm font-medium">{{'groups.NAME' | translate}}</label>
+                        <input type="text" 
+                               class="w-full p-3 border border-[var(--input-border-color)] rounded-lg text-base 
+                                      focus:ring-2 focus:ring-[var(--button-background-color)]"
+                               [(ngModel)]="userName">
+                    </div>
+                    <button class="w-full p-4 bg-[var(--button-background-color)] text-[var(--button-color)] 
+                                 rounded-lg text-base font-medium hover:bg-[var(--button-background-color-hover)] 
+                                 transition-colors"
+                            (click)="getSpecificUser($event)">
+                        {{'groups.ADDUSER' | translate}}
+                    </button>
+                    <h4 class="text-sm font-medium text-center">{{'groups.EMAILHASTOBEVISIBLE' | translate}}</h4>
+                </form>
+
+                <!-- Added Users List -->
+                <div class="space-y-4">
+                    <h4 class="text-xl font-medium">{{'groups.ADDEDUSERS' | translate}}</h4>
+                    @for (user of userList; track $index) {
+                        <div class="flex items-center justify-between gap-4 p-4 bg-gray-50 rounded-lg">
+                            <div class="flex items-center gap-4">
+                                <img class="w-10 h-10 rounded-full" [src]="getUserAvatar(user)" alt="user avatar">
+                                <span class="font-medium">{{ user.name }}</span>
+                            </div>
+                            <span class="text-sm">{{ user.email }}</span>
+                        </div>
+                    }
+                </div>
+                <button class="w-full p-4 bg-gray-200 text-gray-700 rounded-lg text-base font-medium 
+                             hover:bg-gray-300 transition-colors"
+                        (click)="showCreateGroupToggle()">
+                    {{ 'groups.CLOSE' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
 }
 
 

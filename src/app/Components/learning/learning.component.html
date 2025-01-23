@@ -1,53 +1,56 @@
-<main>
-    <section>
-        <h2>{{'learning.USERWORDSETS' | translate}}</h2>
+<main class="flex flex-col lg:flex-row items-center justify-center min-h-screen bg-[var(--body-background-color)] gap-4 lg:gap-20 p-4">
+    <section class="flex flex-col gap-2 bg-[var(--main-background-color)] rounded-3xl p-4 lg:p-10 shadow-lg min-h-[60vh] lg:min-h-[70vh] max-h-[60vh] lg:max-h-[70vh] w-full lg:w-[25vw] overflow-y-auto">
+        <h2 class="text-2xl lg:text-4xl font-medium text-gray-700 bg-gray-100 rounded-lg px-3 py-2">{{'learning.USERWORDSETS' | translate}}</h2>
         @if (userAccessedWordsets.length != 0) {
-            <div class="grid">
-                <div class="grid-item"></div>
-                <div class="grid-item">{{'learning.WORDSETNAME' | translate}}</div>
-                <div class="grid-item">{{'learning.WORDSETLANGUAGE' | translate}}</div>
-                <div class="grid-item"></div>
+            <div class="grid grid-cols-4 gap-2 lg:gap-4">
+                <div class="col-span-1"></div>
+                <div class="font-medium text-xs lg:text-base">{{'learning.WORDSETNAME' | translate}}</div>
+                <div class="font-medium text-xs lg:text-base">{{'learning.WORDSETLANGUAGE' | translate}}</div>
+                <div class="col-span-1"></div>
                 @for (access of userAccessedWordsets; track $index) {
-                    <img class="icon grid-item" [src]="getWordsetIcon(access.expand.wordsetId)" alt="wordset icon">
-                    <div class="grid-item">{{ access.expand.wordsetId.name }}</div>
-                    <div class="grid-item">{{ access.expand.wordsetId.language }}</div>
-                    <button class="grid-item" (click)="displayForm($index, 'user')">{{'learning.USE' | translate}}</button>
+                    <img class="w-6 lg:w-8 h-6 lg:h-8 object-contain" [src]="getWordsetIcon(access.expand.wordsetId)" alt="wordset icon">
+                    <div class="text-xs lg:text-base">{{ access.expand.wordsetId.name }}</div>
+                    <div class="text-xs lg:text-base">{{ access.expand.wordsetId.language }}</div>
+                    <button class="bg-[var(--button-background-color)] text-[var(--button-color)] rounded px-2 py-1 lg:px-4 lg:py-2 text-xs lg:text-base font-medium hover:opacity-90 transition-opacity" 
+                            (click)="displayForm($index, 'user')">{{'learning.USE' | translate}}</button>
                 }
             </div>
         }
     </section>
 
-    <section>
-        <h2>{{'learning.GROUPWORDSETS' | translate}}</h2>
+    <section class="flex flex-col gap-2 bg-[var(--main-background-color)] rounded-3xl p-4 lg:p-10 shadow-lg min-h-[60vh] lg:min-h-[70vh] max-h-[60vh] lg:max-h-[70vh] w-full lg:w-[25vw] overflow-y-auto">
+        <h2 class="text-2xl lg:text-4xl font-medium text-gray-700 bg-gray-100 rounded-lg px-3 py-2">{{'learning.GROUPWORDSETS' | translate}}</h2>
         @if (groupAccessedWordsets.length != 0) {
-            <div class="grid">
-                <div class="grid-item"></div>
-                <div class="grid-item">{{'learning.WORDSETNAME' | translate}}</div>
-                <div class="grid-item">{{'learning.WORDSETLANGUAGE' | translate}}</div>
-                <div class="grid-item"></div>
+            <div class="grid grid-cols-4 gap-2 lg:gap-4">
+                <div class="col-span-1"></div>
+                <div class="font-medium text-xs lg:text-base">{{'learning.WORDSETNAME' | translate}}</div>
+                <div class="font-medium text-xs lg:text-base">{{'learning.WORDSETLANGUAGE' | translate}}</div>
+                <div class="col-span-1"></div>
                 @for (access of groupAccessedWordsets; track $index) {
-                    <img class="icon grid-item" [src]="getWordsetIcon(access.expand.wordsetId)" alt="wordset icon">
-                    <div class="grid-item">{{ access.expand.wordsetId.name }}</div>
-                    <div class="grid-item">{{ access.expand.wordsetId.language }}</div>
-                    <button class="grid-item" (click)="displayForm($index, 'group')">{{'learning.USE' | translate}}</button>
+                    <img class="w-6 lg:w-8 h-6 lg:h-8 object-contain" [src]="getWordsetIcon(access.expand.wordsetId)" alt="wordset icon">
+                    <div class="text-xs lg:text-base">{{ access.expand.wordsetId.name }}</div>
+                    <div class="text-xs lg:text-base">{{ access.expand.wordsetId.language }}</div>
+                    <button class="bg-[var(--button-background-color)] text-[var(--button-color)] rounded px-2 py-1 lg:px-4 lg:py-2 text-xs lg:text-base font-medium hover:opacity-90 transition-opacity" 
+                            (click)="displayForm($index, 'group')">{{'learning.USE' | translate}}</button>
                 }
             </div>
         }
     </section>
 
-    <section>
-        <h2>{{'learning.YOURWORDSETS' | translate}}</h2>
+    <section class="flex flex-col gap-2 bg-[var(--main-background-color)] rounded-3xl p-4 lg:p-10 shadow-lg min-h-[60vh] lg:min-h-[70vh] max-h-[60vh] lg:max-h-[70vh] w-full lg:w-[25vw] overflow-y-auto">
+        <h2 class="text-2xl lg:text-4xl font-medium text-gray-700 bg-gray-100 rounded-lg px-3 py-2">{{'learning.YOURWORDSETS' | translate}}</h2>
         @if (userWordsets.length != 0) {
-            <div class="grid">
-                <div class="grid-item"></div>
-                <div class="grid-item">{{'learning.WORDSETNAME' | translate}}</div>
-                <div class="grid-item">{{'learning.WORDSETLANGUAGE' | translate}}</div>
-                <div class="grid-item"></div>
+            <div class="grid grid-cols-4 gap-2 lg:gap-4">
+                <div class="col-span-1"></div>
+                <div class="font-medium text-xs lg:text-base">{{'learning.WORDSETNAME' | translate}}</div>
+                <div class="font-medium text-xs lg:text-base">{{'learning.WORDSETLANGUAGE' | translate}}</div>
+                <div class="col-span-1"></div>
                 @for (wordset of userWordsets; track $index) {
-                    <img class="icon grid-item" [src]="getWordsetIcon(wordset)" alt="wordset icon">
-                    <div class="grid-item">{{wordset.name}}</div>
-                    <div class="grid-item">{{wordset.language}}</div>
-                    <button class="grid-item" (click)="displayForm($index, 'owned')">{{'learning.USE' | translate}}</button>
+                    <img class="w-6 lg:w-8 h-6 lg:h-8 object-contain" [src]="getWordsetIcon(wordset)" alt="wordset icon">
+                    <div class="text-xs lg:text-base">{{wordset.name}}</div>
+                    <div class="text-xs lg:text-base">{{wordset.language}}</div>
+                    <button class="bg-[var(--button-background-color)] text-[var(--button-color)] rounded px-2 py-1 lg:px-4 lg:py-2 text-xs lg:text-base font-medium hover:opacity-90 transition-opacity" 
+                            (click)="displayForm($index, 'owned')">{{'learning.USE' | translate}}</button>
                 }
             </div>
         }

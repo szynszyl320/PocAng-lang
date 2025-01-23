@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
   
   menuSelector: string = 'learning';
 
+  isMenuOpen = false;
+
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
@@ -101,6 +103,10 @@ export class LoginComponent implements OnInit {
 
   changeTab(tab: string) {
     this.menuSelector = tab;
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
 }

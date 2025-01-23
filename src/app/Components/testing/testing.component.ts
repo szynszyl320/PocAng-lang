@@ -64,6 +64,7 @@ export class TestingComponent {
   
   generateSubset() {
     this.ticker = 0;
+    this.hintTicker = 0;
     this.questionSubSet = [];
     const usedValues = new Array<number>   
     for(let i = 0; i < this.length; i++) {
