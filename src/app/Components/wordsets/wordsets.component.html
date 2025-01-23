@@ -1,5 +1,5 @@
-<main class="min-h-screen bg-[var(--body-background-color)] p-4 md:p-6 lg:p-8">
-    <section class="mx-auto max-w-7xl bg-[var(--main-background-color)] rounded-2xl p-6 md:p-8 shadow-lg">
+<main class="min-h-[calc(100vh-64px)] lg:min-h-[calc(100vh-10vh)] bg-[var(--body-background-color)] p-4 md:p-6 lg:p-8">
+    <section class="mx-auto max-w-7xl bg-[var(--whit-main-background-color)] rounded-2xl p-6 md:p-8 shadow-lg">
         <!-- Header -->
         <div class="space-y-4 mb-6">
             <h2 class="text-2xl md:text-3xl lg:text-4xl font-medium text-[var(--heading-color)] text-center">
@@ -26,12 +26,12 @@
             <!-- Grid Items -->
             @for (wordset of userWordsets; track $index) {
                 <!-- Mobile Card View -->
-                <div class="md:hidden mb-6 bg-white rounded-lg p-4 shadow-sm">
+                <div class="md:hidden mb-6 bg-[var(--whit-main-background-color)] rounded-lg p-4 shadow-sm">
                     <div class="flex items-center gap-4 mb-4">
                         <img class="w-12 h-12 object-contain" [src]="getWordsetIcon(wordset)" alt="Icon">
                         <div>
                             <div class="font-medium">{{ wordset.name }}</div>
-                            <div class="text-gray-600">{{ wordset.language }}</div>
+                            <div class="text-[var(--secondary-text)]">{{ wordset.language }}</div>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-2">
@@ -45,8 +45,8 @@
                                 (click)="userAccessEdit($index)">
                             {{'wordsets.EDITACCESS' | translate}}
                         </button>
-                        <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
-                                     rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors" 
+                        <button class="px-3 py-2 text-sm bg-[var(--danger-button-background)] text-[var(--danger-button-text)] 
+                                     rounded-lg font-medium hover:bg-[var(--danger-button-hover)] transition-colors" 
                                 (click)="deleteWordset($event, wordset.id)">
                             {{'wordsets.DELETEWORDSET' | translate}}
                         </button>
@@ -79,8 +79,8 @@
                             (click)="userAccessEdit($index)">
                         {{'wordsets.EDITACCESS' | translate}}
                     </button>
-                    <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
-                                 rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors" 
+                    <button class="px-3 py-2 text-sm bg-[var(--danger-button-background)] text-[var(--danger-button-text)] 
+                                 rounded-lg font-medium hover:bg-[var(--danger-button-hover)] transition-colors" 
                             (click)="deleteWordset($event, wordset.id)">
                         {{'wordsets.DELETEWORDSET' | translate}}
                     </button>
@@ -101,13 +101,13 @@
 
     <!-- Edit Form Modal -->
     @if (wordsetEditForm) {
-        <div class="fixed inset-0 bg-black/50 z-40">
-            <div class="fixed inset-4 md:inset-8 lg:inset-[10%] bg-white rounded-xl p-6 overflow-y-auto z-50">
+        <div class="fixed inset-0 bg-[var(--overlay-background)] z-40">
+            <div class="fixed inset-4 md:inset-8 lg:inset-[10%] bg-[var(--whit-main-background-color)] rounded-xl p-6 overflow-y-auto z-50">
                 <div class="max-w-2xl mx-auto space-y-6">
                     <h2 class="text-2xl font-medium mb-6">{{'wordsets.EDITWORDSETS' | translate}}</h2>
                     <form class="space-y-6">
                         <!-- Form Fields -->
-                        <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                        <div class="bg-[var(--section-background)] rounded-lg p-4 space-y-2">
                             <label class="block text-sm font-medium">{{'wordsets.EDITWORDSETNAME' | translate}}</label>
                             <input type="text" 
                                    class="w-full p-3 border border-[var(--input-border-color)] 
@@ -115,7 +115,7 @@
                                    [(ngModel)]="wordsetEditName"
                                    name="edit name">
                         </div>
-                        <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                        <div class="bg-[var(--section-background)] rounded-lg p-4 space-y-2">
                             <label class="block text-sm font-medium">{{'wordsets.EDITWORDSETICON' | translate}}</label>
                             <input type="file" 
                                    class="w-full p-3 border border-[var(--input-border-color)] 
@@ -123,7 +123,7 @@
                                    (change)="onFileSelected($event)"
                                    name="edit icon">
                         </div>
-                        <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                        <div class="bg-[var(--section-background)] rounded-lg p-4 space-y-2">
                             <label class="block text-sm font-medium">{{'wordsets.EDITWORDSETLANGUAGE' | translate}}</label>
                             <input type="text" 
                                    class="w-full p-3 border border-[var(--input-border-color)] 
@@ -138,8 +138,8 @@
                                     (click)="updateWordset($event)">
                                 {{'wordsets.CONFIRMWORDSETEDIT' | translate}}
                             </button>
-                            <button class="flex-1 p-4 bg-gray-200 text-gray-700 rounded-lg text-base 
-                                           font-medium hover:bg-gray-300 transition-colors" 
+                            <button class="flex-1 p-4 bg-[var(--secondary-button-background)] text-[var(--secondary-text)] rounded-lg text-base 
+                                           font-medium hover:bg-[var(--secondary-button-hover)] transition-colors" 
                                     (click)="editFormToggle(0)">
                                 {{'wordsets.CLOSE' | translate}}
                             </button>
@@ -153,12 +153,12 @@
     <!-- Creation Form Modal -->
     @if (wordsetCreationForm) {
         <div class="fixed inset-0 bg-black/50 z-40">
-            <div class="fixed inset-4 md:inset-8 lg:inset-[10%] bg-white rounded-xl p-6 overflow-y-auto z-50">
+            <div class="fixed inset-4 md:inset-8 lg:inset-[10%] bg-[var(--whit-main-background-color)] rounded-xl p-6 overflow-y-auto z-50">
                 <div class="max-w-2xl mx-auto space-y-6">
                     <h2 class="text-2xl font-medium mb-6">{{'wordsets.CREATENEWWORDSET' | translate}}</h2>
                     <form class="space-y-6">
                         <!-- Form Fields -->
-                        <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                        <div class="bg-[var(--section-background)] rounded-lg p-4 space-y-2">
                             <label class="block text-sm font-medium">{{'wordsets.NEWWORDSETNAME' | translate}}</label>
                             <input type="text" 
                                    class="w-full p-3 border border-[var(--input-border-color)] 
@@ -167,7 +167,7 @@
                                    name="create name">
                             <sub class="text-sm text-gray-600">{{'wordsets.FIELDISREQUIRED' | translate}}</sub>
                         </div>
-                        <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                        <div class="bg-[var(--section-background)] rounded-lg p-4 space-y-2">
                             <label class="block text-sm font-medium">{{'wordsets.NEWWORDSETICON' | translate}}</label>
                             <input type="file" 
                                    class="w-full p-3 border border-[var(--input-border-color)] 
@@ -175,7 +175,7 @@
                                    (change)="onFileSelected($event)"
                                    name="create icon">
                         </div>
-                        <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                        <div class="bg-[var(--section-background)] rounded-lg p-4 space-y-2">
                             <label class="block text-sm font-medium">{{'wordsets.NEWORDSETLANGUAGE' | translate}}</label>
                             <input type="text" 
                                    class="w-full p-3 border border-[var(--input-border-color)] 
@@ -191,8 +191,8 @@
                                     (click)="createNewWordset($event)">
                                 {{'wordsets.CONFIMRWORDSETCREATION' | translate}}
                             </button>
-                            <button class="flex-1 p-4 bg-gray-200 text-gray-700 rounded-lg text-base 
-                                           font-medium hover:bg-gray-300 transition-colors" 
+                            <button class="flex-1 p-4 bg-[var(--secondary-button-background)] text-[var(--secondary-text)] rounded-lg text-base 
+                                           font-medium hover:bg-[var(--secondary-button-hover)] transition-colors" 
                                     (click)="creationFromToggle()">
                                 {{'wordsets.CLOSE' | translate}}
                             </button>
@@ -201,7 +201,7 @@
                     <hr>
                     <form class="space-y-6">
                         <h2 class="text-2xl font-medium mb-6">{{'wordsets.IMPORTWORDSET' | translate}}</h2>
-                        <div class="bg-gray-100 rounded-lg p-4 space-y-2">
+                        <div class="bg-[var(--section-background)] rounded-lg p-4 space-y-2">
                             <label class="block text-sm font-medium">{{'wordsets.WORDSETIMPORT' | translate}}</label>
                             <input type="file" 
                                    class="w-full p-3 border border-[var(--input-border-color)] 

@@ -1,11 +1,11 @@
-<div class="fixed inset-0 w-screen h-screen flex items-center justify-center backdrop-blur-sm bg-white/30 z-50 p-4">
-    <main class="w-full max-w-[1200px] p-4 md:p-6 bg-white/95 flex flex-col gap-4 md:gap-6 rounded-xl shadow-2xl border border-gray-200 max-h-[90vh] overflow-y-auto">
+<div class="fixed inset-0 w-screen h-screen flex items-center justify-center backdrop-blur-sm bg-[var(--overlay-backdrop)] z-50 p-4">
+    <main class="w-full max-w-[1200px] p-4 md:p-6 bg-[var(--overlay-white)] flex flex-col gap-4 md:gap-6 rounded-xl shadow-2xl border border-[var(--border-color)] max-h-[90vh] overflow-y-auto">
         <section class="flex flex-col md:flex-row gap-4 p-2 md:p-4 w-full items-start justify-between">
-            <h2 class="text-lg md:text-2xl font-medium text-gray-800 w-full md:w-auto text-center md:text-left">
+            <h2 class="text-lg md:text-2xl font-medium text-[var(--heading-color)] w-full md:w-auto text-center md:text-left">
                 {{'access.USERACCESS' | translate}}
             </h2>
             
-            <div class="flex-1 w-full grid grid-cols-1 md:grid-cols-3 border border-gray-200 shadow-sm p-3 gap-2 max-h-[40vh] md:max-h-[25vh] overflow-y-auto rounded-lg">
+            <div class="flex-1 w-full grid grid-cols-1 md:grid-cols-3 border border-[var(--border-color)] shadow-sm p-3 gap-2 max-h-[40vh] md:max-h-[25vh] overflow-y-auto rounded-lg">
                 @for (header of ['USEREMAIL', 'USERNAME', 'REVOKEFROMUSER']; track $index) {
                     <div class="p-4 font-medium flex items-center justify-center text-center text-sm">{{'access.' + header | translate}}</div>
                 }
@@ -13,26 +13,28 @@
                 @for (access of userAccessList; track $index) {
                     <div class="p-4 font-medium flex items-center justify-center text-center text-sm">{{ access.expand.userId.email }}</div>
                     <div class="p-4 font-medium flex items-center justify-center text-center text-sm">{{ access.expand.userId.name }}</div>
-                    <button class="p-4 font-medium flex items-center justify-center text-center text-sm bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors" 
+                    <button class="p-4 font-medium flex items-center justify-center text-center text-sm 
+                                   bg-[var(--danger-button-background)] text-[var(--danger-button-text)] rounded 
+                                   hover:bg-[var(--danger-button-hover)] transition-colors" 
                             (click)="revokeUserAccess(access.id, $event)">
-                        {{'access.REVOKEFROMUSER' | translate}}
+                        {{'access.REVOKEFROMUSER' | translate}} 
                     </button>
                 }
             </div>
 
-            <form class="w-full md:w-72 flex flex-col gap-3 bg-gray-50 p-4 rounded-lg">
-                <h3 class="text-base md:text-lg font-medium text-gray-700">{{'access.GRANTACCESSTOUSER' | translate}}</h3>
+            <form class="w-full md:w-72 flex flex-col gap-3 bg-[var(--section-background)] p-4 rounded-lg">
+                <h3 class="text-base md:text-lg font-medium text-[var(--heading-color)]">{{'access.GRANTACCESSTOUSER' | translate}}</h3>
                 <article class="flex flex-col gap-2">
-                    <label for="userEmail" class="text-sm text-gray-600">{{'access.USEREMAIL' | translate}}</label>
+                    <label for="userEmail" class="text-sm text-[var(--secondary-text)]">{{'access.USEREMAIL' | translate}}</label>
                     <input type="email" id="userEmail" [(ngModel)]="userEmail" name="user email" 
-                           class="p-2 rounded border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                           class="p-2 rounded border border-[var(--border-color)] focus:ring-2 focus:ring-[var(--button-background-color)] focus:border-transparent">
                 </article>
                 <article class="flex flex-col gap-2">
-                    <label for="userName" class="text-sm text-gray-600">{{'access.USERNAME' | translate}}</label>
+                    <label for="userName" class="text-sm text-[var(--secondary-text)]">{{'access.USERNAME' | translate}}</label>
                     <input type="text" id="userName" [(ngModel)]="userName" name="user name" 
-                           class="p-2 rounded border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                           class="p-2 rounded border border-[var(--border-color)] focus:ring-2 focus:ring-[var(--button-background-color)] focus:border-transparent">
                 </article>
-                <button class="bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors shadow-sm" 
+                <button class="bg-[var(--button-background-color)] text-[var(--button-color)] rounded-lg py-2 px-4 hover:bg-[var(--button-background-color-hover)] transition-colors shadow-sm" 
                         (click)="grantUserAccess($event)">
                     {{'access.GRANTACCESS' | translate}}
                 </button>
@@ -40,38 +42,38 @@
         </section> 
 
         <section class="flex flex-col md:flex-row gap-4 p-2 md:p-4 w-full items-start justify-between">
-            <h2 class="text-lg md:text-2xl font-medium text-gray-800 w-full md:w-auto text-center md:text-left">
+            <h2 class="text-lg md:text-2xl font-medium text-[var(--heading-color)] w-full md:w-auto text-center md:text-left">
                 {{'access.GROUPACCESS' | translate}}
             </h2>
             
-            <div class="flex-1 w-full grid grid-cols-1 md:grid-cols-3 border border-gray-200 shadow-sm p-3 gap-2 max-h-[40vh] md:max-h-[25vh] overflow-y-auto rounded-lg">
+            <div class="flex-1 w-full grid grid-cols-1 md:grid-cols-3 border border-[var(--border-color)] shadow-sm p-3 gap-2 max-h-[40vh] md:max-h-[25vh] overflow-y-auto rounded-lg">
                 @for (access of groupAccessList; track $index) {
                     <div class="flex items-center justify-center md:block">
                         <img class="w-10 h-10 md:w-12 md:h-12 object-contain" [src]="groupIconSet(access.expand.groupId)" alt="group icon">
                     </div>
                     <div class="p-2 md:p-4 font-medium flex items-center justify-center text-center text-sm">{{access.expand.groupId.name}}</div>
-                    <button class="p-2 md:p-4 font-medium flex items-center justify-center text-center text-sm bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors" 
+                    <button class="p-2 md:p-4 font-medium flex items-center justify-center text-center text-sm bg-[var(--button-background-color)] text-[var(--button-color)] rounded hover:bg-[var(--button-background-color-hover)] transition-colors" 
                             (click)="revokeGroupAccess($event, access.i)">
                         {{'access.REVOKEGROUPACCESS' | translate}}
                     </button>
                 }
             </div>
 
-            <form class="w-full md:w-72 flex flex-col gap-3 bg-gray-50 p-4 rounded-lg">
-                <h3 class="text-base md:text-lg font-medium text-gray-700">{{'access.GRANTACCESSTOGROUP' | translate}}</h3>
+            <form class="w-full md:w-72 flex flex-col gap-3 bg-[var(--section-background)] p-4 rounded-lg">
+                <h3 class="text-base md:text-lg font-medium text-[var(--heading-color)]">{{'access.GRANTACCESSTOGROUP' | translate}}</h3>
                 <article class="flex flex-col gap-2">
-                    <label for="groupName" class="text-sm text-gray-600">{{'access.GROUPNAME' | translate}}</label>
+                    <label for="groupName" class="text-sm text-[var(--secondary-text)]">{{'access.GROUPNAME' | translate}}</label>
                     <input type="text" id="groupName" [(ngModel)]="groupName" name="name" 
-                           class="p-2 rounded border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                           class="p-2 rounded border border-[var(--border-color)] focus:ring-2 focus:ring-[var(--button-background-color)] focus:border-transparent">
                 </article>
-                <button class="bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition-colors shadow-sm" 
+                <button class="bg-[var(--button-background-color)] text-[var(--button-color)] rounded-lg py-2 px-4 hover:bg-[var(--button-background-color-hover)] transition-colors shadow-sm" 
                         (click)="grantGroupAccess($event)">
                     {{'access.GRANTACCESS' | translate}}
                 </button>
             </form>
         </section>
 
-        <button class="w-full md:w-auto md:ml-auto bg-gray-500 text-white rounded-lg py-2 px-6 hover:bg-gray-600 transition-colors shadow-sm" 
+        <button class="w-full md:w-auto md:ml-auto bg-[var(--secondary-button-background)] text-[var(--button-color)] rounded-lg py-2 px-6 hover:bg-[var(--secondary-button-hover)] transition-colors shadow-sm" 
                 (click)="closeWindow()">
             {{'access.EXIT' | translate}}
         </button>

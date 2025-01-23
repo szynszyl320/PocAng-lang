@@ -31,6 +31,37 @@ body {
     --activity-medium: #40c463;
     --activity-high: #216e39;
     --activity-none: #ebedf0;
+
+    /* Status colors */
+    --error-color: #ff0000;
+    
+    /* Testing colors */
+    --correct-answer-color: #40c463;
+    --incorrect-answer-color: #ff0000;
+
+    /* New variables for backgrounds */
+    --overlay-background: rgba(0, 0, 0, 0.5);
+    --overlay-backdrop: rgba(255, 255, 255, 0.3);
+    --secondary-button-background: #e5e7eb;
+    --secondary-button-hover: #d1d5db;
+    --secondary-text: #4b5563;
+    --border-color: #e5e7eb;
+    --overlay-white: rgba(255, 255, 255, 0.95);
+
+    /* Action button colors */
+    --danger-button-background: #ef4444;  /* Less vibrant red */
+    --danger-button-hover: #dc2626;      /* Darker red for hover */
+    --danger-button-text: white;
+    --warning-button-background: #f97316; /* Orange for warning actions */
+    --warning-button-hover: #ea580c;
+    
+    /* Feedback colors */
+    --error-background: #fee2e2;         /* Soft red background */
+    --error-text: #991b1b;               /* Dark red text */
+    --warning-background: #ffedd5;       /* Soft orange background */
+    --warning-text: #9a3412;             /* Dark orange text */
+    --info-background: #dbeafe;          /* Soft blue background */
+    --info-text: #1e40af;               /* Dark blue text */
 }
 
 /* Dark theme - global variables */
@@ -56,5 +87,36 @@ body {
     --activity-medium: #2ea043;
     --activity-high: #216e39;
     --activity-none: #2d2d2d;
+
+    /* Status colors */
+    --error-color: #ff4444;
+    
+    /* Testing colors */
+    --correct-answer-color: #2ea043;
+    --incorrect-answer-color: #ff4444;
+
+    /* New dark theme variables */
+    --overlay-background: rgba(0, 0, 0, 0.7);
+    --overlay-backdrop: rgba(0, 0, 0, 0.3);
+    --secondary-button-background: #4b5563;
+    --secondary-button-hover: #374151;
+    --secondary-text: #9ca3af;
+    --border-color: #374151;
+    --overlay-white: rgba(45, 45, 45, 0.95);
+
+    /* Action button colors */
+    --danger-button-background: #b91c1c;  /* Darker red for dark theme */
+    --danger-button-hover: #991b1b;
+    --danger-button-text: #fecaca;        /* Lighter text for contrast */
+    --warning-button-background: #c2410c;
+    --warning-button-hover: #9a3412;
+    
+    /* Feedback colors */
+    --error-background: #450a0a;
+    --error-text: #fecaca;
+    --warning-background: #431407;
+    --warning-text: #fed7aa;
+    --info-background: #172554;
+    --info-text: #bfdbfe;
 }
 

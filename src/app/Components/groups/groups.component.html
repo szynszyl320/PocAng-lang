@@ -1,5 +1,5 @@
-<main class="min-h-screen bg-[var(--body-background-color)] p-2 sm:p-4 md:p-6 lg:p-8">
-    <section class="mx-auto max-w-7xl bg-[var(--main-background-color)] rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg">
+<main class="min-h-[calc(100vh-64px)] lg:min-h-[calc(100vh-10vh)] bg-[var(--body-background-color)] p-2 sm:p-4 md:p-6 lg:p-8">
+    <section class="mx-auto max-w-7xl bg-[var(--whit-main-background-color)] rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg">
         <!-- Header -->
         <div class="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
             <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-[var(--heading-color)] text-center">
@@ -25,7 +25,7 @@
             <!-- Grid Items -->
             @for (group of groupList; track $index) {
                 <!-- Mobile Card View -->
-                <div class="md:hidden mb-3 sm:mb-4 bg-white rounded-lg p-3 sm:p-4 shadow-sm">
+                <div class="md:hidden mb-3 sm:mb-4 bg-[var(--whit-main-background-color)] rounded-lg p-3 sm:p-4 shadow-sm">
                     <div class="flex items-center gap-3 mb-3">
                         <img class="w-10 sm:w-12 h-10 sm:h-12 object-contain" [src]="groupIconSet(group)" alt="Icon">
                         <div class="font-medium text-sm sm:text-base">{{ group.name }}</div>
@@ -41,8 +41,8 @@
                                 (click)="showGroupEditToggle($index)">
                             {{'groups.EDITGROUP' | translate}}
                         </button>
-                        <button class="px-2 py-1.5 text-xs sm:text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
-                                     rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors"
+                        <button class="px-2 py-1.5 text-xs sm:text-sm bg-[var(--danger-button-background)] text-[var(--danger-button-text)] 
+                                     rounded-lg font-medium hover:bg-[var(--danger-button-hover)] transition-colors"
                                 (click)="deleteGroup(group.id, $event)">
                             {{'groups.DELETEGROUP' | translate}}
                         </button>
@@ -63,8 +63,8 @@
                             (click)="showGroupEditToggle($index)">
                         {{'groups.EDITGROUP' | translate}}
                     </button>
-                    <button class="px-3 py-2 text-sm bg-[var(--button-background-color)] text-[var(--button-color)] 
-                                 rounded-lg font-medium hover:bg-[var(--button-background-color-hover)] transition-colors"
+                    <button class="px-3 py-2 text-sm bg-[var(--danger-button-background)] text-[var(--danger-button-text)] 
+                                 rounded-lg font-medium hover:bg-[var(--danger-button-hover)] transition-colors"
                             (click)="deleteGroup(group.id, $event)">
                         {{'groups.DELETEGROUP' | translate}}
                     </button>
@@ -75,9 +75,9 @@
 </main>
 
 <!-- User List Modal -->
-@if (userListModal) {
-    <div class="fixed inset-0 bg-black/50 z-40">
-        <div class="fixed inset-2 sm:inset-4 md:inset-8 lg:inset-[10%] bg-white rounded-lg sm:rounded-xl 
+@if (userListModal || editGroupForm || createGroupForm) {
+    <div class="fixed inset-0 bg-[var(--overlay-background)] z-40">
+        <div class="fixed inset-2 sm:inset-4 md:inset-8 lg:inset-[10%] bg-[var(--whit-main-background-color)] rounded-lg sm:rounded-xl 
                     p-3 sm:p-4 md:p-6 overflow-y-auto z-50">
             <div class="max-w-2xl mx-auto space-y-4 sm:space-y-6">
                 <h2 class="text-xl sm:text-2xl font-medium mb-4 sm:mb-6">{{'groups.USERS' | translate}}</h2>
@@ -140,8 +140,8 @@
 
 <!-- Edit Group Modal -->
 @if (editGroupForm) {
-    <div class="fixed inset-0 bg-black/50 z-40">
-        <div class="fixed inset-4 md:inset-8 lg:inset-[10%] bg-white rounded-xl p-6 overflow-y-auto z-50">
+    <div class="fixed inset-0 bg-[var(--overlay-background)] z-40">
+        <div class="fixed inset-4 md:inset-8 lg:inset-[10%] bg-[var(--whit-main-background-color)] rounded-xl p-6 overflow-y-auto z-50">
             <div class="max-w-2xl mx-auto space-y-6">
                 <h2 class="text-2xl font-medium mb-6">{{'groups.EDITGROUP' | translate}}</h2>
                 <form class="space-y-6">
@@ -166,7 +166,7 @@
                                      rounded-lg text-base font-medium hover:bg-[var(--button-background-color-hover)] 
                                      transition-colors"
                                 (click)="updateGroup(usedGroup, groupEditName, groupEditIcon, usedGroup.users)">
-                            {{'EDITGROUPCONFIRM' | translate}}
+                            {{'groups.EDITGROUPCONFIRM' | translate}}
                         </button>
                         <button class="flex-1 p-4 bg-gray-200 text-gray-700 rounded-lg text-base font-medium 
                                      hover:bg-gray-300 transition-colors"
@@ -182,8 +182,8 @@
 
 <!-- Create Group Modal -->
 @if (createGroupForm) {
-    <div class="fixed inset-0 bg-black/50 z-40">
-        <div class="fixed inset-4 md:inset-8 lg:inset-[10%] bg-white rounded-xl p-6 overflow-y-auto z-50">
+    <div class="fixed inset-0 bg-[var(--overlay-background)] z-40">
+        <div class="fixed inset-4 md:inset-8 lg:inset-[10%] bg-[var(--whit-main-background-color)] rounded-xl p-6 overflow-y-auto z-50">
             <div class="max-w-2xl mx-auto space-y-6">
                 <h2 class="text-2xl font-medium mb-6">{{'groups.CREATENEWGROUP' | translate}}</h2>
                 <!-- Create Group Form -->
@@ -245,7 +245,7 @@
                 <div class="space-y-4">
                     <h4 class="text-xl font-medium">{{'groups.ADDEDUSERS' | translate}}</h4>
                     @for (user of userList; track $index) {
-                        <div class="flex items-center justify-between gap-4 p-4 bg-gray-50 rounded-lg">
+                        <div class="flex items-center justify-between gap-4 p-4 bg-[var(--section-background)] rounded-lg">
                             <div class="flex items-center gap-4">
                                 <img class="w-10 h-10 rounded-full" [src]="getUserAvatar(user)" alt="user avatar">
                                 <span class="font-medium">{{ user.name }}</span>

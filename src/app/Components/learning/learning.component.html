@@ -1,6 +1,6 @@
-<main class="flex flex-col lg:flex-row items-center justify-center min-h-screen bg-[var(--body-background-color)] gap-4 lg:gap-20 p-4">
-    <section class="flex flex-col gap-2 bg-[var(--main-background-color)] rounded-3xl p-4 lg:p-10 shadow-lg min-h-[60vh] lg:min-h-[70vh] max-h-[60vh] lg:max-h-[70vh] w-full lg:w-[25vw] overflow-y-auto">
-        <h2 class="text-2xl lg:text-4xl font-medium text-gray-700 bg-gray-100 rounded-lg px-3 py-2">{{'learning.USERWORDSETS' | translate}}</h2>
+<main class="min-h-[calc(100vh-64px)] lg:min-h-[calc(100vh-10vh)] bg-[var(--body-background-color)] p-4 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-20 overflow-hidden">
+    <section class="flex flex-col gap-2 bg-[var(--whit-main-background-color)] rounded-3xl p-4 lg:p-10 shadow-lg min-h-[60vh] lg:min-h-[70vh] max-h-[60vh] lg:max-h-[70vh] w-full lg:w-[25vw] overflow-y-auto">
+        <h2 class="text-2xl lg:text-4xl font-medium text-[var(--heading-color)] bg-gray-100 rounded-lg px-3 py-2">{{'learning.USERWORDSETS' | translate}}</h2>
         @if (userAccessedWordsets.length != 0) {
             <div class="grid grid-cols-4 gap-2 lg:gap-4">
                 <div class="col-span-1"></div>
@@ -18,7 +18,7 @@
         }
     </section>
 
-    <section class="flex flex-col gap-2 bg-[var(--main-background-color)] rounded-3xl p-4 lg:p-10 shadow-lg min-h-[60vh] lg:min-h-[70vh] max-h-[60vh] lg:max-h-[70vh] w-full lg:w-[25vw] overflow-y-auto">
+    <section class="flex flex-col gap-2 bg-[var(--whit-main-background-color)] rounded-3xl p-4 lg:p-10 shadow-lg min-h-[60vh] lg:min-h-[70vh] max-h-[60vh] lg:max-h-[70vh] w-full lg:w-[25vw] overflow-y-auto">
         <h2 class="text-2xl lg:text-4xl font-medium text-gray-700 bg-gray-100 rounded-lg px-3 py-2">{{'learning.GROUPWORDSETS' | translate}}</h2>
         @if (groupAccessedWordsets.length != 0) {
             <div class="grid grid-cols-4 gap-2 lg:gap-4">
@@ -37,7 +37,7 @@
         }
     </section>
 
-    <section class="flex flex-col gap-2 bg-[var(--main-background-color)] rounded-3xl p-4 lg:p-10 shadow-lg min-h-[60vh] lg:min-h-[70vh] max-h-[60vh] lg:max-h-[70vh] w-full lg:w-[25vw] overflow-y-auto">
+    <section class="flex flex-col gap-2 bg-[var(--whit-main-background-color)] rounded-3xl p-4 lg:p-10 shadow-lg min-h-[60vh] lg:min-h-[70vh] max-h-[60vh] lg:max-h-[70vh] w-full lg:w-[25vw] overflow-y-auto">
         <h2 class="text-2xl lg:text-4xl font-medium text-gray-700 bg-gray-100 rounded-lg px-3 py-2">{{'learning.YOURWORDSETS' | translate}}</h2>
         @if (userWordsets.length != 0) {
             <div class="grid grid-cols-4 gap-2 lg:gap-4">

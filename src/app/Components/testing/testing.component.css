@@ -1,7 +1,7 @@
 .correctInput {
-    color: green;
+    color: var(--correct-answer-color);
 }
 
 .incorrectInput {
-    color: red;
-} 
+    color: var(--incorrect-answer-color);
+}

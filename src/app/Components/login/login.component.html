@@ -1,119 +1,119 @@
-<div class="flex justify-center items-center min-h-screen bg-gray-100">
-    @if (currentUser) {
-        <!-- Mobile Menu Button -->
-        <button 
-            (click)="toggleMenu()"
-            class="lg:hidden fixed top-4 right-4 z-50 p-2 rounded-lg bg-blue-600 text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                @if (isMenuOpen) {
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                } @else {
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                }
-            </svg>
-        </button>
-
-        <!-- Navigation -->
-        <nav class="fixed top-0 w-full transition-transform duration-300 ease-in-out z-40
-                    lg:transform-none lg:opacity-100
-                    {{ isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 lg:translate-y-0' }}">
+<div class="h-screen overflow-hidden bg-[var(--body-background-color)] flex flex-col">
+    <!-- Fixed Navigation -->
+    <nav class="w-full bg-[var(--whit-main-background-color)] shadow-md h-[64px] lg:h-[10vh]">
+        @if (currentUser) {
+            <!-- Single row layout -->
+            <div class="h-full w-full px-4 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <img [src]="getUserAvatar(currentUser)" alt="user avatar" class="rounded-full object-cover h-20 w-20">
+                    <h3 class="hidden lg:block">{{'login.WELCOME' | translate}}, {{ currentUser?.name }}</h3>
+                </div>
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center gap-4">
+                    <button (click)="changeTab('groups')" class="px-6 py-2 bg-[var(--button-background-color)] text-[var(--button-color)] rounded-lg hover:bg-[var(--button-background-color-hover)] transition-colors">{{'login.GROUPS' | translate}}</button>
+                    <button (click)="changeTab('wordsets')" class="px-6 py-2 bg-[var(--button-background-color)] text-[var(--button-color)] rounded-lg hover:bg-[var(--button-background-color-hover)] transition-colors">{{'login.WORDLISTS' | translate}}</button>
+                    <button (click)="changeTab('learning')" class="px-6 py-2 bg-[var(--button-background-color)] text-[var(--button-color)] rounded-lg hover:bg-[var(--button-background-color-hover)] transition-colors">{{'login.LEARNING' | translate}}</button>
+                    <button (click)="logout()" class="px-6 py-2 bg-[var(--button-background-color)] text-[var(--button-color)] rounded-lg hover:bg-[var(--button-background-color-hover)] transition-colors">{{'login.LOGOUT' | translate}}</button>
+                </div>
+                <!-- Mobile Menu Button -->
+                <button class="lg:hidden p-2" (click)="toggleMenu()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        @if (isMenuOpen) {
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        } @else {
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        }
+                    </svg>
+                </button>
+            </div>
             
-            <!-- Desktop Navigation -->
-            <div class="hidden lg:flex w-full p-4 bg-white shadow-md items-center gap-4 h-[10vh]">
-                <div class="flex gap-4 items-center m-1">
-                    <img [src]="getUserAvatar(currentUser)" alt="user avatar" class="rounded-full object-cover min-h-[60px] min-w-[60px]">
-                    <h3>{{'login.WELCOME' | translate}}, {{ currentUser?.name }}</h3>
+            <!-- Mobile Menu Dropdown - Fixed positioning -->
+            @if (isMenuOpen) {
+                <div class="lg:hidden fixed top-[64px] left-0 right-0 bg-[var(--whit-main-background-color)] shadow-md p-4 z-50">
+                    <div class="flex items-center gap-4 pb-4 border-b border-[var(--border-color)]">
+                        <h3>{{'login.WELCOME' | translate}}, {{ currentUser?.name }}</h3>
+                    </div>
+                    <button (click)="changeTab('groups'); toggleMenu()" class="w-full p-4 text-left hover:bg-[var(--section-background)] rounded-lg">{{'login.GROUPS' | translate}}</button>
+                    <button (click)="changeTab('wordsets'); toggleMenu()" class="w-full p-4 text-left hover:bg-[var(--section-background)] rounded-lg">{{'login.WORDLISTS' | translate}}</button>
+                    <button (click)="changeTab('learning'); toggleMenu()" class="w-full p-4 text-left hover:bg-[var(--section-background)] rounded-lg">{{'login.LEARNING' | translate}}</button>
+                    <button (click)="logout()" class="w-full p-4 text-left text-[var(--error-color)] hover:bg-[var(--section-background)] rounded-lg">{{'login.LOGOUT' | translate}}</button>
                 </div>
-                <div class="flex gap-4 flex-1 justify-end">
-                    <button (click)="changeTab('groups')" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">{{'login.GROUPS' | translate}}</button>
-                    <button (click)="changeTab('wordsets')" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">{{'login.WORDLISTS' | translate}}</button>
-                    <button (click)="changeTab('learning')" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">{{'login.LEARNING' | translate}}</button>
-                    <button (click)="logout()" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">{{'login.LOGOUT' | translate}}</button>
-                </div>
-            </div>
+            }
+        }
+    </nav>
 
-            <!-- Mobile Navigation -->
-            <div class="lg:hidden flex flex-col w-full bg-white shadow-md p-4 space-y-4">
-                <div class="flex items-center gap-4 pb-4 border-b">
-                    <img [src]="getUserAvatar(currentUser)" alt="user avatar" class="rounded-full object-cover w-10 h-10">
-                    <h3>{{'login.WELCOME' | translate}}, {{ currentUser?.name }}</h3>
-                </div>
-                <button (click)="changeTab('groups'); toggleMenu()" class="w-full p-4 text-left hover:bg-blue-50 rounded-lg">{{'login.GROUPS' | translate}}</button>
-                <button (click)="changeTab('wordsets'); toggleMenu()" class="w-full p-4 text-left hover:bg-blue-50 rounded-lg">{{'login.WORDLISTS' | translate}}</button>
-                <button (click)="changeTab('learning'); toggleMenu()" class="w-full p-4 text-left hover:bg-blue-50 rounded-lg">{{'login.LEARNING' | translate}}</button>
-                <button (click)="logout()" class="w-full p-4 text-left text-red-600 hover:bg-red-50 rounded-lg">{{'login.LOGOUT' | translate}}</button>
+    <!-- Main content area -->
+    <div class="flex-1 overflow-y-auto">
+        @if (currentUser) {
+            <div class="w-full min-h-full">
+                @switch (menuSelector) {
+                    @case ('groups') {
+                        <app-groups></app-groups>
+                    }
+                    @case ('wordsets') {
+                        <app-wordlists></app-wordlists>
+                    }
+                    @case ('learning') {
+                        <app-learning></app-learning>
+                    }
+                } 
             </div>
-        </nav>
-
-        <!-- Main Content -->
-        <div class="w-full mt-[10vh] p-4">
-            @switch (menuSelector) {
-                @case ('groups') {
-                    <app-groups></app-groups>
-                }
-                @case ('wordsets') {
-                    <app-wordlists></app-wordlists>
-                }
-                @case ('learning') {
-                    <app-learning></app-learning>
-                }
-            } 
-        </div>
-    } @else {
-        @if (loginForm) {
-            <main class="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
-                <header class="text-center mb-8"><h1>Installed</h1></header>
-                <form (submit)="login($event)" class="flex flex-col gap-4">
-                    <input type="email" name="email" placeholder="{{ 'login.EMAIL' | translate }}" [(ngModel)]="email" required
-                           class="p-3 border border-gray-300 rounded-md text-base"/>
-                    <input type="password" name="password" placeholder="{{ 'login.PASSWORD' | translate }}" [(ngModel)]="password" required 
-                           class="p-3 border border-gray-300 rounded-md text-base"/>
-                    <button type="submit" class="p-3 bg-blue-600 text-white rounded-md text-base hover:bg-blue-700 transition-colors">
-                        {{ 'login.LOGIN' | translate }}
-                    </button>
-                </form>    
-            </main>
-            <button (click)="loginInit()" class="absolute top-4 left-4 w-10 h-10 p-2 bg-transparent">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 800"><g stroke-width="59" stroke="hsl(227, 71%, 57%)" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="rotate(44, 400, 400)"><line x1="280.5" y1="280.5" x2="519.5" y2="519.5" marker-end="url(#SvgjsMarker1160)"></line></g><defs><marker markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" viewBox="0 0 5 5" orient="auto" id="SvgjsMarker1160"><polygon points="0,5 1.6666666666666667,2.5 0,0 5,2.5" fill="hsl(227, 71%, 57%)"></polygon></marker></defs></svg>
-            </button>
-        } @else if (signupForm) {
-            <main class="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
-                <header class="text-center mb-8"><h1>Installed</h1></header>
-                <form (submit)="signup($event)" class="flex flex-col gap-4">
-                    <input type="email" name="email" placeholder="{{ 'login.EMAIL' | translate }}" [(ngModel)]="email" required 
-                           class="p-3 border border-gray-300 rounded-md text-base"/>
-                    <input type="text" name="name" placeholder="{{ 'login.NAME' | translate }}" [(ngModel)]="name" required 
-                           class="p-3 border border-gray-300 rounded-md text-base"/>
-                    <input type="password" name="password" placeholder="{{ 'login.PASSWORD' | translate }}" [(ngModel)]="password" required 
-                           class="p-3 border border-gray-300 rounded-md text-base"/>
-                    <input type="password" name="password" placeholder="{{ 'login.PASSWORDCONFIRM' | translate }}" [(ngModel)]="confirmPassword" required 
-                           class="p-3 border border-gray-300 rounded-md text-base"/>
-                    <input type="file" name="avatar" id="avatar" placeholder="{{ 'login.USERICON' | translate }}" 
-                           class="p-3 border border-gray-300 rounded-md text-base"/>
-                    <button type="submit" class="p-3 bg-blue-600 text-white rounded-md text-base hover:bg-blue-700 transition-colors">
-                        {{ 'login.SIGNUP' | translate }}
-                    </button>
-                </form>
-                <button class="absolute top-4 left-4 w-10 h-10 p-2 bg-transparent" (click)="signupInit()">
+        } @else {
+            @if (loginForm) {
+                <main class="w-full max-w-md p-8 bg-[var(--whit-main-background-color)] rounded-lg shadow-md">
+                    <header class="text-center mb-8"><h1>Installed</h1></header>
+                    <form (submit)="login($event)" class="flex flex-col gap-4">
+                        <input type="email" name="email" placeholder="{{ 'login.EMAIL' | translate }}" [(ngModel)]="email" required
+                               class="p-3 border border-[var(--border-color)] rounded-md text-base"/>
+                        <input type="password" name="password" placeholder="{{ 'login.PASSWORD' | translate }}" [(ngModel)]="password" required 
+                               class="p-3 border border-[var(--border-color)] rounded-md text-base"/>
+                        <button type="submit" class="p-3 bg-[var(--button-background-color)] text-[var(--button-color)] rounded-md text-base hover:bg-[var(--button-background-color-hover)] transition-colors">
+                            {{ 'login.LOGIN' | translate }}
+                        </button>
+                    </form>    
+                </main>
+                <button (click)="loginInit()" class="absolute top-4 left-4 w-10 h-10 p-2 bg-transparent">
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 800"><g stroke-width="59" stroke="hsl(227, 71%, 57%)" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="rotate(44, 400, 400)"><line x1="280.5" y1="280.5" x2="519.5" y2="519.5" marker-end="url(#SvgjsMarker1160)"></line></g><defs><marker markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" viewBox="0 0 5 5" orient="auto" id="SvgjsMarker1160"><polygon points="0,5 1.6666666666666667,2.5 0,0 5,2.5" fill="hsl(227, 71%, 57%)"></polygon></marker></defs></svg>
                 </button>
-            </main>
-        } @else {
-            <main class="text-center p-8">
-                <header class="mb-8">
-                    <h1>Installed</h1>
-                    <h3>To jest wersja demonstracyjna</h3>
-                </header>
-                <article class="flex gap-4 justify-center">
-                    <button class="min-w-[120px] p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors" (click)="loginInit()">
-                        {{ 'login.LOGIN' | translate }}
+            } @else if (signupForm) {
+                <main class="w-full max-w-md p-8 bg-[var(--whit-main-background-color)] rounded-lg shadow-md">
+                    <header class="text-center mb-8"><h1>Installed</h1></header>
+                    <form (submit)="signup($event)" class="flex flex-col gap-4">
+                        <input type="email" name="email" placeholder="{{ 'login.EMAIL' | translate }}" [(ngModel)]="email" required 
+                               class="p-3 border border-[var(--border-color)] rounded-md text-base"/>
+                        <input type="text" name="name" placeholder="{{ 'login.NAME' | translate }}" [(ngModel)]="name" required 
+                               class="p-3 border border-[var(--border-color)] rounded-md text-base"/>
+                        <input type="password" name="password" placeholder="{{ 'login.PASSWORD' | translate }}" [(ngModel)]="password" required 
+                               class="p-3 border border-[var(--border-color)] rounded-md text-base"/>
+                        <input type="password" name="password" placeholder="{{ 'login.PASSWORDCONFIRM' | translate }}" [(ngModel)]="confirmPassword" required 
+                               class="p-3 border border-[var(--border-color)] rounded-md text-base"/>
+                        <input type="file" name="avatar" id="avatar" placeholder="{{ 'login.USERICON' | translate }}" 
+                               class="p-3 border border-[var(--border-color)] rounded-md text-base"/>
+                        <button type="submit" class="p-3 bg-[var(--button-background-color)] text-[var(--button-color)] rounded-md text-base hover:bg-[var(--button-background-color-hover)] transition-colors">
+                            {{ 'login.SIGNUP' | translate }}
+                        </button>
+                    </form>
+                    <button class="absolute top-4 left-4 w-10 h-10 p-2 bg-transparent" (click)="signupInit()">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 800"><g stroke-width="59" stroke="hsl(227, 71%, 57%)" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="rotate(44, 400, 400)"><line x1="280.5" y1="280.5" x2="519.5" y2="519.5" marker-end="url(#SvgjsMarker1160)"></line></g><defs><marker markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" viewBox="0 0 5 5" orient="auto" id="SvgjsMarker1160"><polygon points="0,5 1.6666666666666667,2.5 0,0 5,2.5" fill="hsl(227, 71%, 57%)"></polygon></marker></defs></svg>
                     </button>
-                    <button class="min-w-[120px] p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors" (click)="signupInit()">
-                        {{ 'login.SIGNUP' | translate }}
-                    </button>
-                </article>
-            </main>
-        }    
-    }
-    <app-settings></app-settings>
+                </main>
+            } @else {
+                <main class="text-center p-8">
+                    <header class="mb-8">
+                        <h1>Installed</h1>
+                        <h3>To jest wersja demonstracyjna</h3>
+                    </header>
+                    <article class="flex gap-4 justify-center">
+                        <button class="min-w-[120px] p-3 bg-[var(--button-background-color)] text-[var(--button-color)] rounded-md hover:bg-[var(--button-background-color-hover)] transition-colors" (click)="loginInit()">
+                            {{ 'login.LOGIN' | translate }}
+                        </button>
+                        <button class="min-w-[120px] p-3 bg-[var(--button-background-color)] text-[var(--button-color)] rounded-md hover:bg-[var(--button-background-color-hover)] transition-colors" (click)="signupInit()">
+                            {{ 'login.SIGNUP' | translate }}
+                        </button>
+                    </article>
+                </main>
+            }    
+        }
+        <app-settings></app-settings>
+    </div>
 </div>
