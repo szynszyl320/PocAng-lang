@@ -141,10 +141,12 @@ export class GroupsComponent {
   async deleteGroup(groupId: string, event: Event) {
     event.preventDefault();
     try {
-      this.authService.deleteGroup(groupId);
+      if (confirm('Are you sure you want to delete this group?')) {
+        this.authService.deleteGroup(groupId);
       
-      await new Promise(resolve => setTimeout(resolve, 100));
-      await this.getUserGroups();
+        await new Promise(resolve => setTimeout(resolve, 100));
+        await this.getUserGroups();  
+      }
     } catch (error) {
       console.error('failed to delete group', error);
       alert(`failed to remove group`)

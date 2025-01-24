@@ -7,7 +7,7 @@ import PocketBase from 'pocketbase';
 })
 
 export class AuthService {
-  private pb = new PocketBase('http://127.0.0.1:8090');
+  private pb = new PocketBase('http://127.0.0.1:9000');
 
   private currentUserSubject = new BehaviorSubject<any>(this.pb.authStore.record);
   public currentUser$ :Observable<any> = this.currentUserSubject.asObservable();
@@ -39,11 +39,11 @@ export class AuthService {
     }
   }
 
-  private async getDefaultIconAsFile(type: string): Promise<File> {
+  async getDefaultIconAsFile(type: string): Promise<File> {
     let defaultIconUrl = '';
     if (type == 'user') {
       defaultIconUrl = '../../assets/images/user.png';
-    } else if (type == 'group.png') {
+    } else if (type == 'group') {
       defaultIconUrl = '../../assets/images/group.png'
     } else {
       defaultIconUrl = '../../assets/images/wordset.png'
@@ -51,7 +51,7 @@ export class AuthService {
     
     const response = await fetch(defaultIconUrl);
     const blob = await response.blob();
-    return new File([blob], 'user.png', { type: 'image/png' });
+    return new File([blob], `${type}.png`, { type: 'image/png' });
   }
 
   //checked

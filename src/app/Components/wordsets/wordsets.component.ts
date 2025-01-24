@@ -108,9 +108,11 @@ export class WordlistsComponent {
   async deleteWordset(event: Event, wordsetId: string) {
     event.preventDefault()
     try {
-      this.authService.deleteWordset(wordsetId);
-      await new Promise(resolve => setTimeout(resolve, 100));
-      await this.getUserWordsets();
+      if (confirm('Are you sure you want to delete this wordset?')) {
+        this.authService.deleteWordset(wordsetId);
+        await new Promise(resolve => setTimeout(resolve, 100));
+        await this.getUserWordsets();
+      }
     } catch (error) {
       console.error('failed to delte wordset', error);
     }

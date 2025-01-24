@@ -121,7 +121,7 @@ export class UseraccessComponent {
     this.componentClose.emit(false);
   }
 
-  groupIconSet(group: any) {
+  async groupIconSet(group: any) {
     return this.authService.getGroupIcon(group);
   }
 
