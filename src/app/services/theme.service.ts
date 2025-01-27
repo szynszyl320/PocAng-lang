@@ -9,6 +9,5 @@ export class ThemeService {
   /** Set a specific theme */
   setTheme(theme: string) {
     document.documentElement.setAttribute('data-theme', theme);
-    // localStorage.setItem(this.storageKey, theme);
   }
 }

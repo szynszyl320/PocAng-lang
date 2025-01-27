@@ -11,6 +11,5 @@ import { LoginComponent } from "./Components/login/login.component";
 })
 
 export class AppComponent {
-
   
 }

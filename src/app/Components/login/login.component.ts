@@ -85,6 +85,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.icon = file;
+    } 
+  }
+
   getUserAvatar(user: any) {
     return this.authService.getAvatar(user);
   }
