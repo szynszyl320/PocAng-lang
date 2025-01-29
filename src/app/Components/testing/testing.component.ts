@@ -33,6 +33,7 @@ export class TestingComponent {
   isLastCorrect? : boolean;
   replyClass : string = '';
   displayReply : boolean = false;
+  correctAnswer: string = '';
 
   testFinished: boolean = false;
 
@@ -99,7 +100,9 @@ export class TestingComponent {
       this.isLastCorrect = true;
       this.displayReply = true;
       this.hintActive = false;
+      this.correctAnswer = '';
     } else {
+      this.correctAnswer = this.question.valueTwo;
       this.replyClass = 'incorrectInput'
       this.isLastCorrect = false;
     }

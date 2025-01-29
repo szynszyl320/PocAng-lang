@@ -29,7 +29,7 @@
             }
             <div class="p-3 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-lg md:text-2xl">{{length}}/{{staticLenght}}</div>
             @if (displayReply) {
-                <div class="{{replyClass}} p-3 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-lg md:text-2xl">{{ ((isLastCorrect == true )? 'testing.LASTQUESTIONCORRECT' : 'testing.LASTQUESTIONINCORRECT') | translate }}</div>
+                <div class="{{replyClass}} p-3 md:p-4 bg-[var(--section-background)] rounded-lg shadow-md text-center font-bold text-lg md:text-2xl">{{ (isLastCorrect == true )? ('testing.LASTQUESTIONCORRECT' | translate ): ('testing.LASTQUESTIONINCORRECT' | translate ) + correctAnswer }}</div>
             }
         </article>
 

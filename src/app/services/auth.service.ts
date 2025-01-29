@@ -64,7 +64,7 @@ export class AuthService {
         password: password,
         passwordConfirm: confirmPassword,
         name: name,
-        emailVisibilty: true,
+        "emailVisibility": true,
         avatar: avatarFile
       }
       const record = await this.pb.collection('users').create(newUser);

@@ -148,7 +148,7 @@
         "CHECKANSWER": "Check answer",
         "LEAVETEST": "Leave test",
         "LASTQUESTIONCORRECT": "Last answer was correct",
-        "LASTQUESTIONINCORRECT": "Last answer was incorrect",
+        "LASTQUESTIONINCORRECT": "Last answer was incorrect, the correct answer is: ",
         "TRANSALTE": "Translate",
         "FILLIN": "Fill in the statement with the correct word",
         "PRESSFORHINT": "Press to receive a hint",

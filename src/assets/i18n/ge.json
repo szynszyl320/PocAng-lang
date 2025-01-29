@@ -148,7 +148,7 @@
         "CHECKANSWER": "Antwort überprüfen",
         "LEAVETEST": "Test verlassen",
         "LASTQUESTIONCORRECT": "Letzte Antwort war richtig",
-        "LASTQUESTIONINCORRECT": "Letzte Antwort war falsch",
+        "LASTQUESTIONINCORRECT": "Die letzte Antwort war falsch, die richtige Antwort lautet: ",
         "TRANSALTE": "Übersetzen",
         "FILLIN": "Ergänze die Aussage mit dem richtigen Wort",
         "PRESSFORHINT": "Drücken Sie für einen Hinweis",

@@ -148,7 +148,7 @@
         "CHECKANSWER": "Vérifier la réponse",
         "LEAVETEST": "Quitter le test",
         "LASTQUESTIONCORRECT": "La dernière réponse était correcte",
-        "LASTQUESTIONINCORRECT": "La dernière réponse était incorrecte",
+        "LASTQUESTIONINCORRECT": "La dernière réponse était incorrecte, la bonne réponse est: ",
         "TRANSALTE": "Traduire",
         "FILLIN": "Complétez l'énoncé avec le mot correct"
     }
