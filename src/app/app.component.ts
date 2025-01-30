@@ -12,5 +12,12 @@ import { LoginComponent } from "./Components/login/login.component";
 
 export class AppComponent {
 
+  ngOnInit() {
+    const isReloaded = localStorage.getItem('isReloaded');    
+    if(!isReloaded) {
+      location.reload();
+      localStorage.setItem('isReloaded', 'true');
+    }  
+  }
   
 }
