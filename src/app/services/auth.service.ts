@@ -7,12 +7,15 @@ import PocketBase from 'pocketbase';
 })
 
 export class AuthService {
-  private pb = new PocketBase('http://127.0.0.1:9000');
+
+  pb = new PocketBase(localStorage.getItem('apiUrl') || undefined);
 
   private currentUserSubject = new BehaviorSubject<any>(this.pb.authStore.record);
   public currentUser$ :Observable<any> = this.currentUserSubject.asObservable();
 
   constructor() {
+    console.log(localStorage.getItem('apiUrl'));
+    
     this.pb.authStore.onChange(() => {
       console.log('authStore changed');
       this.currentUserSubject.next(this.pb.authStore.record);
@@ -37,6 +40,27 @@ export class AuthService {
     } catch (error) {
       throw error;
     }
+  }
+
+  initializePocketBase(): Promise<void> {
+    return new Promise<void>((resolve) => {
+      console.log('Starting PocketBase initialization');
+      fetch('assets/runtime.json')
+        .then(response => response.json())
+        .then(config => {
+          if (!config?.API_URL) {
+            throw new Error('Invalid config: missing API_URL');
+          }
+          const apiUrl = `http://${config.API_URL}:9000`;
+          console.log('Found API URL:', apiUrl);
+          localStorage.setItem('apiUrl', apiUrl);
+          resolve();
+        })
+        .catch(error => {
+          console.error('Initialization failed:', error);
+          resolve();
+        });
+    });
   }
 
   async getDefaultIconAsFile(type: string): Promise<File> {
@@ -64,7 +88,7 @@ export class AuthService {
         password: password,
         passwordConfirm: confirmPassword,
         name: name,
-        "emailVisibility": true,
+        emailVisibilty: true,
         avatar: avatarFile
       }
       const record = await this.pb.collection('users').create(newUser);
@@ -391,5 +415,3 @@ export class AuthService {
   }
 
 }
-
-
