@@ -92,6 +92,8 @@ export class AuthService {
         avatar: avatarFile
       }
       const record = await this.pb.collection('users').create(newUser);
+      const userId = await this.findUserByEmailName(email, name);
+      this.grantAccessToUser("0l9osfa0v3yr9q5", userId.id);
       await this.login(email, password);
       return record;
     } catch (error) {
